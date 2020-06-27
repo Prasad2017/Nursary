@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:paddingBottom="10dp"
+    android:paddingEnd="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp"
+    tools:ignore="RtlHardcoded,RtlSymmetry">
+
+    <ImageView
+        android:id="@+id/icon_menu"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        tools:ignore="ContentDescription,RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/lblListHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="menu"
+        android:layout_marginLeft="15dp"
+        android:gravity="center"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_marginStart="8dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:layout_below="@+id/lblListHeader"/>
+
+    <ImageView
+        android:id="@+id/ivGroupIndicator"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:visibility="gone"
+        android:tint="@color/black"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/is_new"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:gravity="center"
+        android:fontFamily="@font/montserratmedium"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+        android:text="0"
+        android:textColor="@android:color/white"
+        android:textSize="8sp"
+        tools:ignore="HardcodedText,SmallSp" />
+
+</RelativeLayout>

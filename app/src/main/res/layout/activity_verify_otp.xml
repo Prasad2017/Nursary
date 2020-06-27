@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Activity.VerifyOtp">
+
+    <LinearLayout
+        android:id="@+id/verifyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:visibility="visible"
+            android:src="@drawable/defaultimage"
+            android:layout_alignParentTop="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="OTP Verification"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:fontFamily="@font/montserratbold"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/check"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <com.mukesh.OtpView
+                    android:id="@+id/otpView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:inputType="number"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    app:itemCount="4"
+                    android:textSize="18sp"
+                    app:lineColor="@color/black"
+                    app:viewType="line" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/montserratregular"
+                    android:textColor="@color/black"
+                    android:text="Enter OTP Code"
+                    android:textSize="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/montserratregular"
+                    android:textColor="@color/black"
+                    android:text="We have sent on mobile number"
+                    android:textSize="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/montserratregular"
+                    android:textColor="@color/black"
+                    android:text="Please check"
+                    android:textSize="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/montserratregular"
+                    android:textColor="@color/black"
+                    android:text="your message inbox"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="12dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center|left"
+                        android:padding="5dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserratregular"
+                        android:text="Don’t Receive The OTP?"
+                        android:textSize="14sp"
+                        android:layout_weight="1"
+                        android:layout_toLeftOf="@+id/resendCode"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:id="@+id/resendCode"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:gravity="center|right"
+                        android:layout_marginRight="15dp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/blue_900"
+                        android:text="RESEND OTP"
+                        android:fontFamily="@font/montserratmedium"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="200dp"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:background="@drawable/button_back"
+                    android:text="SUBMIT"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

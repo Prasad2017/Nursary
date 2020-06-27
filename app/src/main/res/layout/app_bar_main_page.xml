@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.MainPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:tint="@color/white"
+                android:visibility="visible"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_menu_black_24dp" />
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_toRightOf="@+id/menu"
+                android:layout_width="50dp"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:padding="2dp"
+                android:src="@drawable/logo" />
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:layout_centerVertical="true"
+                android:tint="@color/white"
+                android:visibility="gone"
+                android:src="@drawable/arrowback"  />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/back"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserratmedium"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/importProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:text="Import"
+                android:textStyle="italic"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:fontFamily="@font/montserratbold"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/saveProduct"
+                android:layout_width="95dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center"
+                android:fontFamily="@font/montserratmedium"
+                android:scaleType="centerCrop"
+                android:text="Save"
+                android:visibility="gone"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:background="@drawable/textborder"
+                android:backgroundTint="@color/white"
+                android:drawableRight="@drawable/ic_baseline_save_24"
+                android:drawableTint="@color/black"
+                android:drawablePadding="10dp"/>
+
+
+            <ImageView
+                android:id="@+id/cart"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:src="@drawable/cart_icon" />
+
+            <TextView
+                android:id="@+id/cartCount"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/cart_count_back"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                tools:ignore="RtlHardcoded" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

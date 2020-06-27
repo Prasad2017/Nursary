@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Fragment.Setting">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/montserratbold"
+                android:textColor="@color/black"
+                android:text="Setting"/>
+
+
+            <LinearLayout
+                android:id="@+id/pinLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/black"
+                    android:src="@drawable/shield"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:id="@+id/setPin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:padding="5dp"
+                    android:textSize="13dp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:text="Set Pin"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_40"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    tools:ignore="VectorDrawableCompat" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/montserratmedium"
+                android:textColor="@color/light_black"
+                android:text="Customer Type"/>
+
+            <LinearLayout
+                android:id="@+id/retailerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/black"
+                    android:src="@drawable/retail"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:padding="5dp"
+                    android:textSize="13dp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:text="Retailer"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="wrap_content" />
+
+                <com.github.angads25.toggle.widget.LabeledSwitch
+                    android:id="@+id/retailerSwitch"
+                    android:layout_width="65dp"
+                    android:layout_height="30dp"
+                    android:textSize="14sp"
+                    app:on="false"
+                    android:layout_gravity="center"
+                    app:textOn="ON"
+                    app:textOff="OFF"
+                    app:colorOn="#00c4a6"
+                    app:colorBorder="#00c4a6"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/distributorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/black"
+                    android:src="@drawable/distributor"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:padding="5dp"
+                    android:textSize="13dp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:text="Wholesaler"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="wrap_content" />
+
+                <com.github.angads25.toggle.widget.LabeledSwitch
+                    android:id="@+id/wholesalerSwitch"
+                    android:layout_width="65dp"
+                    android:layout_height="30dp"
+                    android:textSize="14sp"
+                    android:layout_gravity="center"
+                    app:on="false"
+                    app:textOn="ON"
+                    app:textOff="OFF"
+                    app:colorOn="#00c4a6"
+                    app:colorBorder="#00c4a6"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray"/>
+
+            <LinearLayout
+                android:id="@+id/aboutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:text="About"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_40"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    tools:ignore="VectorDrawableCompat" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray"/>
+
+            <LinearLayout
+                android:id="@+id/logoutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:text="Log Out"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="@color/black"
+                    android:src="@drawable/ic_baseline_exit_to_app_24"
+                    tools:ignore="VectorDrawableCompat" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</LinearLayout>

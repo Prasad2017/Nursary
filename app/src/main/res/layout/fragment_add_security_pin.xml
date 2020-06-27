@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Fragment.AddSecurityPin">
+
+    <TextView
+        android:id="@+id/setPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_alignParentTop="true"
+        android:padding="5dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/new_security_pin"
+        android:textStyle="italic"
+        android:textColor="@color/red_900" />
+
+    <com.mukesh.OtpView
+        android:id="@+id/otpView"
+        android:layout_below="@+id/setPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:digits="0123456789"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:itemCount="6"
+        android:imeOptions="actionNext"
+        android:textSize="17sp"
+        app:lineColor="@color/black"
+        app:viewType="line" />
+
+    <TextView
+        android:layout_below="@+id/otpView"
+        android:id="@+id/confirmSetPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="40dp"
+        android:padding="5dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/confirm_security_pin"
+        android:textStyle="italic"
+        android:textColor="@color/red_900" />
+
+    <com.mukesh.OtpView
+        android:id="@+id/confirmOtpView"
+        android:layout_below="@+id/confirmSetPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:digits="0123456789"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:itemCount="6"
+        android:imeOptions="actionDone"
+        android:textSize="17sp"
+        app:lineColor="@color/black"
+        app:viewType="line" />
+
+    <TextView
+        android:id="@+id/proceed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="@string/proceed"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserratmedium"/>
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:id="@+id/linearLayout"
+    android:background="@drawable/layoutborder">
+
+    <com.github.siyamed.shapeimageview.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/categoryIcon"
+        android:layout_width="120dp"
+        android:layout_gravity="center"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:gravity="center"
+        app:siRadius="5dp"
+        app:siBorderColor="@color/gray"
+        app:siBorderWidth="0.5dp"
+        android:background="@drawable/defaultimage"/>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:buttonTint="@color/black"
+        android:layout_alignParentRight="true"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_below="@+id/categoryIcon"
+        android:layout_width="120dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        android:background="@color/grey"/>
+
+    <TextView
+        android:layout_below="@+id/view"
+        android:id="@+id/categoryName"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Product Name"
+        android:fontFamily="@font/montserratmedium"
+        android:capitalize="characters"
+        android:inputType="textCapCharacters"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+</RelativeLayout>

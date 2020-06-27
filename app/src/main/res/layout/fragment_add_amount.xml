@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".Fragment.CustomerRegistration">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserratbold"
+                android:text="Add Product Amount"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/productName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserratmedium"
+                whatever:hintText="Select Product Name"
+                android:autofillHints="Select Product Name"
+                android:background="@drawable/spinnerbackground"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/plantSize"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserratmedium"
+                whatever:hintText="Select Plant Size"
+                android:autofillHints="Select Category"
+                android:visibility="gone"
+                android:background="@drawable/spinnerbackground"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/bagSize"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserratmedium"
+                whatever:hintText="Select Bag Size"
+                android:autofillHints="Select Bag Size"
+                android:background="@drawable/spinnerbackground"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                whatever:boxCornerRadiusBottomEnd="5dp"
+                whatever:boxCornerRadiusBottomStart="5dp"
+                whatever:boxCornerRadiusTopEnd="5dp"
+                whatever:boxCornerRadiusTopStart="5dp"
+                android:gravity="center"
+                whatever:boxStrokeColor="@color/light_black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="@color/light_black">
+
+                <com.andreabaccega.widget.FormEditText
+                    android:id="@+id/retailerAmount"
+                    whatever:testErrorString="Enter Valid Amount"
+                    whatever:emptyErrorString="Please Fill This"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Retailer Price*"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789"
+                    android:drawablePadding="10dp"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:backgroundTint="@color/green_900"
+                    android:fontFamily="@font/montserratmedium"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/green_900"
+                    android:textSize="17sp"
+                    tools:ignore="HardcodedText" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                whatever:boxCornerRadiusBottomEnd="5dp"
+                whatever:boxCornerRadiusBottomStart="5dp"
+                whatever:boxCornerRadiusTopEnd="5dp"
+                whatever:boxCornerRadiusTopStart="5dp"
+                android:gravity="center"
+                whatever:boxStrokeColor="@color/light_black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="@color/light_black">
+
+                <com.andreabaccega.widget.FormEditText
+                    android:id="@+id/wholesalerAmount"
+                    whatever:testErrorString="Enter Valid Amount"
+                    whatever:emptyErrorString="Please Fill This"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Wholesaler Price*"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789"
+                    android:drawablePadding="10dp"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:backgroundTint="@color/green_900"
+                    android:fontFamily="@font/montserratmedium"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/green_900"
+                    android:textSize="17sp"
+                    tools:ignore="HardcodedText" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/save"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/btn_back"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:drawablePadding="50dp"
+                android:layout_marginBottom="30dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:fontFamily="@font/montserratmedium"
+                android:drawableTint="@color/white"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText,RtlHardcoded,UnusedAttribute"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:elevation="7dp"
+                app:cardElevation="7dp"
+                android:layout_margin="5dp"
+                android:background="@color/black"
+                android:foreground="@android:color/transparent"
+                app:cardCornerRadius="7dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:textSize="13sp"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="Product"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:background="@drawable/txtborder"
+                            android:fontFamily="@font/montserratmedium"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:textSize="13sp"
+                            android:padding="5dp"
+                            android:layout_weight="1"
+                            android:text="Bag Size"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:background="@drawable/txtborder"
+                            android:fontFamily="@font/montserratmedium"/>
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:textSize="13sp"
+                            android:padding="5dp"
+                            android:layout_weight="1"
+                            android:text="Retailer"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:background="@drawable/txtborder"
+                            android:fontFamily="@font/montserratmedium"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:textSize="13sp"
+                            android:padding="5dp"
+                            android:text="Wholesaler"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:background="@drawable/txtborder"
+                            android:fontFamily="@font/montserratmedium"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

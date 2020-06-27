@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <color name="colorPrimary">#1B5E20</color>
+    <!--<color name="colorPrimary">#6F307C</color>-->
+    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="colorAccent">#1B5E20</color>
+    <color name="white">#fff</color>
+    <color name="light_black">#4a4a4a</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deepPurple">#7c4dff</color>
+    <color name="yellow">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <color name="lightBlue">#2ebadc</color>
+    <color name="pink">#fe104d</color>
+    <color name="black">#000</color>
+    <color name="gray">#EBEBEB</color>
+
+
+    <!--Material color list from https://material.io/guidelines/style/color.html-->
+
+    <color name="grey_40">#999999</color>
+    <color name="grey_60">#666666</color>
+
+    <color name="red_900">#B71C1C</color>
+
+    <color name="green_700">#388E3C</color>
+    <color name="green_900">#1B5E20</color>
+
+    <color name="blue_900">#0D47A1</color>
+
+    <color name="orange_600">#FB8C00</color>
+
+
+</resources>

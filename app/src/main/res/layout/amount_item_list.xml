@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/productId"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:hint="0"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/txtborder"
+            android:fontFamily="@font/montserratregular"/>
+
+        <TextView
+            android:id="@+id/bagSizeId"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="13sp"
+            android:hint="0"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:background="@drawable/txtborder"
+            android:fontFamily="@font/montserratregular"/>
+
+        <TextView
+            android:id="@+id/plantSizeId"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="13sp"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:hint="0"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:background="@drawable/txtborder"
+            android:fontFamily="@font/montserratregular"/>
+
+        <TextView
+            android:id="@+id/retailerAmount"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="13sp"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:hint="0"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/txtborder"
+            android:fontFamily="@font/montserratregular"/>
+
+        <TextView
+            android:id="@+id/wholesalerAmount"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="13sp"
+            android:padding="5dp"
+            android:hint="0"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/txtborder"
+            android:fontFamily="@font/montserratregular"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SSP</string>
+    <string name="secure_payment_text"><![CDATA[Safe and Secure Payments. 100% Original products]]></string>
+    <string name="emailId">demo@gmail.com</string>
+    <string name="bankDetails"><u>Bank Details</u></string>
+    <string name="err_msg_email">Please enter a valid email id</string>
+    <string name="contactNo">+919876543210</string>
+    <string name="targetProductImageWidth">300</string>
+    <string name="targetProductImageHeight">250</string>
+    <string name="targetProductImageWidth1">100</string>
+    <string name="cartImageWidth">100</string>
+    <string name="fullImageWidth">500</string>
+    <string name="title_activity_main_page">MainPage</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="singup"><u>Sign Up</u></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

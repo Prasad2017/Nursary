@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/colorPrimary">
+
+            <EditText
+                android:id="@+id/searchEdit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/searchborder"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:hint="Search any product...."
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_black"
+                android:fontFamily="@font/montserratregular"
+                android:layout_margin="10dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="35dp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/montserratbold"
+                android:text="SrNo"
+                android:padding="5dp"
+                android:textSize="17sp"
+                android:background="@drawable/txtborder"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:fontFamily="@font/montserratbold"
+                android:text="Size Name"
+                android:textSize="17sp"
+                android:background="@drawable/txtborder"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:fontFamily="@font/montserratbold"
+                android:text="Action"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="17sp"
+                android:background="@drawable/txtborder"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoryRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/noCategorytxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="17sp"
+        android:layout_centerInParent="true"
+        android:text="No Size Found"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/addicon"
+        android:tint="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

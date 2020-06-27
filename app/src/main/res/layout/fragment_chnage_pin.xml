@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Fragment.AddSecurityPin">
+
+
+    <TextView
+        android:id="@+id/txtcurrentPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:padding="5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="15dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="Set Old Pin"
+        android:textStyle="italic"
+        android:textColor="@color/red_900" />
+
+    <com.mukesh.OtpView
+        android:id="@+id/oldOtpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:digits="0123456789"
+        app:state_filled="true"
+        android:layout_below="@+id/txtcurrentPin"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:itemCount="6"
+        android:imeOptions="actionNext"
+        android:textSize="17sp"
+        app:lineColor="@color/black"
+        app:viewType="line" />
+
+    <TextView
+        android:layout_below="@+id/oldOtpView"
+        android:id="@+id/txtnewPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="15dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="Set New Pin"
+        android:textStyle="italic"
+        android:textColor="@color/red_900" />
+
+    <com.mukesh.OtpView
+        android:id="@+id/otpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:digits="0123456789"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:itemCount="6"
+        android:layout_below="@+id/txtnewPin"
+        android:imeOptions="actionDone"
+        android:textSize="17sp"
+        app:lineColor="@color/black"
+        app:viewType="line" />
+
+    <TextView
+        android:layout_below="@+id/otpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:layout_margin="15dp"
+        android:textSize="15sp"
+        android:visibility="gone"
+        android:fontFamily="@font/montserratmedium"
+        android:text="To set security pin"
+        android:textStyle="italic"
+        android:textColor="@color/red_900" />
+
+    <TextView
+        android:id="@+id/proceed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="Proceed"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserratmedium"/>
+
+</RelativeLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:elevation="7dp"
+        app:cardElevation="7dp"
+        android:layout_margin="5dp"
+        android:background="@color/black"
+        android:foreground="@android:color/transparent"
+        app:cardCornerRadius="7dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextborder"
+            android:backgroundTint="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/customerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:text="Name"
+                android:fontFamily="@font/montserratmedium"/>
+
+            <TextView
+                android:id="@+id/mobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:text="Mobile No."
+                android:fontFamily="@font/montserratmedium"/>
+
+            <TextView
+                android:id="@+id/contactPerson"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:text="Contact Person"
+                android:fontFamily="@font/montserratmedium"/>
+
+            <TextView
+                android:id="@+id/contactPersonNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:text="Contact Person Number"
+                android:fontFamily="@font/montserratmedium"/>
+
+            <TextView
+                android:id="@+id/businessAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:text="Business Address"
+                android:fontFamily="@font/montserratmedium"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray">
+
+                <TextView
+                    android:id="@+id/invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="Invoice"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:background="@drawable/statusborder"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:padding="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="35dp"
+                    android:background="@color/white"/>
+
+                <TextView
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="View"
+                    android:textSize="17sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/viewborder"
+                    android:fontFamily="@font/montserratmedium"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:padding="5dp"/>
+
+
+
+                <TextView
+                    android:id="@+id/trackorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:visibility="gone"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+

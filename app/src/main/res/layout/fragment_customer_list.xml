@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/colorPrimary">
+
+            <EditText
+                android:id="@+id/searchEdit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/searchborder"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_black"
+                android:hint="Search any customer...."
+                android:textSize="18sp"
+                android:fontFamily="@font/montserratregular"
+                android:layout_margin="10dp"/>
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/customerRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/noCategorytxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="17sp"
+        android:layout_centerInParent="true"
+        android:text="No Customer Found"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/addicon"
+        android:tint="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

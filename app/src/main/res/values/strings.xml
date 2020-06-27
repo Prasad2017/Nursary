@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Wagh Nursery</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="secure_payment_text"><![CDATA[Safe and Secure Payments. <br/> 100% Authentic products]]></string>
+    <string name="proceed">Proceed</string>
+    <string name="new_security_pin">new security pin</string>
+    <string name="confirm_security_pin">confirm security pin</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+</resources>

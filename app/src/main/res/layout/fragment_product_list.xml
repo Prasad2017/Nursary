@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/colorPrimary">
+
+            <EditText
+                android:id="@+id/searchEdit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/searchborder"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:hint="search any product"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_black"
+                android:fontFamily="@font/montserratregular"
+                android:layout_margin="10dp"/>
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoryRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/noCategorytxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="17sp"
+        android:layout_centerInParent="true"
+        android:text="No Product Found"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserratmedium"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+</RelativeLayout>

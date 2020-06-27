@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:scrollbars="none"
+    android:background="@color/white"
+    tools:context=".Fragment.BillingDetails">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="visible"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserratbold"
+                android:text="Billing Invoice"/>
+
+            <LinearLayout
+                android:id="@+id/invoiceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="30dp"
+                android:visibility="visible">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/invoice"
+                        whatever:testErrorString="Enter Valid Invoice To"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Invoice To*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/contactPerson"
+                        whatever:testErrorString="Enter Valid Contact Person"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Contact Person*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/personNumber"
+                        whatever:testErrorString="Enter Valid Contact Person Mb"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Contact Person Mb*"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/gst"
+                        whatever:testErrorString="Enter Valid GST NO"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="GST NO*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAllCaps="true"
+                        android:capitalize="characters"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/poNumber"
+                        whatever:testErrorString="Enter Valid PO Number"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="PO Number*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAllCaps="true"
+                        android:capitalize="characters"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/billingAddress"
+                        whatever:testErrorString="Enter Valid Billing Address"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Billing Address*"
+                        android:imeOptions="actionNext"
+                        android:inputType="textMultiLine"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Same as billing address"
+                    android:textSize="17sp"
+                    android:textColor="@color/light_black"
+                    android:fontFamily="@font/montserratregular"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingRight="10dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/deliveryAddress"
+                        whatever:testErrorString="Enter Valid Delivery Address"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Delivery Address*"
+                        android:imeOptions="actionNext"
+                        android:inputType="textMultiLine"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/vehicleNumber"
+                        whatever:testErrorString="Enter Valid Vehicle Number"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Vehicle Number*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:capitalize="characters"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:textAllCaps="true"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/next"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/arrowforward"
+                    android:drawableTint="@color/white"
+                    android:drawablePadding="10dp"
+                    android:text="Next"
+                    android:padding="10dp"
+                    android:background="@drawable/btn_back"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/montserratmedium"
+                    android:textSize="17sp"
+                    android:textColor="@color/white"
+                    android:gravity="center|right"
+                    android:layout_gravity="center|right"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="50dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/paymentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="30dp"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/subAmount"
+                        whatever:testErrorString="Enter Valid Sub Amount"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Sub Amount"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/rupee_icon"
+                        android:padding="15dp"
+                        android:text="0"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/discount"
+                        whatever:testErrorString="Enter Valid Discount"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Discount(in %)"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:maxLength="3"
+                        android:text="0"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/otherCharges"
+                        whatever:testErrorString="Enter Valid Other Charges"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Other Charges"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:text="0"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/rupee_icon"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/transport"
+                        whatever:testErrorString="Enter Valid Transport"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Transport"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:text="0"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/rupee_icon"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/grandAmount"
+                        whatever:testErrorString="Enter Valid Grand Amount"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Grand Amount"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:text="0"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/rupee_icon"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="50dp">
+
+                    <TextView
+                        android:id="@+id/previous"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:drawableLeft="@drawable/arrowback"
+                        android:drawableTint="@color/white"
+                        android:drawablePadding="10dp"
+                        android:text="Previous"
+                        android:padding="10dp"
+                        android:background="@drawable/btn_back"
+                        android:backgroundTint="@color/black"
+                        android:fontFamily="@font/montserratmedium"
+                        android:textSize="17sp"
+                        android:textColor="@color/white"
+                        android:gravity="center|left"
+                        android:layout_gravity="center|left"/>
+
+                    <TextView
+                        android:id="@+id/save"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:drawableTint="@color/white"
+                        android:drawablePadding="10dp"
+                        android:text="Save"
+                        android:padding="10dp"
+                        android:background="@drawable/btn_back"
+                        android:fontFamily="@font/montserratmedium"
+                        android:textSize="17sp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

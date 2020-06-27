@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/simpleSwipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <Spinner
+        android:id="@+id/customertypeSpin"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/montserratmedium"
+        android:background="@drawable/spinnerbackground"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        android:gravity="center"/>
+
+    <Spinner
+        android:layout_below="@+id/customertypeSpin"
+        android:id="@+id/customerNameSpin"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerHorizontal="true"
+        android:autofillHints="Select Customer Name"
+        android:fontFamily="@font/montserratmedium"
+        android:background="@drawable/spinnerbackground"
+        android:layout_marginTop="30dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/addCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Add Customer"
+        android:textSize="18sp"
+        android:textColor="@color/red_900"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:layout_below="@+id/customerNameSpin"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/montserratmedium"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/customerSelection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/arrowforward"
+        android:tint="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

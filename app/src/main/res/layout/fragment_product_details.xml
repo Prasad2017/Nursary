@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".Fragment.ProductDetails">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="5dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:elevation="7dp"
+                app:cardElevation="7dp"
+                app:cardCornerRadius="7dp"
+                android:background="@color/black"
+                android:foreground="@android:color/transparent">
+
+                <com.github.siyamed.shapeimageview.RoundedImageView
+                    android:id="@+id/productImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/defaultimage"
+                    android:layout_gravity="center"
+                    app:siRadius="7dp"
+                    app:siBorderWidth="0.5dp"
+                    app:siBorderColor="@color/white"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_below="@+id/productImage"
+                android:id="@+id/productName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_black"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/montserratbold"
+                android:padding="10dp"
+                android:hint="Product Name"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Plant Size"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="15dp"
+                    android:textSize="17sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserratmedium"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bag Size"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="17sp"
+                    android:paddingLeft="15dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserratmedium"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp">
+
+                <Spinner
+                    android:id="@+id/plantSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="10dp"
+                    android:autofillHints="Select  plant size"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinnerbackground"/>
+
+                <Spinner
+                    android:id="@+id/bagSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="10dp"
+                    android:autofillHints="Select bag size"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinnerbackground"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CGST"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="15dp"
+                    android:textSize="17sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserratmedium"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SGST"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="17sp"
+                    android:paddingLeft="15dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserratmedium"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:id="@+id/cgst"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="10dp"
+                    android:autofillHints="Select CGST"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/textborder"/>
+
+                <TextView
+                    android:id="@+id/sgst"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="10dp"
+                    android:autofillHints="Select SGST"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/textborder"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/productPrice"
+                        whatever:testErrorString="Enter Valid Amount"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Price*"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:drawableLeft="@drawable/rupee_icon"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:backgroundTint="@color/green_900"
+                        android:fontFamily="@font/montserratmedium"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        whatever:testErrorString="Enter Valid Name"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:id="@+id/quantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity*"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:gravity="center|left"
+                        android:layout_marginRight="5dp"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratmedium"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/light_black"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/totalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_black"
+                android:textSize="17sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="50dp"
+                android:drawableLeft="@drawable/rupee_icon"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/montserratmedium"
+                android:padding="15dp"
+                android:background="@drawable/textborder"
+                android:hint="Total Amount" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/addToCart"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Add To Cart"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserratmedium"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>
