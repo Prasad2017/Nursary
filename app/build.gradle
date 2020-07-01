@@ -4,11 +4,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion '30.0.0'
     defaultConfig {
-        applicationId "com.nursery"
+        applicationId "com.sawant_nursery"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -81,8 +81,7 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.0'
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
     implementation 'com.mikhaellopez:circularimageview:3.2.0'          // circle image view
-    implementation 'com.mikhaellopez:lazydatepicker:1.0.5'
-    implementation 'com.aminography:choosephotohelper:1.0.3' //Choose Image from gallery or Camera
+    implementation 'com.aminography:choosephotohelper:1.2.0' //Choose Image from gallery or Camera
     implementation 'com.github.aabhasr1:OtpView:1.0.6'
     implementation 'com.google.android.material:material:1.2.0-alpha02'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

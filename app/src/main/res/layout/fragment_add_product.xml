@@ -42,8 +42,16 @@
             android:id="@+id/productCategory"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:autofillHints="Select Category"
+            android:background="@drawable/spinnerbackground"/>
+
+        <Spinner
+            android:id="@+id/subProductCategory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints="Select Sub Category"
             android:background="@drawable/spinnerbackground"/>
 
         <com.google.android.material.textfield.TextInputLayout

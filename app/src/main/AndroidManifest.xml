@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nursery">
+    package="com.sawant_nursery">
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -27,23 +27,23 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:icon">
 
-        <activity android:name="com.nursery.Activity.VerifyOtp"
+        <activity android:name="com.sawant_nursery.Activity.VerifyOtp"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="InnerclassSeparator"/>
 
-        <activity android:name="com.nursery.Activity.Login"
+        <activity android:name="com.sawant_nursery.Activity.Login"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="InnerclassSeparator"/>
 
-        <activity android:name="com.nursery.Activity.MainPage"
+        <activity android:name="com.sawant_nursery.Activity.MainPage"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="InnerclassSeparator"/>
 
         <activity
-            android:name="com.nursery.Activity.SplashScreen"
+            android:name="com.sawant_nursery.Activity.SplashScreen"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="InnerclassSeparator">
