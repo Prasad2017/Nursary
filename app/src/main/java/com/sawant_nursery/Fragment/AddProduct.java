@@ -70,7 +70,7 @@ import retrofit2.Response;
 public class AddProduct extends Fragment {
 
     View view;
-    @BindViews({R.id.botanicalName, R.id.productName, R.id.cgst, R.id.sgst, R.id.igst})
+    @BindViews({R.id.botanicalName, R.id.productName, R.id.cgst, R.id.sgst, R.id.igst, R.id.retailerAmount, R.id.wholesalerAmount})
     List<FormEditText> formEditTexts;
     @BindView(R.id.productSize)
     TextView productSize;
@@ -112,6 +112,8 @@ public class AddProduct extends Fragment {
         formEditTexts.get(2).setSelection(formEditTexts.get(2).getText().toString().length());
         formEditTexts.get(3).setSelection(formEditTexts.get(3).getText().toString().length());
         formEditTexts.get(4).setSelection(formEditTexts.get(4).getText().toString().length());
+        formEditTexts.get(5).setSelection(formEditTexts.get(5).getText().toString().length());
+        formEditTexts.get(6).setSelection(formEditTexts.get(6).getText().toString().length());
 
         formEditTexts.get(0).setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         formEditTexts.get(1).setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
@@ -133,12 +135,16 @@ public class AddProduct extends Fragment {
                         formEditTexts.get(2).setVisibility(View.VISIBLE);
                         formEditTexts.get(3).setVisibility(View.VISIBLE);
                         formEditTexts.get(4).setVisibility(View.VISIBLE);
+                        formEditTexts.get(5).setVisibility(View.GONE);
+                        formEditTexts.get(6).setVisibility(View.GONE);
 
                     } else {
 
                         formEditTexts.get(2).setVisibility(View.GONE);
                         formEditTexts.get(3).setVisibility(View.GONE);
                         formEditTexts.get(4).setVisibility(View.GONE);
+                        formEditTexts.get(5).setVisibility(View.VISIBLE);
+                        formEditTexts.get(6).setVisibility(View.VISIBLE);
                     }
 
                 } catch (Exception e) {
@@ -328,7 +334,7 @@ public class AddProduct extends Fragment {
 
                     }
                 } else {
-                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity()) {
+                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
                         if (imageView.getDrawable() == null) {
                             productImage = "";
                         } else {
@@ -336,7 +342,7 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addProduct(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, categoryId);
+                        addTaxableProduct(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, categoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
 
                     }
                 }
@@ -427,6 +433,64 @@ public class AddProduct extends Fragment {
         }
     }
 
+    private void addTaxableProduct(String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId, String retailerAmount, String wholesalerAmount) {
+
+        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setTitle("Product is in creating");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
+        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.body().getSuccess().equals("true")){
+                    String productId = response.body().getProductId();
+
+                    ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+                    Call<LoginResponse> callq = apiInterface.addProductAmount(MainPage.userId, productId, "0", "0", retailerAmount, wholesalerAmount);
+                    callq.enqueue(new Callback<LoginResponse>() {
+                        @Override
+                        public void onResponse(Call<LoginResponse> callq, Response<LoginResponse> response) {
+
+                            if (response.body().getSuccess().equals("true")){
+                                progressDialog.dismiss();
+                                Log.e("Response", ""+response.body().getMessage());
+                                Toast.makeText(getActivity(), "Successfully Added", Toast.LENGTH_SHORT).show();
+                                ((MainPage) getActivity()).loadFragment(new ProductList(), true);
+                            } else if (response.body().getSuccess().equals("false")){
+                                progressDialog.dismiss();
+                                Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                ((MainPage)getActivity()).loadFragment(new ProductList(), true);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<LoginResponse> callq, Throwable t) {
+                            progressDialog.dismiss();
+                            Log.e("Error", ""+t.getMessage());
+                        }
+                    });
+
+
+                }else if (response.body().getSuccess().equals("false")){
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Log.e("Error", ""+t.getMessage());
+            }
+        });
+
+    }
+
     private void onChangeSelectedProductBagSize() {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -499,7 +563,7 @@ public class AddProduct extends Fragment {
                 progressDialog.dismiss();
                 if (response.body().getSuccess().equals("true")){
                     String productId = response.body().getProductId();
-                    Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                     ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                     AddProductAmount addProductAmount = new AddProductAmount();
                     Bundle bundle = new Bundle();

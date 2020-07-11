@@ -148,7 +148,7 @@ public class AddProductAmount extends Fragment {
                 formEditTexts.get(0).setText("");
                 formEditTexts.get(1).setText("");
 
-                getAmountList();
+                ((MainPage) getActivity()).loadFragment(new ProductList(), true);
 
             }
         });

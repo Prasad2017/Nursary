@@ -1,6 +1,7 @@
 package com.sawant_nursery.Model;
 
 import com.google.gson.annotations.SerializedName;
+import com.sawant_nursery.Fragment.LedgerResponse;
 
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class AllList {
 
     @SerializedName("invoiceResponse")
     List<InvoiceResponse> invoiceResponseList;
+
+    @SerializedName("invoiceResponse")
+    List<LedgerResponse> ledgerResponseList;
 
 
 
@@ -107,5 +111,13 @@ public class AllList {
 
     public void setSubcategoryResponseList(List<CategoryResponse> subcategoryResponseList) {
         this.subcategoryResponseList = subcategoryResponseList;
+    }
+
+    public List<LedgerResponse> getLedgerResponseList() {
+        return ledgerResponseList;
+    }
+
+    public void setLedgerResponseList(List<LedgerResponse> ledgerResponseList) {
+        this.ledgerResponseList = ledgerResponseList;
     }
 }

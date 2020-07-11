@@ -82,7 +82,7 @@ public class InvoiceList extends Fragment {
                     searchInvoice(editable.toString());
                 }else {
                     noCategorytxt.setVisibility(View.VISIBLE);
-                    noCategorytxt.setText("Search any customer.....");
+                    noCategorytxt.setText("Search any invoice number.....");
                     linearLayout.setVisibility(View.GONE);
                 }
             }
