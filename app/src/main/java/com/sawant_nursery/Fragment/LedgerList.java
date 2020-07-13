@@ -50,7 +50,7 @@ public class LedgerList extends Fragment {
     List<LedgerResponse> ledgerResponseList = new ArrayList<>();
     List<LedgerResponse> searchcustomerResponseList = new ArrayList<>();
     LedgerAdapter adapter;
-    String customerId;
+    String customerId, invoiceId;
 
 
 
