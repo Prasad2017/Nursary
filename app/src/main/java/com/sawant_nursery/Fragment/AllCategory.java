@@ -141,7 +141,7 @@ public class AllCategory extends Fragment {
                 bundle.putString("customerType", customerType);
                 bundle.putString("customerName", customerName);
                 bundle.putString("productId", categoryResponseList.get(position).getProductId());
-                bundle.putString("productId", categoryResponseList.get(position).getProductId());
+                bundle.putString("taxType", categoryResponseList.get(position).getTaxType());
                 bundle.putString("productName", categoryResponseList.get(position).getProductName());
                 bundle.putString("productImage", categoryResponseList.get(position).getCategoryImage());
                 productDetails.setArguments(bundle);

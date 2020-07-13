@@ -63,134 +63,142 @@
                 android:layout_marginTop="10dp"/>
 
             <LinearLayout
+                android:id="@+id/spinnerLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Plant Size"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:paddingLeft="15dp"
-                    android:textSize="17sp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/montserratmedium"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Plant Size"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:paddingLeft="15dp"
+                        android:textSize="17sp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserratmedium"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bag Size"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textSize="17sp"
+                        android:paddingLeft="15dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserratmedium"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bag Size"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:textSize="17sp"
-                    android:paddingLeft="15dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/montserratmedium"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="3dp">
 
-            </LinearLayout>
+                    <Spinner
+                        android:id="@+id/plantSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:padding="10dp"
+                        android:autofillHints="Select  plant size"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/spinnerbackground"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="3dp">
+                    <Spinner
+                        android:id="@+id/bagSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:padding="10dp"
+                        android:autofillHints="Select bag size"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/spinnerbackground"/>
 
-                <Spinner
-                    android:id="@+id/plantSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:padding="10dp"
-                    android:autofillHints="Select  plant size"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/spinnerbackground"/>
+                </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/bagSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:padding="10dp"
-                    android:autofillHints="Select bag size"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/spinnerbackground"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CGST"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:paddingLeft="15dp"
-                    android:textSize="17sp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/montserratmedium"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CGST"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:paddingLeft="15dp"
+                        android:textSize="17sp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserratmedium"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SGST"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textSize="17sp"
+                        android:paddingLeft="15dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserratmedium"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SGST"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:textSize="17sp"
-                    android:paddingLeft="15dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/montserratmedium"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="3dp">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/cgst"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:padding="10dp"
+                        android:autofillHints="Select CGST"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/textborder"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="3dp">
+                    <TextView
+                        android:id="@+id/sgst"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:padding="10dp"
+                        android:autofillHints="Select SGST"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/textborder"/>
 
-                <TextView
-                    android:id="@+id/cgst"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:padding="10dp"
-                    android:autofillHints="Select CGST"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/textborder"/>
-
-                <TextView
-                    android:id="@+id/sgst"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:padding="10dp"
-                    android:autofillHints="Select SGST"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/textborder"/>
+                </LinearLayout>
 
             </LinearLayout>
 

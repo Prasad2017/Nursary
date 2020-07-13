@@ -49,6 +49,9 @@ public class ProductResponse {
     @SerializedName("bagSizeName")
     String bagSizeName;
 
+    @SerializedName("taxType")
+    String taxType;
+
     private boolean isSelected;
 
 
@@ -185,4 +188,14 @@ public class ProductResponse {
     public void setBagSizeName(String bagSizeName) {
         this.bagSizeName = bagSizeName;
     }
+
+    public String getTaxType() {
+        return taxType;
+    }
+
+    public void setTaxType(String taxType) {
+        this.taxType = taxType;
+    }
+
+
 }

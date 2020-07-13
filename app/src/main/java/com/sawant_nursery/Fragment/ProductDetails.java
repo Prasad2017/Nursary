@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +66,9 @@ public class ProductDetails extends Fragment {
     Spinner plantSize;
     @BindView(R.id.bagSize)
     Spinner bagSize;
-    String productId, productName, productImage, customerId, customerType, customerName, plantSizeId, plantSizeName, bagSizeId, bagSizeName, cgst, sgst, igst;
+    @BindView(R.id.spinnerLayout)
+    LinearLayout spinnerLayout;
+    String productId, taxType, productName, productImage, customerId, customerType, customerName, plantSizeId, plantSizeName, bagSizeId, bagSizeName, cgst, sgst, igst;
     String[] productSizeIdList, productSizeNameList, bagSizeIdList, bagSizeNameList;
     List<SizeResponse> sizeResponseList = new ArrayList<>();
     List<BagSizeResponse> bagSizeResponseList = new ArrayList<>();
@@ -85,10 +88,16 @@ public class ProductDetails extends Fragment {
         customerType = bundle.getString("customerType")==null?"":bundle.getString("customerType");
         customerName = bundle.getString("customerName")==null?"":bundle.getString("customerName");
         productId = bundle.getString("productId")==null?"":bundle.getString("productId");
+        taxType = bundle.getString("taxType")==null?"":bundle.getString("taxType");
         productName = bundle.getString("productName")==null?"":bundle.getString("productName");
         productImage = bundle.getString("productImage")==null?"":bundle.getString("productImage");
 
         textViews.get(0).setText(productName);
+        if (taxType.equalsIgnoreCase("Taxable")){
+            spinnerLayout.setVisibility(View.GONE);
+        } else {
+            spinnerLayout.setVisibility(View.VISIBLE);
+        }
 
         try {
 

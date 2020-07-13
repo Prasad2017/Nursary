@@ -320,20 +320,7 @@ public class AddProduct extends Fragment {
         switch (view.getId()) {
             case R.id.save:
 
-                if (taxType.equals("Taxable")) {
-                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() &&
-                            formEditTexts.get(3).testValidity() && formEditTexts.get(4).testValidity()) {
-                        if (imageView.getDrawable() == null) {
-                            productImage = "";
-                        } else {
-                            bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                            productImage = getStringImage(bitmap);
-                        }
-
-                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, categoryId);
-
-                    }
-                } else {
+                if (taxType.equals("Non-Taxable")) {
                     if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
                         if (imageView.getDrawable() == null) {
                             productImage = "";
@@ -342,7 +329,20 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addTaxableProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, categoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
+                        addTaxableProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, categoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
+
+                    }
+                } else {
+                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() &&
+                            formEditTexts.get(3).testValidity() && formEditTexts.get(4).testValidity() ) {
+                        if (imageView.getDrawable() == null) {
+                            productImage = "";
+                        } else {
+                            bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                            productImage = getStringImage(bitmap);
+                        }
+
+                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, categoryId);
 
                     }
                 }
