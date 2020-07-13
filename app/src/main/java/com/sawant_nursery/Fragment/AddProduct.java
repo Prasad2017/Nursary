@@ -333,7 +333,7 @@ public class AddProduct extends Fragment {
                         addProduct(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, categoryId);
 
                     }
-                } else {
+                } else if (taxType.equals("Non-Taxable")) {
                     if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
                         if (imageView.getDrawable() == null) {
                             productImage = "";
