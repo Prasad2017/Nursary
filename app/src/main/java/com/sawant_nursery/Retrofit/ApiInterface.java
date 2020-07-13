@@ -73,6 +73,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("/androidApp/addProduct.php")
     Call<LoginResponse> addProduct(@Field("userId") String userId,
+                                   @Field("taxType") String taxType,
                                    @Field("botanicalName") String botanicalName,
                                    @Field("productName") String productName,
                                    @Field("cgst") String cgst,

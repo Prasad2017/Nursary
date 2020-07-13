@@ -330,7 +330,7 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addProduct(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, categoryId);
+                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, categoryId);
 
                     }
                 } else {
@@ -342,7 +342,7 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addTaxableProduct(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, categoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
+                        addTaxableProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, categoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
 
                     }
                 }
@@ -433,7 +433,7 @@ public class AddProduct extends Fragment {
         }
     }
 
-    private void addTaxableProduct(String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId, String retailerAmount, String wholesalerAmount) {
+    private void addTaxableProduct(String taxType, String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId, String retailerAmount, String wholesalerAmount) {
 
         ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -443,7 +443,7 @@ public class AddProduct extends Fragment {
         progressDialog.setCancelable(false);
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
+        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, taxType, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -546,7 +546,7 @@ public class AddProduct extends Fragment {
     }
 
 
-    private void addProduct(String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId) {
+    private void addProduct(String taxType, String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId) {
 
         ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -556,7 +556,7 @@ public class AddProduct extends Fragment {
         progressDialog.setCancelable(false);
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
+        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, taxType, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
