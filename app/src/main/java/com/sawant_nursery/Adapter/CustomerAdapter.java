@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sawant_nursery.Activity.MainPage;
 import com.sawant_nursery.Fragment.InvoiceValidatePin;
+import com.sawant_nursery.Fragment.LedgerList;
+import com.sawant_nursery.Fragment.LedgerValidatePin;
 import com.sawant_nursery.Fragment.UpdateCustomer;
 import com.sawant_nursery.Model.CustomerResponse;
 import com.sawant_nursery.R;
@@ -87,6 +89,17 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             }
         });
 
+        holder.ledger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LedgerValidatePin ledgerValidatePin = new LedgerValidatePin();
+                Bundle bundle= new Bundle();
+                bundle.putString("customerId", customerResponseList.get(position).getCustomerId());
+                ledgerValidatePin.setArguments(bundle);
+                ((MainPage)context).loadFragment(ledgerValidatePin, true);
+            }
+        });
+
     }
 
     @Override
@@ -97,7 +110,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView businessName, mobileNumber, contactPerson, contactPersonNumber, businessAddress;
-        TextView invoice, view;
+        TextView invoice, view, ledger;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,6 +122,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             businessAddress = itemView.findViewById(R.id.businessAddress);
             invoice = itemView.findViewById(R.id.invoice);
             view = itemView.findViewById(R.id.view);
+            ledger = itemView.findViewById(R.id.ledger);
 
         }
     }

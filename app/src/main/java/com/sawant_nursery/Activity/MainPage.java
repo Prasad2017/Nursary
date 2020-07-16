@@ -36,8 +36,6 @@ import com.sawant_nursery.Fragment.CustomerList;
 import com.sawant_nursery.Fragment.CustomerRegistration;
 import com.sawant_nursery.Fragment.CustomerSelection;
 import com.sawant_nursery.Fragment.Dashboard;
-import com.sawant_nursery.Fragment.InvoiceList;
-import com.sawant_nursery.Fragment.LedgerList;
 import com.sawant_nursery.Fragment.PlantSizeList;
 import com.sawant_nursery.Fragment.ValidatePin;
 import com.sawant_nursery.R;

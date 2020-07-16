@@ -114,10 +114,21 @@
                     android:drawablePadding="10dp"
                     android:padding="5dp"/>
 
-                <View
-                    android:layout_width="1dp"
+                <TextView
+                    android:id="@+id/ledger"
+                    android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:background="@color/white"/>
+                    android:text="Ledger"
+                    android:visibility="visible"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserratmedium"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:background="@color/yellow"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:gravity="center"/>
 
                 <TextView
                     android:id="@+id/view"
@@ -133,24 +144,6 @@
                     android:layout_weight="1"
                     android:drawablePadding="10dp"
                     android:padding="5dp"/>
-
-
-
-                <TextView
-                    android:id="@+id/trackorder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cancel"
-                    android:visibility="gone"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/montserratmedium"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:gravity="center"/>
 
             </LinearLayout>
 
