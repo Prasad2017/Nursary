@@ -147,7 +147,7 @@ public class AddProductAmount extends Fragment {
                 Toast.makeText(getActivity(), "Successfully Added", Toast.LENGTH_SHORT).show();
                 formEditTexts.get(0).setText("");
                 formEditTexts.get(1).setText("");
-
+                ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                 ((MainPage) getActivity()).loadFragment(new ProductList(), true);
 
             }
@@ -280,7 +280,6 @@ public class AddProductAmount extends Fragment {
                     Log.e("Response", ""+response.body().getMessage());
                 } else if (response.body().getSuccess().equals("false")){
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    ((MainPage)getActivity()).loadFragment(new ProductList(), true);
                 }
             }
 

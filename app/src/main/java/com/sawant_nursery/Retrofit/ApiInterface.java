@@ -252,4 +252,11 @@ public interface ApiInterface {
                                  @Query("customerId") String customerId);
 
 
+    @GET("/androidApp/productWiseAmount.php")
+    Call<AllList> getProductWiseAmount(@Query("productId") String productId);
+
+
+    @GET("/androidApp/getCategoryWiseSubCategoryList.php")
+    Call<AllList> getCategoryWiseSubCategoryList(@Query("categoryId") String categoryId);
+
 }

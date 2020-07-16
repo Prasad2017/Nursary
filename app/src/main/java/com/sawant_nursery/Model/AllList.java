@@ -20,6 +20,9 @@ public class AllList {
     @SerializedName("productResponse")
     List<ProductResponse> productResponseList;
 
+    @SerializedName("productAmtResponse")
+    List<ProductResponse> productAmountResponseList;
+
     @SerializedName("sizeResponse")
     List<SizeResponse> sizeResponseList;
 
@@ -35,7 +38,7 @@ public class AllList {
     @SerializedName("invoiceResponse")
     List<InvoiceResponse> invoiceResponseList;
 
-    @SerializedName("invoiceResponse")
+    @SerializedName("invoicelistResponse")
     List<LedgerResponse> ledgerResponseList;
 
 
@@ -119,5 +122,13 @@ public class AllList {
 
     public void setLedgerResponseList(List<LedgerResponse> ledgerResponseList) {
         this.ledgerResponseList = ledgerResponseList;
+    }
+
+    public List<ProductResponse> getProductAmountResponseList() {
+        return productAmountResponseList;
+    }
+
+    public void setProductAmountResponseList(List<ProductResponse> productAmountResponseList) {
+        this.productAmountResponseList = productAmountResponseList;
     }
 }

@@ -89,13 +89,16 @@ public class ProductDetails extends Fragment {
         customerName = bundle.getString("customerName")==null?"":bundle.getString("customerName");
         productId = bundle.getString("productId")==null?"":bundle.getString("productId");
         taxType = bundle.getString("taxType")==null?"":bundle.getString("taxType");
+        Log.e("taxType", ""+taxType);
         productName = bundle.getString("productName")==null?"":bundle.getString("productName");
         productImage = bundle.getString("productImage")==null?"":bundle.getString("productImage");
 
         textViews.get(0).setText(productName);
-        if (taxType.equalsIgnoreCase("Taxable")){
+
+        if (taxType.equalsIgnoreCase("Non-Taxable")){
             spinnerLayout.setVisibility(View.GONE);
-        } else {
+            getAmount(productId);
+        } else  if (taxType.equalsIgnoreCase("Taxable")){
             spinnerLayout.setVisibility(View.VISIBLE);
         }
 
@@ -254,6 +257,48 @@ public class ProductDetails extends Fragment {
 
 
         return view;
+
+    }
+
+    private void getAmount(String productId) {
+
+        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+        Call<AllList> call = apiInterface.getProductWiseAmount(productId);
+        call.enqueue(new Callback<AllList>() {
+            @Override
+            public void onResponse(Call<AllList> call, Response<AllList> response) {
+
+                AllList allList = response.body();
+                productResponseList = allList.getProductAmountResponseList();
+
+                if (productResponseList.size()==0){
+                    productprice.setText("0");
+                } else {
+
+                    for (int i=0;i<productResponseList.size();i++){
+
+                        cgst = productResponseList.get(i).getCgst();
+                        sgst = productResponseList.get(i).getSgst();
+                        igst = productResponseList.get(i).getIgst();
+
+                        if (customerType.equals("Retailer_on")) {
+                            productprice.setText(productResponseList.get(i).getRetailPrice());
+                        } else if (customerType.equals("Wholesaler_on")) {
+                            productprice.setText(productResponseList.get(i).getWholesalerPrice());
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<AllList> call, Throwable t) {
+                Log.e("Error", ""+t.getMessage());
+            }
+        });
 
     }
 

@@ -34,6 +34,7 @@ import com.andreabaccega.widget.FormEditText;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputLayout;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -86,9 +87,10 @@ public class AddProduct extends Fragment {
     Spinner taxTypeSpin;
     private ChoosePhotoHelper choosePhotoHelper;
     Bitmap bitmap;
-    String productImage, categoryId, categoryName, prodsizeId, productbagId;
-    String[]categoryIdList, categoryNameList, productSizeIdList, productSizeNameList, productBageIdList, productBagSizeList;
+    String productImage, categoryId, categoryName, subcategoryId, subcategoryName, prodsizeId, productbagId;
+    String[]categoryIdList, categoryNameList, subcategoryIdList, subcategoryNameList, productSizeIdList, productSizeNameList, productBageIdList, productBagSizeList;
     List<CategoryResponse> categoryResponseList = new ArrayList<>();
+    List<CategoryResponse> subcategoryResponseList = new ArrayList<>();
     List<SizeResponse> sizeResponseList = new ArrayList<>();
     List<BagSizeResponse> bagSizeResponseList = new ArrayList<>();
     protected ArrayList<String> productSizeId = new ArrayList<String>();
@@ -97,6 +99,8 @@ public class AddProduct extends Fragment {
     protected ArrayList<String> productBagSizeName = new ArrayList<String>();
     String[] tax_type = {"Taxable" ,"Non-Taxable"};
     String taxType;
+    @BindViews({R.id.csgtLayout, R.id.sgstLayout, R.id.igstLayout, R.id.retailerLayout, R.id.wholesalerLayout})
+    List<TextInputLayout> textInputLayouts;
 
 
 
@@ -126,25 +130,24 @@ public class AddProduct extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 taxType = tax_type[position];
-                Log.e("taxType", ""+taxType);
                 try {
                     ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
 
                     if (taxType.equals("Taxable")){
 
-                        formEditTexts.get(2).setVisibility(View.VISIBLE);
-                        formEditTexts.get(3).setVisibility(View.VISIBLE);
-                        formEditTexts.get(4).setVisibility(View.VISIBLE);
-                        formEditTexts.get(5).setVisibility(View.GONE);
-                        formEditTexts.get(6).setVisibility(View.GONE);
+                        textInputLayouts.get(0).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(1).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(2).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(3).setVisibility(View.GONE);
+                        textInputLayouts.get(4).setVisibility(View.GONE);
 
-                    } else {
+                    } else if (taxType.equals("Non-Taxable")){
 
-                        formEditTexts.get(2).setVisibility(View.GONE);
-                        formEditTexts.get(3).setVisibility(View.GONE);
-                        formEditTexts.get(4).setVisibility(View.GONE);
-                        formEditTexts.get(5).setVisibility(View.VISIBLE);
-                        formEditTexts.get(6).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(0).setVisibility(View.GONE);
+                        textInputLayouts.get(1).setVisibility(View.GONE);
+                        textInputLayouts.get(2).setVisibility(View.GONE);
+                        textInputLayouts.get(3).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(4).setVisibility(View.VISIBLE);
                     }
 
                 } catch (Exception e) {
@@ -173,8 +176,8 @@ public class AddProduct extends Fragment {
         subProductCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-             //   categoryId = categoryIdList[position];
-               // categoryName = categoryNameList[position];
+                subcategoryId = subcategoryIdList[position];
+                subcategoryName = subcategoryNameList[position];
                 try {
                     ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
                 } catch (Exception e) {
@@ -195,6 +198,7 @@ public class AddProduct extends Fragment {
                 categoryName = categoryNameList[position];
                 try {
                     ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
+                    getSubCategoryList(categoryId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -315,6 +319,46 @@ public class AddProduct extends Fragment {
 
     }
 
+    private void getSubCategoryList(String categoryId) {
+
+        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+        Call<AllList> call = apiInterface.getCategoryWiseSubCategoryList(categoryId);
+        call.enqueue(new Callback<AllList>() {
+            @Override
+            public void onResponse(Call<AllList> call, Response<AllList> response) {
+
+                AllList allList = response.body();
+                subcategoryResponseList = allList.getSubcategoryResponseList();
+                if (subcategoryResponseList.size() == 0){
+                    Toast.makeText(getActivity(), "No Sub-Category Found", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    subcategoryIdList = new String[subcategoryResponseList.size()];
+                    subcategoryNameList = new String[subcategoryResponseList.size()];
+
+                    for (int i=0;i<subcategoryResponseList.size();i++){
+
+                        subcategoryIdList[i] = subcategoryResponseList.get(i).getSub_type_id_pk();
+                        subcategoryNameList[i] = subcategoryResponseList.get(i).getSub_type_name();
+
+                    }
+
+                    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, subcategoryNameList);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    subProductCategory.setAdapter(adapter);
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AllList> call, Throwable t) {
+                Log.e("Error", ""+t.getMessage());
+            }
+        });
+
+    }
+
     @OnClick({R.id.save, R.id.chooseProduct, R.id.productSize, R.id.productBagSize})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -330,7 +374,7 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addProduct(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, categoryId);
+                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, subcategoryId);
 
                     }
                 } else if (taxType.equals("Non-Taxable")) {
@@ -342,7 +386,7 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addTaxableProduct(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, categoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
+                        addTaxableProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, subcategoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
 
                     }
                 }
@@ -433,7 +477,7 @@ public class AddProduct extends Fragment {
         }
     }
 
-    private void addTaxableProduct(String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId, String retailerAmount, String wholesalerAmount) {
+    private void addTaxableProduct(String taxType, String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId, String retailerAmount, String wholesalerAmount) {
 
         ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -443,7 +487,7 @@ public class AddProduct extends Fragment {
         progressDialog.setCancelable(false);
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
+        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, taxType, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -460,11 +504,11 @@ public class AddProduct extends Fragment {
                                 progressDialog.dismiss();
                                 Log.e("Response", ""+response.body().getMessage());
                                 Toast.makeText(getActivity(), "Successfully Added", Toast.LENGTH_SHORT).show();
+                                ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                                 ((MainPage) getActivity()).loadFragment(new ProductList(), true);
                             } else if (response.body().getSuccess().equals("false")){
                                 progressDialog.dismiss();
                                 Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                ((MainPage)getActivity()).loadFragment(new ProductList(), true);
                             }
                         }
 
@@ -546,7 +590,7 @@ public class AddProduct extends Fragment {
     }
 
 
-    private void addProduct(String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId) {
+    private void addProduct(String taxType, String botanicalName, String productName, String cgst, String sgst, String igst, String productSize, String productBagSize, String productImage, String categoryId) {
 
         ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -556,7 +600,7 @@ public class AddProduct extends Fragment {
         progressDialog.setCancelable(false);
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
+        Call<LoginResponse> call  = apiInterface.addProduct(MainPage.userId, taxType, botanicalName, productName, cgst, sgst, igst, productSize, productBagSize, productImage, categoryId);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -748,13 +792,13 @@ public class AddProduct extends Fragment {
     private void getCategoryList() {
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<AllList> call = apiInterface.getSubCategoryList(MainPage.userId);
+        Call<AllList> call = apiInterface.getCategoryList(MainPage.userId);
         call.enqueue(new Callback<AllList>() {
             @Override
             public void onResponse(Call<AllList> call, Response<AllList> response) {
 
                 AllList allList = response.body();
-                categoryResponseList = allList.getSubcategoryResponseList();
+                categoryResponseList = allList.getCategoryResponseList();
                 if (categoryResponseList.size() == 0){
                     Toast.makeText(getActivity(), "No category Found", Toast.LENGTH_SHORT).show();
                 } else {
@@ -764,8 +808,8 @@ public class AddProduct extends Fragment {
 
                     for (int i=0;i<categoryResponseList.size();i++){
 
-                        categoryIdList[i] = categoryResponseList.get(i).getSub_type_id_pk();
-                        categoryNameList[i] = categoryResponseList.get(i).getSub_type_name();
+                        categoryIdList[i] = categoryResponseList.get(i).getCategoryId();
+                        categoryNameList[i] = categoryResponseList.get(i).getCategoryType();
 
                     }
 
