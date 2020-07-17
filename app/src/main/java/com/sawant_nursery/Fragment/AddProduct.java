@@ -141,13 +141,21 @@ public class AddProduct extends Fragment {
                         textInputLayouts.get(3).setVisibility(View.GONE);
                         textInputLayouts.get(4).setVisibility(View.GONE);
 
+                        productSize.setVisibility(View.GONE);
+                        productBagSize.setVisibility(View.GONE);
+
+
                     } else if (taxType.equals("Non-Taxable")){
 
-                        textInputLayouts.get(0).setVisibility(View.GONE);
-                        textInputLayouts.get(1).setVisibility(View.GONE);
-                        textInputLayouts.get(2).setVisibility(View.GONE);
+                        textInputLayouts.get(0).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(1).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(2).setVisibility(View.VISIBLE);
                         textInputLayouts.get(3).setVisibility(View.VISIBLE);
                         textInputLayouts.get(4).setVisibility(View.VISIBLE);
+
+                        productSize.setVisibility(View.VISIBLE);
+                        productBagSize.setVisibility(View.VISIBLE);
+
                     }
 
                 } catch (Exception e) {
@@ -615,6 +623,7 @@ public class AddProduct extends Fragment {
                     bundle.putString("productName", productName);
                     addProductAmount.setArguments(bundle);
                     ((MainPage) getActivity()).loadFragment(addProductAmount, true);
+
                 }else if (response.body().getSuccess().equals("false")){
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
