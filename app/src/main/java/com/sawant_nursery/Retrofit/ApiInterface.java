@@ -15,7 +15,8 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("/androidApp/Login.php")
-    Call<LoginResponse> Login(@Field("mobileNumber") String mobileNumber);
+    Call<LoginResponse> Login(@Field("mobileNumber") String mobileNumber,
+                              @Field("password") String password);
 
 
     @FormUrlEncoded

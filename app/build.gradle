@@ -95,5 +95,6 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
     implementation 'com.github.angads25:toggle:1.1.0'
+    implementation 'com.flaviofaria:kenburnsview:1.0.7'
 
 }
