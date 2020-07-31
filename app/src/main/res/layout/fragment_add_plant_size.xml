@@ -8,6 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:scrollbars="none"
     android:background="@color/white"
+    android:id="@+id/nestedScrollView"
     tools:context=".Fragment.CustomerRegistration">
 
     <LinearLayout

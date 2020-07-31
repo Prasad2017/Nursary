@@ -3,12 +3,14 @@ package com.sawant_nursery.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.andreabaccega.widget.FormEditText;
@@ -34,7 +36,8 @@ public class AddPlantSize extends Fragment {
    View view;
    @BindView(R.id.productSize)
    FormEditText productSize;
-
+    @BindView(R.id.nestedScrollView)
+    NestedScrollView nestedScrollView;
 
 
     @Override
@@ -43,6 +46,9 @@ public class AddPlantSize extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_plant_size, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
+
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInputFromWindow(nestedScrollView.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
 
         return view;
 
