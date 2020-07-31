@@ -260,4 +260,9 @@ public interface ApiInterface {
     @GET("/androidApp/getCategoryWiseSubCategoryList.php")
     Call<AllList> getCategoryWiseSubCategoryList(@Query("categoryId") String categoryId);
 
+
+    @GET("/androidApp/LedgerList.php")
+    Call<AllList> getLedgerList(@Query("userId") String userId,
+                                 @Query("customerId") String customerId);
+
 }

@@ -1,7 +1,6 @@
 package com.sawant_nursery.Model;
 
 import com.google.gson.annotations.SerializedName;
-import com.sawant_nursery.Fragment.LedgerResponse;
 
 import java.util.List;
 

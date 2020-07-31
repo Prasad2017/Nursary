@@ -60,8 +60,11 @@ public class BagSizeList extends Fragment {
         view = inflater.inflate(R.layout.fragment_bag_size_list, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("Size List");
+
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInputFromWindow(linearLayout.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+
+        searchEditText.setLongClickable(false);
 
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override

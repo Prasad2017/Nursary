@@ -64,6 +64,8 @@ public class InvoiceList extends Fragment {
         Bundle bundle = getArguments();
         customerId = bundle.getString("customerId");
 
+        searchEditText.setLongClickable(false);
+
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

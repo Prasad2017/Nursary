@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sawant_nursery.Activity.MainPage;
 import com.sawant_nursery.Model.InvoiceResponse;
 import com.sawant_nursery.R;
 
@@ -41,9 +42,9 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.MyViewHo
 
         InvoiceResponse invoiceResponse = invoiceResponseList.get(position);
 
-        holder.orderNumber.setText(invoiceResponseList.get(position).getOrder_number());
-        holder.totalAmount.setText(invoiceResponseList.get(position).getTotal_amount());
-        holder.orderDate.setText(invoiceResponseList.get(position).getOrder_date());
+        holder.orderNumber.setText(""+invoiceResponseList.get(position).getOrder_number());
+        holder.totalAmount.setText("Total Amount: "+ MainPage.currency+invoiceResponseList.get(position).getTotal_amount());
+        holder.orderDate.setText("Date: "+invoiceResponseList.get(position).getOrder_date());
 
 
     }

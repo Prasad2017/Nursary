@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:inputType="text"
-                android:text="Order Date"
+                android:text="Payment Date"
                 android:fontFamily="@font/montserratregular"/>
 
             <TextView
@@ -53,9 +53,46 @@
                 android:textSize="17sp"
                 android:layout_gravity="center"
                 android:gravity="center|left"
+                android:inputType="text"
                 android:textColor="@color/black"
                 android:text="Order Number"
                 android:fontFamily="@font/montserratbold"/>
+
+            <TextView
+                android:id="@+id/paidAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:text="Paid Amount"
+                android:fontFamily="@font/montserratmedium"/>
+
+            <TextView
+                android:id="@+id/pendingAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:text="Pending Amount"
+                android:fontFamily="@font/montserratmedium"/>
 
             <TextView
                 android:id="@+id/totalAmount"
@@ -75,11 +112,8 @@
                 android:text="Total Amount"
                 android:fontFamily="@font/montserratmedium"/>
 
-
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
-
-

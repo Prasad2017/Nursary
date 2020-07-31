@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +69,8 @@ public class AddAmount extends Fragment {
     List<BagSizeResponse> bagSizeResponseList = new ArrayList<>();
     List<ProductResponse> amountProductResponseList = new ArrayList<>();
     NurseryDatabase nurseryDatabase;
+    @BindView(R.id.retailerLayout)
+    RelativeLayout retailerLayout;
 
 
 
@@ -76,6 +80,9 @@ public class AddAmount extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_amount, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInputFromWindow(retailerLayout.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+
 
         nurseryDatabase = new NurseryDatabase(getActivity());
 

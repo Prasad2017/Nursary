@@ -158,6 +158,9 @@ public class MainPage extends AppCompatActivity {
                         } else if (groupPosition == 3  && id == 0) {
                             loadFragment(new CustomerSelection(), true);
                             drawerLayout.closeDrawer(GravityCompat.START);
+                        } else if (groupPosition == 3  && id == 1) {
+                            loadFragment(new CustomerList(), true);
+                            drawerLayout.closeDrawer(GravityCompat.START);
                         }
                         return false;
                     }

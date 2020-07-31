@@ -16,12 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sawant_nursery.Activity.MainPage;
-import com.sawant_nursery.Adapter.InvoiceAdapter;
 import com.sawant_nursery.Adapter.LedgerAdapter;
-import com.sawant_nursery.Extra.Common;
 import com.sawant_nursery.Extra.DetectConnection;
 import com.sawant_nursery.Model.AllList;
-import com.sawant_nursery.Model.InvoiceResponse;
+import com.sawant_nursery.Model.LedgerResponse;
 import com.sawant_nursery.R;
 import com.sawant_nursery.Retrofit.Api;
 import com.sawant_nursery.Retrofit.ApiInterface;
@@ -61,6 +59,8 @@ public class LedgerList extends Fragment {
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
 
+        searchEditText.setLongClickable(false);
+
         Bundle bundle = getArguments();
         customerId = bundle.getString("customerId");
 
@@ -89,7 +89,7 @@ public class LedgerList extends Fragment {
     private void getInvoiceList() {
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<AllList> call = apiInterface.getInvoiceList(MainPage.userId, customerId);
+        Call<AllList> call = apiInterface.getLedgerList(MainPage.userId, customerId);
         call.enqueue(new Callback<AllList>() {
             @Override
             public void onResponse(Call<AllList> call, Response<AllList> response) {
