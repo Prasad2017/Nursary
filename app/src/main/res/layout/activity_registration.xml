@@ -163,7 +163,7 @@
                 android:textColorHint="@color/light_black">
 
                 <com.andreabaccega.widget.FormEditText
-                    android:id="@+id/fullName"
+                    android:id="@+id/officeNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
@@ -234,7 +234,7 @@
                 android:textColorHint="@color/light_black">
 
                 <com.andreabaccega.widget.FormEditText
-                    android:id="@+id/personName"
+                    android:id="@+id/personNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"

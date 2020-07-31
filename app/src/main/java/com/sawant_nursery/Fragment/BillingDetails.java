@@ -22,6 +22,7 @@ import com.sawant_nursery.Activity.MainPage;
 import com.sawant_nursery.Extra.DetectConnection;
 import com.sawant_nursery.Model.AllList;
 import com.sawant_nursery.Model.CartResponse;
+import com.sawant_nursery.Model.CustomerResponse;
 import com.sawant_nursery.Model.LoginResponse;
 import com.sawant_nursery.R;
 import com.sawant_nursery.Retrofit.Api;
@@ -58,6 +59,7 @@ public class BillingDetails extends Fragment {
     LinearLayout linearLayout;
     String customerType, customerId, customerName;
     List<CartResponse> cartResponseList = new ArrayList<>();
+    List<CustomerResponse> customerResponseList = new ArrayList<>();
 
 
 
@@ -338,19 +340,15 @@ public class BillingDetails extends Fragment {
             public void onResponse(Call<AllList> call, Response<AllList> response) {
 
                 AllList allList = response.body();
-                cartResponseList = allList.getCartResponseList();
+                customerResponseList = allList.getCustomerResponseList();
 
-                if (cartResponseList.size()==0){
-                    paymentFormEditTexts.get(0).setText("0");
-                    paymentFormEditTexts.get(4).setText("0");
+                if (customerResponseList.size()==0){
+
                 } else {
 
-                    for (int i=0;i<cartResponseList.size();i++){
+                    for (int i=0;i<customerResponseList.size();i++){
 
-                        MainPage.subAmount = cartResponseList.get(i).getSubAmount();
-                        Log.e("subAmount", ""+MainPage.subAmount);
-                        paymentFormEditTexts.get(0).setText(""+String.format(Locale.US, "%.2f", Float.parseFloat(MainPage.subAmount)));
-                        paymentFormEditTexts.get(4).setText(""+String.format(Locale.US, "%.2f", Float.parseFloat(MainPage.subAmount)));
+
 
                     }
 
