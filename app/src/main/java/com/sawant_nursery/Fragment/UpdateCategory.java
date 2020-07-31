@@ -61,6 +61,7 @@ public class UpdateCategory extends Fragment {
         subCategoryName = bundle.getString("subCategoryName");
 
         productCategory.setLongClickable(false);
+        productCategory.setText(subCategoryName);
 
         spinProductCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -115,6 +116,7 @@ public class UpdateCategory extends Fragment {
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     productCategory.setText("");
+                    ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                     ((MainPage)getActivity()).loadFragment(new CategoryList(), true);
                 } else if (response.body().getSuccess().equals("false")){
                     progressDialog.dismiss();
