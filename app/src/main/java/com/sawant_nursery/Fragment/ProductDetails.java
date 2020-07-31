@@ -207,11 +207,13 @@ public class ProductDetails extends Fragment {
                             } else {
                                 quantity.setError("Enter Quantity");
                                 quantity.requestFocus();
+                                textViews.get(1).setText("0");
                             }
                         }
                     } else {
                         productprice.setError("Enter Price");
                         productprice.requestFocus();
+                        textViews.get(1).setText("0");
                     }
 
                 }catch (Exception e){
@@ -245,8 +247,14 @@ public class ProductDetails extends Fragment {
                                 float totalAmount = price * qnty;
                                 textViews.get(1).setText("" + String.format(Locale.US, "%.2f", totalAmount));
 
+                            } else {
+                                textViews.get(1).setText("0");
                             }
+                        } else {
+                            textViews.get(1).setText("0");
                         }
+                    } else {
+                        textViews.get(1).setText("0");
                     }
 
                 }catch (Exception e){

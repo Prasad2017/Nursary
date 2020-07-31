@@ -126,7 +126,7 @@ public class BillingDetails extends Fragment {
                         float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
                         float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
                         float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
-                        float grandTotal = ((subAmount*discount)/100) + otherCharges + transport;
+                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport + subAmount;
 
                         paymentFormEditTexts.get(4).setText(""+String.format(Locale.US, "%.2f", grandTotal));
 
@@ -168,7 +168,7 @@ public class BillingDetails extends Fragment {
                         float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
                         float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
                         float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
-                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport;
+                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport + subAmount;
 
                         paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
 
@@ -207,7 +207,7 @@ public class BillingDetails extends Fragment {
                         float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
                         float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
                         float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
-                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport;
+                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport + subAmount;
 
                         paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
 
@@ -291,6 +291,7 @@ public class BillingDetails extends Fragment {
                 if (response.body().getSuccess().equals("true")){
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                     ((MainPage) getActivity()).loadFragment(new Dashboard(), true);
                 } else if (response.body().getSuccess().equals("false")){
                     progressDialog.dismiss();
@@ -322,9 +323,50 @@ public class BillingDetails extends Fragment {
         MainPage.drawerLayout.closeDrawers();
         if (DetectConnection.checkInternetConnection(getActivity())) {
             getCartAmount();
+            getCustomerDetails();
         } else {
             Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void getCustomerDetails() {
+
+        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+        Call<AllList> call = apiInterface.getProductAmount(MainPage.userId, customerId);
+        call.enqueue(new Callback<AllList>() {
+            @Override
+            public void onResponse(Call<AllList> call, Response<AllList> response) {
+
+                AllList allList = response.body();
+                cartResponseList = allList.getCartResponseList();
+
+                if (cartResponseList.size()==0){
+                    paymentFormEditTexts.get(0).setText("0");
+                    paymentFormEditTexts.get(4).setText("0");
+                } else {
+
+                    for (int i=0;i<cartResponseList.size();i++){
+
+                        MainPage.subAmount = cartResponseList.get(i).getSubAmount();
+                        Log.e("subAmount", ""+MainPage.subAmount);
+                        paymentFormEditTexts.get(0).setText(""+String.format(Locale.US, "%.2f", Float.parseFloat(MainPage.subAmount)));
+                        paymentFormEditTexts.get(4).setText(""+String.format(Locale.US, "%.2f", Float.parseFloat(MainPage.subAmount)));
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AllList> call, Throwable t) {
+                paymentFormEditTexts.get(0).setText("0");
+                paymentFormEditTexts.get(4).setText("0");
+                Log.e("Error", ""+t.getMessage());
+            }
+        });
+
+
     }
 
     private void getCartAmount() {
