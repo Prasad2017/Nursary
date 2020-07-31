@@ -113,6 +113,7 @@ public class AddSubCategory extends Fragment {
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     productCategory.setText("");
+                    ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                     ((MainPage) getActivity()).loadFragment(new CategoryList(), true);
                 } else if (response.body().getSuccess().equals("false")){
                     progressDialog.dismiss();

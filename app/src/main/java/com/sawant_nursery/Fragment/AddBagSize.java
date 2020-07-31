@@ -78,6 +78,7 @@ public class AddBagSize extends Fragment {
                     progressDialog.dismiss();
                     productSize.setText("");
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                     ((MainPage)getActivity()).loadFragment(new BagSizeList(), true);
                 } else if (response.body().getSuccess().equals("false")){
                     progressDialog.dismiss();

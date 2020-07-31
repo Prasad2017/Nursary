@@ -138,11 +138,17 @@ public class AddProduct extends Fragment {
                         textInputLayouts.get(0).setVisibility(View.VISIBLE);
                         textInputLayouts.get(1).setVisibility(View.VISIBLE);
                         textInputLayouts.get(2).setVisibility(View.VISIBLE);
-                        textInputLayouts.get(3).setVisibility(View.GONE);
-                        textInputLayouts.get(4).setVisibility(View.GONE);
+                        textInputLayouts.get(3).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(4).setVisibility(View.VISIBLE);
 
                         productSize.setVisibility(View.GONE);
                         productBagSize.setVisibility(View.GONE);
+
+                        formEditTexts.get(0).setVisibility(View.GONE);
+
+                        formEditTexts.get(2).setText("0");
+                        formEditTexts.get(3).setText("0");
+                        formEditTexts.get(4).setText("0");
 
 
                     } else if (taxType.equals("Non-Taxable")){
@@ -150,11 +156,17 @@ public class AddProduct extends Fragment {
                         textInputLayouts.get(0).setVisibility(View.VISIBLE);
                         textInputLayouts.get(1).setVisibility(View.VISIBLE);
                         textInputLayouts.get(2).setVisibility(View.VISIBLE);
-                        textInputLayouts.get(3).setVisibility(View.VISIBLE);
-                        textInputLayouts.get(4).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(3).setVisibility(View.GONE);
+                        textInputLayouts.get(4).setVisibility(View.GONE);
 
                         productSize.setVisibility(View.VISIBLE);
                         productBagSize.setVisibility(View.VISIBLE);
+
+                        formEditTexts.get(0).setVisibility(View.VISIBLE);
+
+                        formEditTexts.get(2).setText("0");
+                        formEditTexts.get(3).setText("0");
+                        formEditTexts.get(4).setText("0");
 
                     }
 
@@ -372,7 +384,7 @@ public class AddProduct extends Fragment {
         switch (view.getId()) {
             case R.id.save:
 
-                if (taxType.equals("Taxable")) {
+                if (taxType.equals("Non-Taxable")) {
                     if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() &&
                             formEditTexts.get(3).testValidity() && formEditTexts.get(4).testValidity()) {
                         if (imageView.getDrawable() == null) {
@@ -382,10 +394,10 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, subcategoryId);
+                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0" , "0", prodsizeId, productbagId, productImage, subcategoryId);
 
                     }
-                } else if (taxType.equals("Non-Taxable")) {
+                } else if (taxType.equals("Taxable")) {
                     if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
                         if (imageView.getDrawable() == null) {
                             productImage = "";
@@ -394,7 +406,7 @@ public class AddProduct extends Fragment {
                             productImage = getStringImage(bitmap);
                         }
 
-                        addTaxableProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, subcategoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
+                        addTaxableProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, subcategoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
 
                     }
                 }
@@ -437,7 +449,7 @@ public class AddProduct extends Fragment {
                 };
 
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                builder1.setTitle("Select Product Size");
+                builder1.setTitle("Select Plant Size");
                 builder1.setMultiChoiceItems(productSizeNameList, checkedSizeName, sizeDialogListener);
                 AlertDialog dialog1 = builder1.create();
                 dialog1.show();
@@ -476,7 +488,7 @@ public class AddProduct extends Fragment {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select Product Size");
+                builder.setTitle("Select Bag Size");
                 builder.setMultiChoiceItems(productBagSizeList, checkedBagName, bagsizeDialogListener);
                 AlertDialog dialog = builder.create();
                 dialog.show();
