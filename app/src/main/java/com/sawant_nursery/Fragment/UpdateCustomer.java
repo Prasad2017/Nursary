@@ -1,6 +1,7 @@
 package com.sawant_nursery.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.andreabaccega.widget.FormEditText;
@@ -43,7 +46,8 @@ public class UpdateCustomer extends Fragment {
         view = inflater.inflate(R.layout.fragment_update_customer, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("Add Customer");
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         if (MainPage.shopStatus.equals("Retailer_on")){
             type = "Retailer_on";
         } else if (MainPage.shopStatus.equals("Wholesaler_on")){

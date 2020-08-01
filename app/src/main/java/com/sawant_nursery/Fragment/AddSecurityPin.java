@@ -1,6 +1,7 @@
 package com.sawant_nursery.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,7 +11,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,13 +55,20 @@ public class AddSecurityPin extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_security_pin, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("Set Pin");
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         otpView.setOtpCompletionListener(new OnOtpCompletionListener() {
             @Override
             public void onOtpCompleted(String otp) {
                 try {
                     securityCode = otp;
                     int length = securityCode.trim().length();
+                    if (securityCode.length()>5){
+                        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    } else {
+
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -265,4 +265,6 @@ public interface ApiInterface {
     Call<AllList> getLedgerList(@Query("userId") String userId,
                                  @Query("customerId") String customerId);
 
+    @GET("/androidApp/getCustomerDetails")
+    Call<AllList> getCustomerDetails(String userId, String customerId);
 }

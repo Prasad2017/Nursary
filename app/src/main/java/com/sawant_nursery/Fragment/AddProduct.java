@@ -2,6 +2,7 @@ package com.sawant_nursery.Fragment;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +22,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -111,6 +114,9 @@ public class AddProduct extends Fragment {
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
 
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
         formEditTexts.get(0).setSelection(formEditTexts.get(0).getText().toString().length());
         formEditTexts.get(1).setSelection(formEditTexts.get(1).getText().toString().length());
         formEditTexts.get(2).setSelection(formEditTexts.get(2).getText().toString().length());
@@ -146,16 +152,16 @@ public class AddProduct extends Fragment {
 
                         formEditTexts.get(0).setVisibility(View.GONE);
 
-                        formEditTexts.get(2).setText("0");
-                        formEditTexts.get(3).setText("0");
-                        formEditTexts.get(4).setText("0");
+                        formEditTexts.get(2).setText("");
+                        formEditTexts.get(3).setText("");
+                        formEditTexts.get(4).setText("");
 
 
                     } else if (taxType.equals("Non-Taxable")){
 
-                        textInputLayouts.get(0).setVisibility(View.VISIBLE);
-                        textInputLayouts.get(1).setVisibility(View.VISIBLE);
-                        textInputLayouts.get(2).setVisibility(View.VISIBLE);
+                        textInputLayouts.get(0).setVisibility(View.GONE);
+                        textInputLayouts.get(1).setVisibility(View.GONE);
+                        textInputLayouts.get(2).setVisibility(View.GONE);
                         textInputLayouts.get(3).setVisibility(View.GONE);
                         textInputLayouts.get(4).setVisibility(View.GONE);
 
@@ -230,110 +236,6 @@ public class AddProduct extends Fragment {
             }
         });
 
-        formEditTexts.get(2).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String s1 = s.toString();
-                try{
-
-                    if (formEditTexts.get(2).testValidity()){
-                        if (Integer.parseInt(formEditTexts.get(2).getText().toString().trim())<0){
-                            formEditTexts.get(2).setText("0");
-                            formEditTexts.get(2).setSelection(formEditTexts.get(2).getText().toString().trim().length());
-                        } else if (Integer.parseInt(formEditTexts.get(2).getText().toString().trim())>100){
-                            formEditTexts.get(2).setText("100");
-                            formEditTexts.get(2).setSelection(formEditTexts.get(2).getText().toString().trim().length());
-                        }
-                    } else {
-                        formEditTexts.get(2).setText("0");
-                        formEditTexts.get(2).setSelection(formEditTexts.get(2).getText().toString().trim().length());
-                    }
-
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        formEditTexts.get(3).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String s1 = s.toString();
-                try{
-
-                    if (formEditTexts.get(3).testValidity()){
-                        if (Integer.parseInt(formEditTexts.get(3).getText().toString().trim())<0){
-                            formEditTexts.get(3).setText("0");
-                            formEditTexts.get(3).setSelection(formEditTexts.get(3).getText().toString().trim().length());
-                        } else if (Integer.parseInt(formEditTexts.get(3).getText().toString().trim())>100){
-                            formEditTexts.get(3).setText("100");
-                            formEditTexts.get(3).setSelection(formEditTexts.get(3).getText().toString().trim().length());
-                        }
-                    } else {
-                        formEditTexts.get(3).setText("0");
-                        formEditTexts.get(3).setSelection(formEditTexts.get(3).getText().toString().trim().length());
-                    }
-
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        formEditTexts.get(4).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String s1 = s.toString();
-                try{
-
-                    if (formEditTexts.get(4).testValidity()){
-                        if (Integer.parseInt(formEditTexts.get(4).getText().toString().trim())<0){
-                            formEditTexts.get(4).setText("0");
-                            formEditTexts.get(4).setSelection(formEditTexts.get(4).getText().toString().trim().length());
-                        } else if (Integer.parseInt(formEditTexts.get(24).getText().toString().trim())>100){
-                            formEditTexts.get(4).setText("100");
-                            formEditTexts.get(4).setSelection(formEditTexts.get(4).getText().toString().trim().length());
-                        }
-                    } else {
-                        formEditTexts.get(4).setText("0");
-                        formEditTexts.get(4).setSelection(formEditTexts.get(4).getText().toString().trim().length());
-                    }
-
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
 
         return view;
 
@@ -387,18 +289,25 @@ public class AddProduct extends Fragment {
                 if (taxType.equals("Non-Taxable")) {
                     if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() &&
                             formEditTexts.get(3).testValidity() && formEditTexts.get(4).testValidity()) {
-                        if (imageView.getDrawable() == null) {
-                            productImage = "";
+                        if (!productSize.getText().toString().trim().isEmpty()) {
+                            if (!productBagSize.getText().toString().trim().isEmpty()) {
+                                if (imageView.getDrawable() == null) {
+                                    productImage = "";
+                                } else {
+                                    bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                                    productImage = getStringImage(bitmap);
+                                }
+
+                                addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, subcategoryId);
+                            } else {
+                                Toast.makeText(getActivity(), "Select Bag Size", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                            productImage = getStringImage(bitmap);
+                            Toast.makeText(getActivity(), "Select Plant Size", Toast.LENGTH_SHORT).show();
                         }
-
-                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0" , "0", prodsizeId, productbagId, productImage, subcategoryId);
-
                     }
                 } else if (taxType.equals("Taxable")) {
-                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
+                    if (formEditTexts.get(1).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
                         if (imageView.getDrawable() == null) {
                             productImage = "";
                         } else {

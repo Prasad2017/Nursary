@@ -1,11 +1,14 @@
 package com.sawant_nursery.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -39,7 +42,8 @@ public class UpdateBagSize extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_bag_size, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         Bundle bundle = getArguments();
         bagSizeId = bundle.getString("plantSizeId");
         plantSizeName = bundle.getString("plantSizeName");

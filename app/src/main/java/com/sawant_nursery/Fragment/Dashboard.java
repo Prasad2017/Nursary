@@ -1,5 +1,6 @@
 package com.sawant_nursery.Fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -93,7 +96,8 @@ public class Dashboard extends Fragment {
         ButterKnife.bind(this, view);
         mPager = view.findViewById(R.id.pager);
         indicator = view.findViewById(R.id.indicator);
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         if (MainPage.shopStatus.equals("Retailer_on")){
             MainPage.adminStatus.setText("Garden center");
             MainPage.adminStatus.setVisibility(View.VISIBLE);

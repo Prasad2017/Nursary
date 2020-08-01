@@ -1,5 +1,6 @@
 package com.sawant_nursery.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +10,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +45,8 @@ public class ValidatePin extends Fragment {
         view = inflater.inflate(R.layout.fragment_validate_pin, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         otpView.setOtpCompletionListener(new OnOtpCompletionListener() {
             @Override
             public void onOtpCompleted(String otp) {
@@ -50,6 +54,12 @@ public class ValidatePin extends Fragment {
                     securityCode = otp;
                     Log.e("securityCode", ""+securityCode);
                     Log.e("securityPin", ""+MainPage.securityPin);
+                    if (securityCode.length()>5){
+                        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    } else {
+
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

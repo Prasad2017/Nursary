@@ -1,6 +1,7 @@
 package com.sawant_nursery.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -60,6 +63,8 @@ public class CustomerSelection extends Fragment {
         view = inflater.inflate(R.layout.fragment_customer_selection, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("Customer Selection");
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, customerType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

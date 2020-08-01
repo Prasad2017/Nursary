@@ -2,6 +2,7 @@ package com.sawant_nursery.Fragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +66,8 @@ public class Setting extends Fragment {
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
         nurseryDatabase = new NurseryDatabase(getActivity());
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
         if (MainPage.shopStatus.equals("Retailer_on")){
             labeledSwitches.get(0).setOn(true);

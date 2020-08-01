@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -74,7 +75,7 @@ public class AddProductAmount extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_product_amount, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         nurseryDatabase = new NurseryDatabase(getActivity());
 
         Bundle bundle = getArguments();

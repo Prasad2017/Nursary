@@ -40,7 +40,7 @@
         <activity
             android:name=".Activity.MainPage"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activity.SplashScreen"

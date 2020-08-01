@@ -16,6 +16,9 @@ public class AllList {
     @SerializedName("customerResponse")
     List<CustomerResponse> customerResponseList;
 
+    @SerializedName("customerIdResponse")
+    List<CustomerResponse> customerResponseLists;
+
     @SerializedName("productResponse")
     List<ProductResponse> productResponseList;
 
@@ -129,5 +132,13 @@ public class AllList {
 
     public void setProductAmountResponseList(List<ProductResponse> productAmountResponseList) {
         this.productAmountResponseList = productAmountResponseList;
+    }
+
+    public List<CustomerResponse> getCustomerResponseLists() {
+        return customerResponseLists;
+    }
+
+    public void setCustomerResponseLists(List<CustomerResponse> customerResponseLists) {
+        this.customerResponseLists = customerResponseLists;
     }
 }

@@ -1,6 +1,7 @@
 package com.sawant_nursery.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -80,9 +82,8 @@ public class AddAmount extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_amount, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInputFromWindow(retailerLayout.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
         nurseryDatabase = new NurseryDatabase(getActivity());
 

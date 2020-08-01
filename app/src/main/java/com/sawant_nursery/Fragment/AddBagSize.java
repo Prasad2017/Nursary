@@ -1,6 +1,7 @@
 package com.sawant_nursery.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.core.widget.NestedScrollView;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -48,9 +50,8 @@ public class AddBagSize extends Fragment {
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
 
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInputFromWindow(nestedScrollView.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         return view;
 
     }

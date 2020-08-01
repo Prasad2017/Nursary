@@ -2,6 +2,7 @@ package com.sawant_nursery.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -82,7 +85,8 @@ public class ProductDetails extends Fragment {
         view = inflater.inflate(R.layout.fragment_product_details, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("Product Details");
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         Bundle bundle = getArguments();
         customerId = bundle.getString("customerId")==null?"":bundle.getString("customerId");
         customerType = bundle.getString("customerType")==null?"":bundle.getString("customerType");
@@ -95,10 +99,10 @@ public class ProductDetails extends Fragment {
 
         textViews.get(0).setText(productName);
 
-        if (taxType.equalsIgnoreCase("Non-Taxable")){
+        if (taxType.equalsIgnoreCase("Taxable")){
             spinnerLayout.setVisibility(View.GONE);
             getAmount(productId);
-        } else  if (taxType.equalsIgnoreCase("Taxable")){
+        } else  if (taxType.equalsIgnoreCase("Non-Taxable")){
             spinnerLayout.setVisibility(View.VISIBLE);
         }
 

@@ -1,6 +1,7 @@
 package com.sawant_nursery.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -68,9 +70,8 @@ public class BillingDetails extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_billing_details, container, false);
         ButterKnife.bind(this, view);
-        InputMethodManager inputMethodManager = (InputMethodManager)getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInputFromWindow(linearLayout.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-
+        InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         Bundle bundle = getArguments();
         customerType = bundle.getString("customerType");
         customerId = bundle.getString("customerId");
@@ -113,7 +114,7 @@ public class BillingDetails extends Fragment {
 
                         if (paymentFormEditTexts.get(1).getText().toString().length()>0) {
                             if (Float.parseFloat(paymentFormEditTexts.get(1).getText().toString()) < 0f) {
-                                paymentFormEditTexts.get(1).setText("0");
+                                paymentFormEditTexts.get(1).setText("");
                                 paymentFormEditTexts.get(1).setSelection(paymentFormEditTexts.get(1).getText().toString().length());
                             } else if (Float.parseFloat(paymentFormEditTexts.get(1).getText().toString()) > 100f) {
                                 paymentFormEditTexts.get(1).setText("100");
@@ -162,7 +163,7 @@ public class BillingDetails extends Fragment {
                             paymentFormEditTexts.get(2).testValidity() && paymentFormEditTexts.get(3).testValidity()) {
 
                         if (paymentFormEditTexts.get(2).getText().toString().length() < 0) {
-                            paymentFormEditTexts.get(2).setText("0");
+                            paymentFormEditTexts.get(2).setText("");
                             paymentFormEditTexts.get(2).setSelection(paymentFormEditTexts.get(2).getText().toString().length());
                         }
 
@@ -202,7 +203,7 @@ public class BillingDetails extends Fragment {
                             paymentFormEditTexts.get(2).testValidity() && paymentFormEditTexts.get(3).testValidity()) {
 
                         if (paymentFormEditTexts.get(3).getText().toString().length() < 0) {
-                            paymentFormEditTexts.get(3).setText("0");
+                            paymentFormEditTexts.get(3).setText("");
                         }
 
                         float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
@@ -334,13 +335,13 @@ public class BillingDetails extends Fragment {
     private void getCustomerDetails() {
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<AllList> call = apiInterface.getProductAmount(MainPage.userId, customerId);
+        Call<AllList> call = apiInterface.getCustomerDetails(MainPage.userId, customerId);
         call.enqueue(new Callback<AllList>() {
             @Override
             public void onResponse(Call<AllList> call, Response<AllList> response) {
 
                 AllList allList = response.body();
-                customerResponseList = allList.getCustomerResponseList();
+                customerResponseList = allList.getCustomerResponseLists();
 
                 if (customerResponseList.size()==0){
 
@@ -348,7 +349,10 @@ public class BillingDetails extends Fragment {
 
                     for (int i=0;i<customerResponseList.size();i++){
 
-
+                        invoiceFormEditTexts.get(0).setText(customerResponseList.get(i).getCustomerName());
+                        invoiceFormEditTexts.get(1).setText(customerResponseList.get(i).getContactPerson());
+                        invoiceFormEditTexts.get(2).setText(customerResponseList.get(i).getContact_person_number());
+                        invoiceFormEditTexts.get(5).setText(customerResponseList.get(i).getAddress());
 
                     }
 
