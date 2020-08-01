@@ -184,6 +184,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 progressDialog.show();
                 progressDialog.setCancelable(false);
 
+                Log.e("CartId", ""+cartResponseList.get(position).getCart_id());
+
                 ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
                 Call<LoginResponse> call = apiInterface.deleteCart(cartResponseList.get(position).getCart_id());
                 call.enqueue(new Callback<LoginResponse>() {
