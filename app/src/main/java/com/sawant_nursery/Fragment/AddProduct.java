@@ -152,9 +152,6 @@ public class AddProduct extends Fragment {
 
                         formEditTexts.get(0).setVisibility(View.GONE);
 
-                        formEditTexts.get(2).setText("");
-                        formEditTexts.get(3).setText("");
-                        formEditTexts.get(4).setText("");
 
 
                     } else if (taxType.equals("Non-Taxable")){
@@ -169,10 +166,6 @@ public class AddProduct extends Fragment {
                         productBagSize.setVisibility(View.VISIBLE);
 
                         formEditTexts.get(0).setVisibility(View.VISIBLE);
-
-                        formEditTexts.get(2).setText("0");
-                        formEditTexts.get(3).setText("0");
-                        formEditTexts.get(4).setText("0");
 
                     }
 
@@ -287,8 +280,7 @@ public class AddProduct extends Fragment {
             case R.id.save:
 
                 if (taxType.equals("Non-Taxable")) {
-                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() &&
-                            formEditTexts.get(3).testValidity() && formEditTexts.get(4).testValidity()) {
+                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity()) {
                         if (!productSize.getText().toString().trim().isEmpty()) {
                             if (!productBagSize.getText().toString().trim().isEmpty()) {
                                 if (imageView.getDrawable() == null) {
@@ -307,7 +299,8 @@ public class AddProduct extends Fragment {
                         }
                     }
                 } else if (taxType.equals("Taxable")) {
-                    if (formEditTexts.get(1).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
+                    if (formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() && formEditTexts.get(3).testValidity() &&
+                            formEditTexts.get(4).testValidity() &&formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
                         if (imageView.getDrawable() == null) {
                             productImage = "";
                         } else {

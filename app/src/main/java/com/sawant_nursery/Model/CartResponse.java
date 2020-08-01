@@ -49,6 +49,18 @@ public class CartResponse {
     @SerializedName("igst")
     String igst;
 
+    @SerializedName("tax_type")
+    String tax_type;
+
+    @SerializedName("business_name")
+    String business_name;
+
+    @SerializedName("c_id")
+    String c_id;
+
+    @SerializedName("type")
+    String type;
+
 
 
     //All getter and setter methods.....
@@ -173,5 +185,36 @@ public class CartResponse {
         this.igst = igst;
     }
 
+    public String getTax_type() {
+        return tax_type;
+    }
 
+    public void setTax_type(String tax_type) {
+        this.tax_type = tax_type;
+    }
+
+
+    public String getBusiness_name() {
+        return business_name;
+    }
+
+    public void setBusiness_name(String business_name) {
+        this.business_name = business_name;
+    }
+
+    public String getC_id() {
+        return c_id;
+    }
+
+    public void setC_id(String c_id) {
+        this.c_id = c_id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

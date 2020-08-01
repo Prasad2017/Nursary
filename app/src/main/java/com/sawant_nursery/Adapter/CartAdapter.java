@@ -3,6 +3,7 @@ package com.sawant_nursery.Adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sawant_nursery.Activity.MainPage;
 import com.sawant_nursery.Extra.Blur;
+import com.sawant_nursery.Fragment.CustomerCartList;
 import com.sawant_nursery.Model.CartResponse;
 import com.sawant_nursery.Model.LoginResponse;
 import com.sawant_nursery.R;
@@ -40,7 +42,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     Context context;
     List<CartResponse> cartResponseList;
-    double totalAmount = 0f, amountPayable;
+    double totalAmount = 0f, amountPayable, taxAmount=0f;
     public static String totalAmountPayable;
     double tax=0f, delivery=0f;
 
@@ -66,26 +68,46 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         CartResponse cartResponse = cartResponseList.get(position);
 
         totalAmount = totalAmount + (Double.parseDouble(cartResponseList.get(position).getProduct_price()) * Double.parseDouble(cartResponseList.get(position).getProduct_quantity()));
+
+        try {
+            tax = tax + Double.parseDouble(cartResponseList.get(position).getSgst());
+            delivery = delivery + Double.parseDouble(cartResponseList.get(position).getCgst());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+            if (cartResponseList.get(position).getTax_type().equalsIgnoreCase("Taxable")) {
+                taxAmount = taxAmount + (Double.parseDouble(cartResponseList.get(position).getProduct_price()) * Double.parseDouble(cartResponseList.get(position).getProduct_quantity()));
+            }  else {
+                taxAmount = 0f;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         if (position == cartResponseList.size() - 1) {
+
             holder.totalAmount.setVisibility(View.VISIBLE);
             holder.txtGurantee.setText(Html.fromHtml(context.getResources().getString(R.string.secure_payment_text)));
 
             holder.textViews.get(0).setText("Price (" + cartResponseList.size() + " items)");
             holder.textViews.get(1).setText(MainPage.currency + " " + totalAmount);
 
-            tax = Double.parseDouble(cartResponseList.get(position).getSgst());
-            delivery = Double.parseDouble(cartResponseList.get(position).getCgst());
+           // tax = Double.parseDouble(cartResponseList.get(position).getSgst());
+          //  delivery = Double.parseDouble(cartResponseList.get(position).getCgst());
             Log.d("floatTax", delivery + "");
             holder.textViews.get(2).setText(" "+delivery);
             holder.textViews.get(3).setText(" " + tax);
-            delivery = delivery/100f;
-            tax = tax/100f;
 
-            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+delivery+tax))));
-            totalAmountPayable = (String.format("%.2f", (amountPayable+delivery+tax)));
-            Log.d("totalAmountPayable", totalAmountPayable);
+            taxAmount = (taxAmount*(tax+delivery))/100;
+
+            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+taxAmount))));
+     //       Log.d("taxAmount", String.valueOf(taxAmount));
+       //     Log.d("totalAmountPayable", totalAmountPayable);
             amountPayable=totalAmount;
-            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+delivery+tax))));
+            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+delivery+taxAmount))));
+
         } else
             holder.totalAmount.setVisibility(View.GONE);
 
@@ -171,6 +193,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                         if (response.body().getSuccess().equals("true")){
                             progressDialog.dismiss();
                             Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            CustomerCartList customerCartList = new CustomerCartList();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("customerType", cartResponseList.get(position).getType());
+                            bundle.putString("customerId", cartResponseList.get(position).getC_id());
+                            bundle.putString("customerName", cartResponseList.get(position).getBusiness_name());
+                            customerCartList.setArguments(bundle);
+                            ((MainPage) context).loadFragment(customerCartList, true);
                         } else if (response.body().getSuccess().equals("false")){
                             progressDialog.dismiss();
                             Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
