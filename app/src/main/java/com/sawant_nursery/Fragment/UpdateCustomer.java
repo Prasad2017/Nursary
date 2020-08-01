@@ -45,7 +45,7 @@ public class UpdateCustomer extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_update_customer, container, false);
         ButterKnife.bind(this, view);
-        MainPage.title.setText("Add Customer");
+        MainPage.title.setText("Update Customer");
         InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         if (MainPage.shopStatus.equals("Retailer_on")){
