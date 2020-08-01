@@ -75,7 +75,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
             tax = Double.parseDouble(cartResponseList.get(position).getSgst());
             delivery = Double.parseDouble(cartResponseList.get(position).getCgst());
-            Log.d("floatTax", tax + "");
+            Log.d("floatTax", delivery + "");
             holder.textViews.get(2).setText(" "+delivery);
             holder.textViews.get(3).setText(" " + tax);
             delivery = delivery/100f;

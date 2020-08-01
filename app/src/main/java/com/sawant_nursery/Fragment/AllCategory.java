@@ -145,6 +145,10 @@ public class AllCategory extends Fragment {
                 bundle.putString("taxType", categoryResponseList.get(position).getTaxType());
                 bundle.putString("productName", categoryResponseList.get(position).getProductName());
                 bundle.putString("productImage", categoryResponseList.get(position).getCategoryImage());
+                bundle.putString("cgst", categoryResponseList.get(position).getCgst());
+                bundle.putString("sgst", categoryResponseList.get(position).getSgst());
+                bundle.putString("igst", categoryResponseList.get(position).getIgst());
+                bundle.putString("productImage", categoryResponseList.get(position).getCategoryImage());
                 productDetails.setArguments(bundle);
                 ((MainPage)getActivity()).loadFragment(productDetails, true);
 

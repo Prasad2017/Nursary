@@ -244,7 +244,7 @@ public class AddProduct extends Fragment {
     private void getSubCategoryList(String categoryId) {
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<AllList> call = apiInterface.getCategoryWiseSubCategoryList(categoryId);
+        Call<AllList> call = apiInterface.getCategoryWiseSubCategoryList(categoryId, MainPage.userId);
         call.enqueue(new Callback<AllList>() {
             @Override
             public void onResponse(Call<AllList> call, Response<AllList> response) {

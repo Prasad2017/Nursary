@@ -258,13 +258,15 @@ public interface ApiInterface {
 
 
     @GET("/androidApp/getCategoryWiseSubCategoryList.php")
-    Call<AllList> getCategoryWiseSubCategoryList(@Query("categoryId") String categoryId);
+    Call<AllList> getCategoryWiseSubCategoryList(@Query("categoryId") String categoryId,
+                                                 @Query("userId") String userId);
 
 
     @GET("/androidApp/LedgerList.php")
     Call<AllList> getLedgerList(@Query("userId") String userId,
                                  @Query("customerId") String customerId);
 
-    @GET("/androidApp/getCustomerDetails")
-    Call<AllList> getCustomerDetails(String userId, String customerId);
+    @GET("/androidApp/getCustomerDetails.php")
+    Call<AllList> getCustomerDetails(@Query("userId") String userId,
+                                     @Query("customerId") String customerId);
 }

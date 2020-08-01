@@ -134,7 +134,10 @@
 
                 </LinearLayout>
 
+            </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/txtGstLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -167,6 +170,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/gstLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -199,8 +203,6 @@
                         android:background="@drawable/textborder"/>
 
                 </LinearLayout>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

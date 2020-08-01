@@ -57,7 +57,7 @@ import retrofit2.Response;
 public class ProductDetails extends Fragment {
 
     View view;
-    @BindViews({R.id.productName, R.id.totalAmount})
+    @BindViews({R.id.productName, R.id.totalAmount, R.id.cgst, R.id.sgst})
     List<TextView> textViews;
     @BindView(R.id.productImage)
     ImageView imageView;
@@ -71,6 +71,8 @@ public class ProductDetails extends Fragment {
     Spinner bagSize;
     @BindView(R.id.spinnerLayout)
     LinearLayout spinnerLayout;
+    @BindViews({R.id.txtGstLayout, R.id.gstLayout})
+    List<LinearLayout> linearLayouts;
     String productId, taxType, productName, productImage, customerId, customerType, customerName, plantSizeId, plantSizeName, bagSizeId, bagSizeName, cgst, sgst, igst;
     String[] productSizeIdList, productSizeNameList, bagSizeIdList, bagSizeNameList;
     List<SizeResponse> sizeResponseList = new ArrayList<>();
@@ -101,9 +103,13 @@ public class ProductDetails extends Fragment {
 
         if (taxType.equalsIgnoreCase("Taxable")){
             spinnerLayout.setVisibility(View.GONE);
+            linearLayouts.get(0).setVisibility(View.VISIBLE);
+            linearLayouts.get(1).setVisibility(View.VISIBLE);
             getAmount(productId);
         } else  if (taxType.equalsIgnoreCase("Non-Taxable")){
             spinnerLayout.setVisibility(View.VISIBLE);
+            linearLayouts.get(0).setVisibility(View.GONE);
+            linearLayouts.get(1).setVisibility(View.GONE);
         }
 
         try {
@@ -285,6 +291,8 @@ public class ProductDetails extends Fragment {
 
                 if (productResponseList.size()==0){
                     productprice.setText("0");
+                    textViews.get(2).setText("0");
+                    textViews.get(3).setText("0");
                 } else {
 
                     for (int i=0;i<productResponseList.size();i++){
@@ -292,6 +300,9 @@ public class ProductDetails extends Fragment {
                         cgst = productResponseList.get(i).getCgst();
                         sgst = productResponseList.get(i).getSgst();
                         igst = productResponseList.get(i).getIgst();
+
+                        textViews.get(2).setText(cgst);
+                        textViews.get(3).setText(sgst);
 
                         if (customerType.equals("Retailer_on")) {
                             productprice.setText(productResponseList.get(i).getRetailPrice());
@@ -327,6 +338,8 @@ public class ProductDetails extends Fragment {
 
                 if (productResponseList.size()==0){
                     productprice.setText("0");
+                    textViews.get(2).setText("0");
+                    textViews.get(3).setText("0");
                 } else {
 
                     for (int i=0;i<productResponseList.size();i++){
@@ -334,6 +347,8 @@ public class ProductDetails extends Fragment {
                         cgst = productResponseList.get(i).getCgst();
                         sgst = productResponseList.get(i).getSgst();
                         igst = productResponseList.get(i).getIgst();
+                        textViews.get(2).setText(cgst);
+                        textViews.get(3).setText(sgst);
 
                         if (customerType.equals("Retailer_on")) {
                             productprice.setText(productResponseList.get(i).getRetailPrice());
