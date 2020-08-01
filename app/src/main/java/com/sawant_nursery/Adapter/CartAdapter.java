@@ -70,8 +70,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         totalAmount = totalAmount + (Double.parseDouble(cartResponseList.get(position).getProduct_price()) * Double.parseDouble(cartResponseList.get(position).getProduct_quantity()));
 
         try {
-            tax = tax + Double.parseDouble(cartResponseList.get(position).getSgst());
-            delivery = delivery + Double.parseDouble(cartResponseList.get(position).getCgst());
+            tax =  tax+Double.parseDouble(cartResponseList.get(position).getSgst());
+            delivery = delivery+Double.parseDouble(cartResponseList.get(position).getCgst());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,7 +80,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             if (cartResponseList.get(position).getTax_type().equalsIgnoreCase("Taxable")) {
                 taxAmount = taxAmount + (Double.parseDouble(cartResponseList.get(position).getProduct_price()) * Double.parseDouble(cartResponseList.get(position).getProduct_quantity()));
             }  else {
-                taxAmount = 0f;
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -100,13 +100,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             holder.textViews.get(2).setText(" "+delivery);
             holder.textViews.get(3).setText(" " + tax);
 
-            taxAmount = (taxAmount*(tax+delivery))/100;
+            double taxamount = (taxAmount*(tax+delivery))/100;
 
-            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+taxAmount))));
+            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+taxamount))));
      //       Log.d("taxAmount", String.valueOf(taxAmount));
        //     Log.d("totalAmountPayable", totalAmountPayable);
             amountPayable=totalAmount;
-            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+delivery+taxAmount))));
+            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+delivery+taxamount))));
 
         } else
             holder.totalAmount.setVisibility(View.GONE);

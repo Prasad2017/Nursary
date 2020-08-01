@@ -121,6 +121,8 @@ public class CustomerCartList extends Fragment {
                 if (cartResponseList.size()==0){
                     noCategorytxt.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.GONE);
+                    ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
+                    ((MainPage) getActivity()).loadFragment(new AllCategory(), true);
                 }else {
 
                     adapter = new CartAdapter(getActivity(), cartResponseList);
