@@ -60,6 +60,7 @@ public class BillingDetails extends Fragment {
     @BindView(R.id.linearLayout)
     LinearLayout linearLayout;
     String customerType, customerId, customerName, pendingAmount;
+    float grandAmount;
     List<PendingResponse> pendingResponseList = new ArrayList<>();
     List<CustomerResponse> customerResponseList = new ArrayList<>();
 
@@ -138,6 +139,7 @@ public class BillingDetails extends Fragment {
                                 float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
                                 float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
                                 float pending = Float.parseFloat(paymentFormEditTexts.get(5).getText().toString());
+                                grandAmount = subAmount + otherCharges + transport - discount;
                                 float grandTotal = subAmount + otherCharges + transport - discount + pending;
 
                                 paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
@@ -191,7 +193,7 @@ public class BillingDetails extends Fragment {
                             float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
                             float pending = Float.parseFloat(paymentFormEditTexts.get(5).getText().toString());
                             float grandTotal = subAmount + otherCharges + transport - discount + pending;
-
+                            grandAmount = subAmount + otherCharges + transport - discount;
                             paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
                         }
 
@@ -235,7 +237,7 @@ public class BillingDetails extends Fragment {
                             float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
                             float pending = Float.parseFloat(paymentFormEditTexts.get(5).getText().toString());
                             float grandTotal = subAmount + otherCharges + transport - discount + pending;
-
+                            grandAmount = subAmount + otherCharges + transport - discount;
                             paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
                         }
 
@@ -270,9 +272,7 @@ public class BillingDetails extends Fragment {
                             paymentFormEditTexts.get(5).testValidity() && paymentFormEditTexts.get(6).testValidity()) {
 
                         if (paymentFormEditTexts.get(6).getText().toString().length() < 0) {
-
-
-
+                            paymentFormEditTexts.get(5).setText(pendingAmount);
                         } else {
 
                             float subAmount = Float.parseFloat(paymentFormEditTexts.get(4).getText().toString());
@@ -283,7 +283,7 @@ public class BillingDetails extends Fragment {
                         }
 
                     } else {
-
+                        paymentFormEditTexts.get(5).setText(pendingAmount);
                     }
 
                 }catch (Exception e){
@@ -329,7 +329,7 @@ public class BillingDetails extends Fragment {
                                 invoiceFormEditTexts.get(3).getText().toString(), invoiceFormEditTexts.get(4).getText().toString(), invoiceFormEditTexts.get(5).getText().toString(),
                                 invoiceFormEditTexts.get(6).getText().toString(), invoiceFormEditTexts.get(7).getText().toString(), paymentFormEditTexts.get(0).getText().toString(),
                                 paymentFormEditTexts.get(1).getText().toString(), paymentFormEditTexts.get(2).getText().toString(), paymentFormEditTexts.get(3).getText().toString(),
-                                paymentFormEditTexts.get(4).getText().toString(), paymentFormEditTexts.get(5).getText().toString(), paymentFormEditTexts.get(6).getText().toString());
+                                paymentFormEditTexts.get(4).getText().toString(), paymentFormEditTexts.get(5).getText().toString(), paymentFormEditTexts.get(6).getText().toString(), ""+grandAmount);
 
                     } else {
                         linearLayouts.get(1).setVisibility(View.VISIBLE);
@@ -346,7 +346,7 @@ public class BillingDetails extends Fragment {
 
     }
 
-    private void addFinalOrder(String invoiceTo, String contactPerson, String personNumber, String gstNo, String poNumber, String billingAddress, String deliveryAddress, String vehicleNumber, String subAmount, String discount, String otherCharges, String transport, String grandTotal, String pendingAmount, String payableAmount) {
+    private void addFinalOrder(String invoiceTo, String contactPerson, String personNumber, String gstNo, String poNumber, String billingAddress, String deliveryAddress, String vehicleNumber, String subAmount, String discount, String otherCharges, String transport, String grandTotal, String pendingAmount, String payableAmount, String grandAmount) {
 
         ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
@@ -356,7 +356,7 @@ public class BillingDetails extends Fragment {
         progressDialog.setCancelable(false);
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<LoginResponse> call = apiInterface.addFinalOrders(MainPage.userId, customerId, customerName, invoiceTo, contactPerson, personNumber, gstNo, poNumber, billingAddress, deliveryAddress, vehicleNumber, subAmount, discount, otherCharges, transport, grandTotal, pendingAmount, payableAmount);
+        Call<LoginResponse> call = apiInterface.addFinalOrders(MainPage.userId, customerId, customerName, invoiceTo, contactPerson, personNumber, gstNo, poNumber, billingAddress, deliveryAddress, vehicleNumber, subAmount, discount, otherCharges, transport, grandTotal, pendingAmount, payableAmount, grandAmount);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -458,8 +458,16 @@ public class BillingDetails extends Fragment {
 
                     for (int i=0;i<pendingResponseList.size();i++){
 
-                       pendingAmount = pendingResponseList.get(i).getPending_amount();
-                        paymentFormEditTexts.get(5).setText(pendingResponseList.get(i).getPending_amount());
+                        pendingAmount = pendingResponseList.get(i).getPending_amount();
+
+                        if (pendingAmount!=null){
+                            pendingAmount = pendingAmount;
+                            paymentFormEditTexts.get(5).setText(pendingResponseList.get(i).getPending_amount());
+                        } else {
+                            pendingAmount="0";
+                            paymentFormEditTexts.get(5).setText("0");
+                        }
+
                         try {
                             float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
                             float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
@@ -470,8 +478,9 @@ public class BillingDetails extends Fragment {
                             float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
                             float pending = Float.parseFloat(paymentFormEditTexts.get(5).getText().toString());
                             float grandTotal = subAmount + otherCharges + transport - discount + pending;
-
+                            grandAmount=subAmount + otherCharges + transport - discount;
                             paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
+
                         }catch (Exception e){
                             e.printStackTrace();
                         }
