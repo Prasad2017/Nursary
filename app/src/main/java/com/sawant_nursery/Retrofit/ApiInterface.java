@@ -281,4 +281,18 @@ public interface ApiInterface {
 
     @GET("/androidApp/cityList.php")
     Call<AllList> getCityList(@Query("stateId") String stateId);
+
+
+    @FormUrlEncoded
+    @POST("/androidApp/updateCustomer.php")
+    Call<LoginResponse> registration(@Field("imageString") String imageString,
+                                     String shopName,
+                                     String shopPrefix,
+                                     String officeNumber,
+                                     String personName,
+                                     String personNumber,
+                                     String gstNumber,
+                                     String email,
+                                     String businessAddress,
+                                     String password);
 }
