@@ -284,15 +284,15 @@ public interface ApiInterface {
 
 
     @FormUrlEncoded
-    @POST("/androidApp/updateCustomer.php")
+    @POST("/androidApp/registration.php")
     Call<LoginResponse> registration(@Field("imageString") String imageString,
-                                     String shopName,
-                                     String shopPrefix,
-                                     String officeNumber,
-                                     String personName,
-                                     String personNumber,
-                                     String gstNumber,
-                                     String email,
-                                     String businessAddress,
-                                     String password);
+                                     @Field("shopName")String shopName,
+                                     @Field("shopPrefix")String shopPrefix,
+                                     @Field("officeNumber")String officeNumber,
+                                     @Field("personName")String personName,
+                                     @Field("personNumber")String personNumber,
+                                     @Field("gstNumber")String gstNumber,
+                                     @Field("email")String email,
+                                     @Field("businessAddress") String businessAddress,
+                                     @Field("password")String password);
 }
