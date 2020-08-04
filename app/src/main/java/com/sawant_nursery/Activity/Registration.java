@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -153,11 +154,18 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
+                if (response.body().getSuccess().equalsIgnoreCase("true")){
+
+                } else if (response.body().getSuccess().equalsIgnoreCase("false")){
+
+                }
+
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-
+                progressDialog.dismiss();
+                Log.e("registrationError", ""+t.getMessage());
             }
         });
 
