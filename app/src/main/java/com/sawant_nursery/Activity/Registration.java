@@ -149,7 +149,7 @@ public class Registration extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<LoginResponse> call = apiInterface.registration();
+        Call<LoginResponse> call = apiInterface.registration(imageString, shopName, shopPrefix, officeNumber, personName, personNumber);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
