@@ -57,7 +57,7 @@ import retrofit2.Response;
 public class ProductDetails extends Fragment {
 
     View view;
-    @BindViews({R.id.productName, R.id.totalAmount, R.id.cgst, R.id.sgst})
+    @BindViews({R.id.productName, R.id.totalAmount, R.id.cgst, R.id.sgst, R.id.igst})
     List<TextView> textViews;
     @BindView(R.id.productImage)
     ImageView imageView;
@@ -71,9 +71,9 @@ public class ProductDetails extends Fragment {
     Spinner bagSize;
     @BindView(R.id.spinnerLayout)
     LinearLayout spinnerLayout;
-    @BindViews({R.id.txtGstLayout, R.id.gstLayout})
+    @BindViews({R.id.txtGstLayout, R.id.gstLayout, R.id.igstLayout})
     List<LinearLayout> linearLayouts;
-    String productId, taxType, productName, productImage, customerId, customerType, customerName, plantSizeId, plantSizeName, bagSizeId, bagSizeName, cgst, sgst, igst;
+    String productId, taxType, productName, productImage, customerId, customerType, customerName, customerState, plantSizeId, plantSizeName, bagSizeId, bagSizeName, cgst, sgst, igst;
     String[] productSizeIdList, productSizeNameList, bagSizeIdList, bagSizeNameList;
     List<SizeResponse> sizeResponseList = new ArrayList<>();
     List<BagSizeResponse> bagSizeResponseList = new ArrayList<>();
@@ -89,10 +89,12 @@ public class ProductDetails extends Fragment {
         MainPage.title.setText("Product Details");
         InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
         Bundle bundle = getArguments();
         customerId = bundle.getString("customerId")==null?"":bundle.getString("customerId");
         customerType = bundle.getString("customerType")==null?"":bundle.getString("customerType");
         customerName = bundle.getString("customerName")==null?"":bundle.getString("customerName");
+        customerState = bundle.getString("customerState")==null?"":bundle.getString("customerState");
         productId = bundle.getString("productId")==null?"":bundle.getString("productId");
         taxType = bundle.getString("taxType")==null?"":bundle.getString("taxType");
         Log.e("taxType", ""+taxType);
@@ -100,16 +102,33 @@ public class ProductDetails extends Fragment {
         productImage = bundle.getString("productImage")==null?"":bundle.getString("productImage");
 
         textViews.get(0).setText(productName);
+        try {
+
+            if (customerState.equalsIgnoreCase("Maharashtra")) {
+                linearLayouts.get(0).setVisibility(View.VISIBLE);
+                linearLayouts.get(1).setVisibility(View.VISIBLE);
+                linearLayouts.get(2).setVisibility(View.GONE);
+            } else {
+                linearLayouts.get(0).setVisibility(View.GONE);
+                linearLayouts.get(1).setVisibility(View.GONE);
+                linearLayouts.get(2).setVisibility(View.VISIBLE);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         if (taxType.equalsIgnoreCase("Taxable")){
             spinnerLayout.setVisibility(View.GONE);
             linearLayouts.get(0).setVisibility(View.VISIBLE);
             linearLayouts.get(1).setVisibility(View.VISIBLE);
             getAmount(productId);
-        } else  if (taxType.equalsIgnoreCase("Non-Taxable")){
+        } else if (taxType.equalsIgnoreCase("Non-Taxable")){
             spinnerLayout.setVisibility(View.VISIBLE);
             linearLayouts.get(0).setVisibility(View.GONE);
             linearLayouts.get(1).setVisibility(View.GONE);
+            linearLayouts.get(2).setVisibility(View.GONE);
         }
 
         try {
@@ -293,6 +312,7 @@ public class ProductDetails extends Fragment {
                     productprice.setText("0");
                     textViews.get(2).setText("0");
                     textViews.get(3).setText("0");
+                    textViews.get(4).setText("0");
                 } else {
 
                     for (int i=0;i<productResponseList.size();i++){
@@ -303,6 +323,7 @@ public class ProductDetails extends Fragment {
 
                         textViews.get(2).setText(cgst);
                         textViews.get(3).setText(sgst);
+                        textViews.get(4).setText(igst);
 
                         if (customerType.equals("Retailer_on")) {
                             productprice.setText(productResponseList.get(i).getRetailPrice());
@@ -310,7 +331,22 @@ public class ProductDetails extends Fragment {
                             productprice.setText(productResponseList.get(i).getWholesalerPrice());
                         }
 
-                    }
+                       /* try {
+
+                            if (customerState.equalsIgnoreCase("Maharashtra")) {
+                                linearLayouts.get(0).setVisibility(View.GONE);
+                                linearLayouts.get(1).setVisibility(View.GONE);
+                                linearLayouts.get(2).setVisibility(View.VISIBLE);
+                            } else {
+                                linearLayouts.get(0).setVisibility(View.VISIBLE);
+                                linearLayouts.get(1).setVisibility(View.VISIBLE);
+                                linearLayouts.get(2).setVisibility(View.GONE);
+                            }
+
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+*/                    }
 
                 }
 
@@ -340,6 +376,7 @@ public class ProductDetails extends Fragment {
                     productprice.setText("0");
                     textViews.get(2).setText("0");
                     textViews.get(3).setText("0");
+                    textViews.get(4).setText("0");
                 } else {
 
                     for (int i=0;i<productResponseList.size();i++){
@@ -349,6 +386,7 @@ public class ProductDetails extends Fragment {
                         igst = productResponseList.get(i).getIgst();
                         textViews.get(2).setText(cgst);
                         textViews.get(3).setText(sgst);
+                        textViews.get(4).setText(igst);
 
                         if (customerType.equals("Retailer_on")) {
                             productprice.setText(productResponseList.get(i).getRetailPrice());
@@ -356,6 +394,22 @@ public class ProductDetails extends Fragment {
                             productprice.setText(productResponseList.get(i).getWholesalerPrice());
                         }
 
+                        /*try {
+
+                            if (customerState.equalsIgnoreCase("Maharashtra")) {
+                                linearLayouts.get(0).setVisibility(View.GONE);
+                                linearLayouts.get(1).setVisibility(View.GONE);
+                                linearLayouts.get(2).setVisibility(View.VISIBLE);
+                            } else {
+                                linearLayouts.get(0).setVisibility(View.VISIBLE);
+                                linearLayouts.get(1).setVisibility(View.VISIBLE);
+                                linearLayouts.get(2).setVisibility(View.GONE);
+                            }
+
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+*/
                     }
 
                 }
@@ -414,6 +468,7 @@ public class ProductDetails extends Fragment {
                     bundle.putString("customerType", customerType);
                     bundle.putString("customerId", customerId);
                     bundle.putString("customerName", customerName);
+                    bundle.putString("customerState", customerState);
                     allCategory.setArguments(bundle);
                     ((MainPage)getActivity()).loadFragment(allCategory, true);
 

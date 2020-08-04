@@ -51,7 +51,7 @@ public class BillingDetails extends Fragment {
     View view;
     @BindViews({R.id.invoice, R.id.contactPerson, R.id.personNumber, R.id.gst, R.id.poNumber, R.id.billingAddress, R.id.deliveryAddress, R.id.vehicleNumber})
     List<FormEditText> invoiceFormEditTexts;
-    @BindViews({R.id.subAmount, R.id.discount, R.id.otherCharges, R.id.transport, R.id.grandAmount})
+    @BindViews({R.id.subAmount, R.id.discount, R.id.otherCharges, R.id.transport, R.id.grandAmount, R.id.pendingAmount, R.id.amountPayable})
     List<FormEditText> paymentFormEditTexts;
     @BindView(R.id.checkBox)
     CheckBox checkBox;
@@ -78,6 +78,15 @@ public class BillingDetails extends Fragment {
         customerName = bundle.getString("customerName");
 
         Log.e("customerId", ""+customerId);
+
+        try{
+
+            paymentFormEditTexts.get(0).setText(""+CustomerCartList.adapter.totalAmountPayable);
+            paymentFormEditTexts.get(4).setText(""+CustomerCartList.adapter.totalAmountPayable);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -119,22 +128,27 @@ public class BillingDetails extends Fragment {
                             } else if (Float.parseFloat(paymentFormEditTexts.get(1).getText().toString()) > 100f) {
                                 paymentFormEditTexts.get(1).setText("100");
                                 paymentFormEditTexts.get(1).setSelection(paymentFormEditTexts.get(1).getText().toString().length());
+                            } else {
+
+                                float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
+                                float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
+                                if (discount>0f) {
+                                    discount = (discount * subAmount) / 100;
+                                }
+                                float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
+                                float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
+                                float grandTotal = subAmount + otherCharges + transport - discount;
+
+                                paymentFormEditTexts.get(4).setText(""+String.format(Locale.US, "%.2f", grandTotal));
                             }
                         } else {
-                            paymentFormEditTexts.get(1).setText("0");
+                            paymentFormEditTexts.get(1).setText("");
                             paymentFormEditTexts.get(1).setSelection(paymentFormEditTexts.get(1).getText().toString().length());
                         }
 
-                        float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
-                        float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
-                        float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
-                        float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
-                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport + subAmount;
-
-                        paymentFormEditTexts.get(4).setText(""+String.format(Locale.US, "%.2f", grandTotal));
 
                     } else {
-                        paymentFormEditTexts.get(1).setText("0");
+
                     }
 
                 }catch (Exception e){
@@ -165,15 +179,19 @@ public class BillingDetails extends Fragment {
                         if (paymentFormEditTexts.get(2).getText().toString().length() < 0) {
                             paymentFormEditTexts.get(2).setText("");
                             paymentFormEditTexts.get(2).setSelection(paymentFormEditTexts.get(2).getText().toString().length());
+                        } else {
+
+                            float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
+                            float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
+                            if (discount>0f) {
+                                discount = (discount * subAmount) / 100;
+                            }
+                            float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
+                            float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
+                            float grandTotal = subAmount + otherCharges + transport - discount;
+
+                            paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
                         }
-
-                        float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
-                        float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
-                        float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
-                        float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
-                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport + subAmount;
-
-                        paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
 
                     }
 
@@ -204,15 +222,19 @@ public class BillingDetails extends Fragment {
 
                         if (paymentFormEditTexts.get(3).getText().toString().length() < 0) {
                             paymentFormEditTexts.get(3).setText("");
+                        } else {
+
+                            float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
+                            float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
+                            if (discount>0f) {
+                                discount = (discount * subAmount) / 100;
+                            }
+                            float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
+                            float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
+                            float grandTotal = subAmount + otherCharges + transport - discount;
+
+                            paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
                         }
-
-                        float subAmount = Float.parseFloat(paymentFormEditTexts.get(0).getText().toString());
-                        float discount = Float.parseFloat(paymentFormEditTexts.get(1).getText().toString());
-                        float otherCharges = Float.parseFloat(paymentFormEditTexts.get(2).getText().toString());
-                        float transport = Float.parseFloat(paymentFormEditTexts.get(3).getText().toString());
-                        float grandTotal = ((subAmount * discount) / 100) + otherCharges + transport + subAmount;
-
-                        paymentFormEditTexts.get(4).setText("" + String.format(Locale.US, "%.2f", grandTotal));
 
                     }
 
@@ -325,7 +347,7 @@ public class BillingDetails extends Fragment {
         ((MainPage) getActivity()).lockUnlockDrawer(1);
         MainPage.drawerLayout.closeDrawers();
         if (DetectConnection.checkInternetConnection(getActivity())) {
-            getCartAmount();
+           // getCartAmount();
             getCustomerDetails();
         } else {
             Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
@@ -352,6 +374,7 @@ public class BillingDetails extends Fragment {
                         invoiceFormEditTexts.get(0).setText(customerResponseList.get(i).getCustomerName());
                         invoiceFormEditTexts.get(1).setText(customerResponseList.get(i).getContactPerson());
                         invoiceFormEditTexts.get(2).setText(customerResponseList.get(i).getContact_person_number());
+                        invoiceFormEditTexts.get(3).setText(customerResponseList.get(i).getGst());
                         invoiceFormEditTexts.get(5).setText(customerResponseList.get(i).getAddress());
 
                     }

@@ -1,18 +1,23 @@
 package com.sawant_nursery.Fragment;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.Settings;
 import android.text.Editable;
@@ -22,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -46,7 +52,11 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sawant_nursery.Activity.MainPage;
+import com.sawant_nursery.Adapter.CategoryAdapter;
+import com.sawant_nursery.Adapter.CategoryTxtAdapter;
+import com.sawant_nursery.Adapter.SubCategoryTxtAdapter;
 import com.sawant_nursery.Extra.DetectConnection;
+import com.sawant_nursery.Extra.RecyclerTouchListener;
 import com.sawant_nursery.Model.AllList;
 import com.sawant_nursery.Model.BagSizeResponse;
 import com.sawant_nursery.Model.CategoryResponse;
@@ -88,12 +98,16 @@ public class AddProduct extends Fragment {
     Spinner subProductCategory;
     @BindView(R.id.taxType)
     Spinner taxTypeSpin;
+    @BindViews({R.id.taxTypeTxt, R.id.categoryTxt, R.id.subCategoryTxt})
+    List<TextView> textViews;
     private ChoosePhotoHelper choosePhotoHelper;
     Bitmap bitmap;
     String productImage, categoryId, categoryName, subcategoryId, subcategoryName, prodsizeId, productbagId;
     String[]categoryIdList, categoryNameList, subcategoryIdList, subcategoryNameList, productSizeIdList, productSizeNameList, productBageIdList, productBagSizeList;
     List<CategoryResponse> categoryResponseList = new ArrayList<>();
+    List<CategoryResponse> searchCategoryResponseList = new ArrayList<>();
     List<CategoryResponse> subcategoryResponseList = new ArrayList<>();
+    List<CategoryResponse> searchSubcategoryResponseList = new ArrayList<>();
     List<SizeResponse> sizeResponseList = new ArrayList<>();
     List<BagSizeResponse> bagSizeResponseList = new ArrayList<>();
     protected ArrayList<String> productSizeId = new ArrayList<String>();
@@ -104,6 +118,9 @@ public class AddProduct extends Fragment {
     String taxType;
     @BindViews({R.id.csgtLayout, R.id.sgstLayout, R.id.igstLayout, R.id.retailerLayout, R.id.wholesalerLayout})
     List<TextInputLayout> textInputLayouts;
+    RecyclerView recyclerView;
+    TextView close;
+    FormEditText searchEdit;
 
 
 
@@ -192,7 +209,7 @@ public class AddProduct extends Fragment {
                     }
                 });
 
-        subProductCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       /* subProductCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 subcategoryId = subcategoryIdList[position];
@@ -227,7 +244,7 @@ public class AddProduct extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
         return view;
@@ -245,10 +262,18 @@ public class AddProduct extends Fragment {
                 AllList allList = response.body();
                 subcategoryResponseList = allList.getSubcategoryResponseList();
                 if (subcategoryResponseList.size() == 0){
-                    Toast.makeText(getActivity(), "No Sub-Category Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Select Other Category. No Product Found!", Toast.LENGTH_SHORT).show();
+                    textViews.get(2).setText("");
+                    textViews.get(2).setHint("Select SubCategory");
                 } else {
 
-                    subcategoryIdList = new String[subcategoryResponseList.size()];
+                    CategoryResponse countryResponse = subcategoryResponseList.get(0);
+                    textViews.get(0).setText(subcategoryResponseList.get(0).getCategoryType());
+                    subcategoryId = countryResponse.getSub_type_id_pk();
+                    subcategoryName = countryResponse.getSub_type_name();
+                    textViews.get(2).setText(subcategoryName);
+
+                   /* subcategoryIdList = new String[subcategoryResponseList.size()];
                     subcategoryNameList = new String[subcategoryResponseList.size()];
 
                     for (int i=0;i<subcategoryResponseList.size();i++){
@@ -260,7 +285,7 @@ public class AddProduct extends Fragment {
 
                     ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, subcategoryNameList);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    subProductCategory.setAdapter(adapter);
+                    subProductCategory.setAdapter(adapter);*/
 
                 }
 
@@ -274,15 +299,292 @@ public class AddProduct extends Fragment {
 
     }
 
-    @OnClick({R.id.save, R.id.chooseProduct, R.id.productSize, R.id.productBagSize})
+    @OnClick({R.id.save, R.id.chooseProduct, R.id.productSize, R.id.productBagSize, R.id.categoryTxt, R.id.subCategoryTxt})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.save:
+            case R.id.categoryTxt:
 
+                if (categoryResponseList.size()>0) {
+
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                    dialog.setContentView(R.layout.drop_down_list);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setCancelable(true);
+
+                    recyclerView = dialog.findViewById(R.id.recyclerView);
+                    close = dialog.findViewById(R.id.close);
+                    searchEdit = dialog.findViewById(R.id.searchEdit);
+
+                    close.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            dialog.dismiss();
+
+                        }
+                    });
+
+                    searchEdit.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                                Log.d("text", ""+editable.toString());
+                                String s = editable.toString();
+                                searchCategoryResponseList = new ArrayList<>();
+                                if (s.length() > 0) {
+                                    for (int i = 0; i < categoryResponseList.size(); i++)
+                                        if (categoryResponseList.get(i).getCategoryType().toLowerCase().contains(s.toLowerCase().trim())) {
+                                            searchCategoryResponseList.add(categoryResponseList.get(i));
+                                        }
+                                    if (searchCategoryResponseList.size() < 1) {
+                                        Toast.makeText(getActivity(), "Record Not Found", Toast.LENGTH_SHORT).show();
+                                    } else {
+
+                                    }
+                                    Log.e("size", searchCategoryResponseList.size() + "" + categoryResponseList.size());
+                                } else {
+                                    searchCategoryResponseList = new ArrayList<>();
+
+                                    CategoryTxtAdapter categoryTxtAdapter = new CategoryTxtAdapter(getActivity(), categoryResponseList);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                    recyclerView.setAdapter(categoryTxtAdapter);
+                                    recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                                    categoryTxtAdapter.notifyDataSetChanged();
+                                    categoryTxtAdapter.notifyItemInserted(categoryResponseList.size() - 1);
+                                    recyclerView.setHasFixedSize(true);
+
+                                }
+
+                            try {
+
+                                CategoryTxtAdapter categoryTxtAdapter = new CategoryTxtAdapter(getActivity(), searchCategoryResponseList);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                recyclerView.setAdapter(categoryTxtAdapter);
+                                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                                categoryTxtAdapter.notifyDataSetChanged();
+                                categoryTxtAdapter.notifyItemInserted(searchCategoryResponseList.size() - 1);
+                                recyclerView.setHasFixedSize(true);
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+
+                    recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            CategoryResponse countryResponse = categoryResponseList.get(position);
+                            textViews.get(0).setText(categoryResponseList.get(position).getCategoryType());
+                            categoryId = countryResponse.getCategoryId();
+                            categoryName = countryResponse.getCategoryType();
+                            textViews.get(1).setText(categoryName);
+                            getSubCategoryList(categoryId);
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onLongClick(View view, int position) {
+
+                        }
+
+                    }));
+
+                    try {
+
+                        CategoryTxtAdapter categoryTxtAdapter = new CategoryTxtAdapter(getActivity(), categoryResponseList);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        recyclerView.setAdapter(categoryTxtAdapter);
+                        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                        categoryTxtAdapter.notifyDataSetChanged();
+                        categoryTxtAdapter.notifyItemInserted(categoryResponseList.size() - 1);
+                        recyclerView.setHasFixedSize(true);
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    dialog.show();
+
+                } else {
+                    textViews.get(1).setHint("Select Category");
+                    textViews.get(2).setHint("Select SubCategory");
+                    textViews.get(1).setText("");
+                    textViews.get(2).setText("");
+                }
+
+                break;
+
+            case R.id.subCategoryTxt:
+
+                if (subcategoryResponseList.size()>0) {
+
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                    dialog.setContentView(R.layout.drop_down_list);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setCancelable(true);
+
+                    recyclerView = dialog.findViewById(R.id.recyclerView);
+                    close = dialog.findViewById(R.id.close);
+                    searchEdit = dialog.findViewById(R.id.searchEdit);
+
+                    close.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            dialog.dismiss();
+
+                        }
+                    });
+
+                    searchEdit.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                            Log.d("text", ""+editable.toString());
+                            String s = editable.toString();
+                            searchSubcategoryResponseList = new ArrayList<>();
+                            if (s.length() > 0) {
+                                for (int i = 0; i < subcategoryResponseList.size(); i++)
+                                    if (subcategoryResponseList.get(i).getSub_type_name().toLowerCase().contains(s.toLowerCase().trim())) {
+                                        searchSubcategoryResponseList.add(subcategoryResponseList.get(i));
+                                    }
+                                if (searchSubcategoryResponseList.size() < 1) {
+                                    Toast.makeText(getActivity(), "Record Not Found", Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                }
+                                Log.e("size", searchSubcategoryResponseList.size() + "" + subcategoryResponseList.size());
+                            } else {
+                                searchSubcategoryResponseList = new ArrayList<>();
+
+                                SubCategoryTxtAdapter subCategoryTxtAdapter = new SubCategoryTxtAdapter(getActivity(), subcategoryResponseList);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                recyclerView.setAdapter(subCategoryTxtAdapter);
+                                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                                subCategoryTxtAdapter.notifyDataSetChanged();
+                                subCategoryTxtAdapter.notifyItemInserted(subcategoryResponseList.size() - 1);
+                                recyclerView.setHasFixedSize(true);
+
+                            }
+
+                            try {
+
+                                SubCategoryTxtAdapter subCategoryTxtAdapter = new SubCategoryTxtAdapter(getActivity(), searchSubcategoryResponseList);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                recyclerView.setAdapter(subCategoryTxtAdapter);
+                                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                                subCategoryTxtAdapter.notifyDataSetChanged();
+                                subCategoryTxtAdapter.notifyItemInserted(searchSubcategoryResponseList.size() - 1);
+                                recyclerView.setHasFixedSize(true);
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+
+                    recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            CategoryResponse countryResponse = subcategoryResponseList.get(position);
+                            textViews.get(0).setText(subcategoryResponseList.get(position).getCategoryType());
+                            subcategoryId = countryResponse.getSub_type_id_pk();
+                            subcategoryName = countryResponse.getSub_type_name();
+                            textViews.get(2).setText(subcategoryName);
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onLongClick(View view, int position) {
+
+                        }
+
+                    }));
+
+                    try {
+
+                        SubCategoryTxtAdapter subCategoryTxtAdapter = new SubCategoryTxtAdapter(getActivity(), subcategoryResponseList);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        recyclerView.setAdapter(subCategoryTxtAdapter);
+                        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                        subCategoryTxtAdapter.notifyDataSetChanged();
+                        subCategoryTxtAdapter.notifyItemInserted(subcategoryResponseList.size() - 1);
+                        recyclerView.setHasFixedSize(true);
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    dialog.show();
+
+                } else {
+                    Toast.makeText(getActivity(), "Select Other Category. No Product Found!", Toast.LENGTH_SHORT).show();
+                    textViews.get(2).setHint("Select SubCategory");
+                    textViews.get(2).setText("");
+
+                }
+
+                break;
+
+            case R.id.save:
                 if (taxType.equals("Non-Taxable")) {
-                    if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity()) {
-                        if (!productSize.getText().toString().trim().isEmpty()) {
-                            if (!productBagSize.getText().toString().trim().isEmpty()) {
+                    if (!textViews.get(1).getText().toString().isEmpty()) {
+                        if (!textViews.get(2).getText().toString().isEmpty()) {
+                            if (formEditTexts.get(0).testValidity() && formEditTexts.get(1).testValidity()) {
+                                if (!productSize.getText().toString().trim().isEmpty()) {
+                                    if (!productBagSize.getText().toString().trim().isEmpty()) {
+                                        if (imageView.getDrawable() == null) {
+                                            productImage = "";
+                                        } else {
+                                            bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                                            productImage = getStringImage(bitmap);
+                                        }
+                                        addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, subcategoryId);
+                                    } else {
+                                        Toast.makeText(getActivity(), "Select Bag Size", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getActivity(), "Select Plant Size", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Select Sub Category", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Select Category", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (taxType.equals("Taxable")) {
+                    if (!textViews.get(1).getText().toString().isEmpty()) {
+                        if (!textViews.get(2).getText().toString().isEmpty()) {
+                            if (formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() && formEditTexts.get(3).testValidity() &&
+                                    formEditTexts.get(4).testValidity() && formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
                                 if (imageView.getDrawable() == null) {
                                     productImage = "";
                                 } else {
@@ -290,26 +592,14 @@ public class AddProduct extends Fragment {
                                     productImage = getStringImage(bitmap);
                                 }
 
-                                addProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), "0", "0", "0", prodsizeId, productbagId, productImage, subcategoryId);
-                            } else {
-                                Toast.makeText(getActivity(), "Select Bag Size", Toast.LENGTH_SHORT).show();
+                                addTaxableProduct(taxType, "", formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, subcategoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
                             }
-                        } else {
-                            Toast.makeText(getActivity(), "Select Plant Size", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                } else if (taxType.equals("Taxable")) {
-                    if (formEditTexts.get(1).testValidity() && formEditTexts.get(2).testValidity() && formEditTexts.get(3).testValidity() &&
-                            formEditTexts.get(4).testValidity() &&formEditTexts.get(5).testValidity() && formEditTexts.get(6).testValidity()) {
-                        if (imageView.getDrawable() == null) {
-                            productImage = "";
-                        } else {
-                            bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                            productImage = getStringImage(bitmap);
-                        }
 
-                        addTaxableProduct(taxType, formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString().trim(), formEditTexts.get(3).getText().toString().trim(), formEditTexts.get(4).getText().toString().trim(), prodsizeId, productbagId, productImage, subcategoryId, formEditTexts.get(5).getText().toString(), formEditTexts.get(6).getText().toString());
-
+                        } else {
+                            Toast.makeText(getActivity(), "Select Sub Category", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Select Category", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -320,80 +610,86 @@ public class AddProduct extends Fragment {
                 break;
 
             case R.id.productSize:
+                if(sizeResponseList.size()>0) {
+                    boolean[] checkedSizeName = new boolean[productSizeNameList.length];
+                    boolean[] checkedSizeId = new boolean[productSizeIdList.length];
+                    int sizeName = productSizeNameList.length;
+                    int sizeId = productSizeIdList.length;
 
-                boolean[] checkedSizeName = new boolean[productSizeNameList.length];
-                boolean[] checkedSizeId = new boolean[productSizeIdList.length];
-                int sizeName = productSizeNameList.length;
-                int sizeId = productSizeIdList.length;
-
-                for(int i = 0; i < sizeName; i++) {
-                    checkedSizeName[i] = productSizeName.contains(productSizeNameList[i]);
-                }
-
-                for (int j = 0; j < sizeId; j++) {
-                    checkedSizeId[j] = productSizeId.contains(productSizeIdList[j]);
-                }
-
-                DialogInterface.OnMultiChoiceClickListener sizeDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
-
-                    @Override
-
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        if(isChecked) {
-                            productSizeName.add(productSizeNameList[which]);
-                            productSizeId.add(productSizeIdList[which]);
-                        }else {
-                            productSizeName.remove(productSizeNameList[which]);
-                            productSizeId.remove(productSizeIdList[which]);
-                        }
-                        onChangeSelectedProductSize();
+                    for (int i = 0; i < sizeName; i++) {
+                        checkedSizeName[i] = productSizeName.contains(productSizeNameList[i]);
                     }
-                };
 
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                builder1.setTitle("Select Plant Size");
-                builder1.setMultiChoiceItems(productSizeNameList, checkedSizeName, sizeDialogListener);
-                AlertDialog dialog1 = builder1.create();
-                dialog1.show();
+                    for (int j = 0; j < sizeId; j++) {
+                        checkedSizeId[j] = productSizeId.contains(productSizeIdList[j]);
+                    }
 
+                    DialogInterface.OnMultiChoiceClickListener sizeDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+
+                        @Override
+
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            if (isChecked) {
+                                productSizeName.add(productSizeNameList[which]);
+                                productSizeId.add(productSizeIdList[which]);
+                            } else {
+                                productSizeName.remove(productSizeNameList[which]);
+                                productSizeId.remove(productSizeIdList[which]);
+                            }
+                            onChangeSelectedProductSize();
+                        }
+                    };
+
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1.setTitle("Select Plant Size");
+                    builder1.setMultiChoiceItems(productSizeNameList, checkedSizeName, sizeDialogListener);
+                    AlertDialog dialog1 = builder1.create();
+                    dialog1.show();
+                }else {
+                    Toast.makeText(getActivity(), "No Plant size found", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.productBagSize:
+                if(bagSizeResponseList.size()>0) {
 
-                boolean[] checkedBagName = new boolean[productBagSizeList.length];
-                boolean[] checkedBagId = new boolean[productBageIdList.length];
-                int bagName = productBagSizeList.length;
-                int bagId = productBageIdList.length;
+                    boolean[] checkedBagName = new boolean[productBagSizeList.length];
+                    boolean[] checkedBagId = new boolean[productBageIdList.length];
+                    int bagName = productBagSizeList.length;
+                    int bagId = productBageIdList.length;
 
-                for(int i = 0; i < bagName; i++) {
-                    checkedBagName[i] = productBagSizeName.contains(productBagSizeList[i]);
-                }
-
-                for (int j = 0; j < bagId; j++) {
-                    checkedBagId[j] = productBagSizeId.contains(productBageIdList[j]);
-                }
-
-                DialogInterface.OnMultiChoiceClickListener bagsizeDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
-
-                    @Override
-
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        if(isChecked) {
-                            productBagSizeName.add(productBagSizeList[which]);
-                            productBagSizeId.add(productBageIdList[which]);
-                        }else {
-                            productBagSizeName.remove(productBagSizeList[which]);
-                            productBagSizeId.remove(productBageIdList[which]);
-                        }
-                        onChangeSelectedProductBagSize();
+                    for (int i = 0; i < bagName; i++) {
+                        checkedBagName[i] = productBagSizeName.contains(productBagSizeList[i]);
                     }
-                };
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select Bag Size");
-                builder.setMultiChoiceItems(productBagSizeList, checkedBagName, bagsizeDialogListener);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                    for (int j = 0; j < bagId; j++) {
+                        checkedBagId[j] = productBagSizeId.contains(productBageIdList[j]);
+                    }
+
+                    DialogInterface.OnMultiChoiceClickListener bagsizeDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+
+                        @Override
+
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            if (isChecked) {
+                                productBagSizeName.add(productBagSizeList[which]);
+                                productBagSizeId.add(productBageIdList[which]);
+                            } else {
+                                productBagSizeName.remove(productBagSizeList[which]);
+                                productBagSizeId.remove(productBageIdList[which]);
+                            }
+                            onChangeSelectedProductBagSize();
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select Bag Size");
+                    builder.setMultiChoiceItems(productBagSizeList, checkedBagName, bagsizeDialogListener);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }else {
+                    Toast.makeText(getActivity(), "No Bag Size found", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
         }
@@ -649,7 +945,7 @@ public class AddProduct extends Fragment {
                 AllList allList = response.body();
                 bagSizeResponseList = allList.getBagSizeResponseList();
                 if (bagSizeResponseList.size() == 0){
-                    Toast.makeText(getActivity(), "No Bag Size Found", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getActivity(), "No Bag Size Found", Toast.LENGTH_SHORT).show();
                 } else {
 
                     productBageIdList = new String[bagSizeResponseList.size()];
@@ -687,7 +983,7 @@ public class AddProduct extends Fragment {
                 AllList allList = response.body();
                 sizeResponseList = allList.getSizeResponseList();
                 if (sizeResponseList.size() == 0){
-                    Toast.makeText(getActivity(), "No Plant Size Found", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getActivity(), "No Plant Size Found", Toast.LENGTH_SHORT).show();
                 } else {
 
                     productSizeIdList = new String[sizeResponseList.size()];
@@ -726,7 +1022,7 @@ public class AddProduct extends Fragment {
                     Toast.makeText(getActivity(), "No category Found", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    categoryIdList = new String[categoryResponseList.size()];
+                    /*categoryIdList = new String[categoryResponseList.size()];
                     categoryNameList = new String[categoryResponseList.size()];
 
                     for (int i=0;i<categoryResponseList.size();i++){
@@ -738,7 +1034,7 @@ public class AddProduct extends Fragment {
 
                     ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, categoryNameList);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
+                    spinner.setAdapter(adapter);*/
 
                 }
 

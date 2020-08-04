@@ -72,6 +72,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                 bundle.putString("city", customerResponseList.get(position).getCity());
                 bundle.putString("state", customerResponseList.get(position).getState());
                 bundle.putString("pincode", customerResponseList.get(position).getPincode());
+                bundle.putString("gst", customerResponseList.get(position).getGst());
                 updateCustomer.setArguments(bundle);
                 ((MainPage)context).loadFragment(updateCustomer, true);
 

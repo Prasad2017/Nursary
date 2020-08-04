@@ -228,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtPrice"
                     android:layout_marginTop="10dp"
-                    android:text="CGST(in %)"
+                    android:text="CGST"
                     android:fontFamily="@font/montserratregular"
                     android:visibility="visible"
                     android:textColor="@color/black"
@@ -253,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtDelivery"
                     android:layout_marginTop="10dp"
-                    android:text="SGST(in %)"
+                    android:text="SGST"
                     android:fontFamily="@font/montserratregular"
                     android:visibility="visible"
                     android:textColor="@color/black"
@@ -273,10 +273,35 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/txtIgst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtTax"
+                    android:layout_marginTop="10dp"
+                    android:text="IGST"
+                    android:fontFamily="@font/montserratregular"
+                    android:visibility="visible"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/igst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/txtTax"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratregular"
+                    android:text="$0"
+                    android:visibility="visible"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+                <TextView
                     android:id="@+id/dotLine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tax"
+                    android:layout_below="@+id/igst"
                     android:ems="1"
                     android:singleLine="true"
                     android:textColor="@color/light_black"

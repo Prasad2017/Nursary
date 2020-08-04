@@ -42,9 +42,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     Context context;
     List<CartResponse> cartResponseList;
-    double totalAmount = 0f, amountPayable, taxAmount=0f;
+    public  double amountPayable=0f, taxAmount=0f;
+    public  double totalAmount =0f;
     public static String totalAmountPayable;
-    double tax=0f, delivery=0f;
+    public  double tax=0f, delivery=0f, igst=0f;
 
     public CartAdapter(Context context, List<CartResponse> cartResponseList) {
 
@@ -70,8 +71,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         totalAmount = totalAmount + (Double.parseDouble(cartResponseList.get(position).getProduct_price()) * Double.parseDouble(cartResponseList.get(position).getProduct_quantity()));
 
         try {
-            tax =  tax+Double.parseDouble(cartResponseList.get(position).getSgst());
-            delivery = delivery+Double.parseDouble(cartResponseList.get(position).getCgst());
+            tax =  (tax+ Double.parseDouble(cartResponseList.get(position).getSgst())*(Double.parseDouble(cartResponseList.get(position).getProduct_price())*Double.parseDouble(cartResponseList.get(position).getProduct_quantity())/100));
+            delivery = (delivery + Double.parseDouble(cartResponseList.get(position).getCgst())*(Double.parseDouble(cartResponseList.get(position).getProduct_price())*Double.parseDouble(cartResponseList.get(position).getProduct_quantity())/100));
+            igst = (igst + Double.parseDouble(cartResponseList.get(position).getIgst())*(Double.parseDouble(cartResponseList.get(position).getProduct_price())*Double.parseDouble(cartResponseList.get(position).getProduct_quantity())/100));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -79,8 +81,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         try{
             if (cartResponseList.get(position).getTax_type().equalsIgnoreCase("Taxable")) {
                 taxAmount = taxAmount + (Double.parseDouble(cartResponseList.get(position).getProduct_price()) * Double.parseDouble(cartResponseList.get(position).getProduct_quantity()));
-            }  else {
-
+            } else {
+                taxAmount = taxAmount+0f;
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -94,19 +96,34 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             holder.textViews.get(0).setText("Price (" + cartResponseList.size() + " items)");
             holder.textViews.get(1).setText(MainPage.currency + " " + totalAmount);
 
-           // tax = Double.parseDouble(cartResponseList.get(position).getSgst());
-          //  delivery = Double.parseDouble(cartResponseList.get(position).getCgst());
-            Log.d("floatTax", delivery + "");
+
+
             holder.textViews.get(2).setText(" "+delivery);
-            holder.textViews.get(3).setText(" " + tax);
+            holder.textViews.get(3).setText(" "+tax);
+            holder.textViews.get(6).setText(" "+igst);
 
-            double taxamount = (taxAmount*(tax+delivery))/100;
-
-            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+taxamount))));
-     //       Log.d("taxAmount", String.valueOf(taxAmount));
-       //     Log.d("totalAmountPayable", totalAmountPayable);
-            amountPayable=totalAmount;
-            holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+delivery+taxamount))));
+            double taxamount=0f;
+            if (cartResponseList.get(position).getState().equalsIgnoreCase("Maharashtra")) {
+                taxamount = 0f;
+                taxamount =tax+delivery;
+                amountPayable=totalAmount;
+                holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+taxamount))));
+                totalAmountPayable = (String.format("%.2f", (amountPayable+taxamount)));
+                holder.textViews.get(2).setVisibility(View.VISIBLE);
+                holder.textViews.get(3).setVisibility(View.VISIBLE);
+                holder.textViews.get(6).setVisibility(View.GONE);
+                holder.textViews.get(7).setVisibility(View.GONE);
+            } else if (!cartResponseList.get(position).getState().equalsIgnoreCase("Maharashtra")) {
+                taxamount = 0f;
+                taxamount = igst;
+                amountPayable=totalAmount;
+                holder.textViews.get(4).setText(MainPage.currency + " " + (String.format("%.2f", (amountPayable+taxamount))));
+                totalAmountPayable = (String.format("%.2f", (amountPayable+taxamount)));
+                holder.textViews.get(2).setVisibility(View.GONE);
+                holder.textViews.get(3).setVisibility(View.GONE);
+                holder.textViews.get(6).setVisibility(View.VISIBLE);
+                holder.textViews.get(7).setVisibility(View.VISIBLE);
+            }
 
         } else
             holder.totalAmount.setVisibility(View.GONE);
@@ -195,6 +212,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                         if (response.body().getSuccess().equals("true")){
                             progressDialog.dismiss();
                             Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            ((MainPage) context).removeCurrentFragmentAndMoveBack();
                             CustomerCartList customerCartList = new CustomerCartList();
                             Bundle bundle = new Bundle();
                             bundle.putString("customerType", cartResponseList.get(position).getType());
@@ -235,7 +253,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         CardView cardView1;
         @BindView(R.id.totalAmount)
         LinearLayout totalAmount;
-        @BindViews({R.id.txtPrice, R.id.price, R.id.delivery,  R.id.tax,  R.id.amountPayable,  R.id.txtTax})
+        @BindViews({R.id.txtPrice, R.id.price, R.id.delivery, R.id.tax, R.id.amountPayable, R.id.txtTax, R.id.igst, R.id.txtIgst})
         List<TextView> textViews;
 
 

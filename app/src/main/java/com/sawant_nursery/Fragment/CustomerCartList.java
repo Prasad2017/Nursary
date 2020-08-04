@@ -49,8 +49,8 @@ public class CustomerCartList extends Fragment {
     @BindView(R.id.linearLayout)
     RelativeLayout linearLayout;
     List<CartResponse> cartResponseList = new ArrayList<>();
-    CartAdapter adapter;
-    String customerType, customerId,customerName;
+    public static CartAdapter adapter;
+    String customerType, customerId,customerName, customerState;
 
 
 
@@ -65,9 +65,12 @@ public class CustomerCartList extends Fragment {
         customerType = bundle.getString("customerType");
         customerId = bundle.getString("customerId");
         customerName = bundle.getString("customerName");
+        customerState = bundle.getString("customerState");
+        try {
+            MainPage.title.setText("" + customerName);
+        }catch (Exception e){
 
-        MainPage.title.setText(""+customerName);
-
+        }
         return view;
 
     }
@@ -92,7 +95,7 @@ public class CustomerCartList extends Fragment {
     public void onStart() {
         super.onStart();
         Log.d("onStart", "called");
-        MainPage.title.setVisibility(View.GONE);
+        MainPage.title.setVisibility(View.VISIBLE);
         MainPage.titleLayout.setVisibility(View.VISIBLE);
         MainPage.importProduct.setVisibility(View.GONE);
         MainPage.cart.setVisibility(View.GONE);
@@ -100,6 +103,12 @@ public class CustomerCartList extends Fragment {
         MainPage.saveProduct.setVisibility(View.GONE);
         ((MainPage) getActivity()).lockUnlockDrawer(1);
         MainPage.drawerLayout.closeDrawers();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (DetectConnection.checkInternetConnection(getActivity())) {
             getCategoryList();
         } else {
@@ -108,6 +117,8 @@ public class CustomerCartList extends Fragment {
     }
 
     private void getCategoryList() {
+        cartResponseList.clear();
+        recyclerView.clearOnScrollListeners();
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
         Call<AllList> call = apiInterface.getCartProductList(MainPage.userId, customerId);
@@ -122,7 +133,15 @@ public class CustomerCartList extends Fragment {
                     noCategorytxt.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.GONE);
                     ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
-                    ((MainPage) getActivity()).loadFragment(new AllCategory(), true);
+                    AllCategory allCategory = new AllCategory();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("customerType", customerType);
+                    bundle.putString("customerId", customerId);
+                    bundle.putString("customerName", customerName);
+                    bundle.putString("customerState", customerState);
+                    allCategory.setArguments(bundle);
+                    ((MainPage) getActivity()).loadFragment(allCategory, true);
+
                 }else {
 
                     adapter = new CartAdapter(getActivity(), cartResponseList);

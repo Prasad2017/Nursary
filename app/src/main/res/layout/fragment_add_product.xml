@@ -38,13 +38,49 @@
             android:autofillHints="Select Tax Type"
             android:background="@drawable/spinnerbackground"/>
 
+        <TextView
+            android:id="@+id/taxTypeTxt"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="30dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:hint="Select Tax Type"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:fontFamily="@font/montserratmedium"
+            android:background="@drawable/quantityback" />
+
         <Spinner
             android:id="@+id/productCategory"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:autofillHints="Select Category"
+            android:visibility="gone"
             android:background="@drawable/spinnerbackground"/>
+
+        <TextView
+            android:id="@+id/categoryTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:hint="Select Category"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:fontFamily="@font/montserratmedium"
+            android:background="@drawable/quantityback" />
 
         <Spinner
             android:id="@+id/subProductCategory"
@@ -52,7 +88,25 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:autofillHints="Select Sub Category"
+            android:visibility="gone"
             android:background="@drawable/spinnerbackground"/>
+
+        <TextView
+            android:id="@+id/subCategoryTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:hint="Select SubCategory"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:fontFamily="@font/montserratmedium"
+            android:background="@drawable/quantityback" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -197,7 +251,7 @@
                 android:hint="CGST *"
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
-                android:digits="0123456789"
+                android:digits=".0123456789"
                 whatever:maxNumber="3"
                 android:drawablePadding="10dp"
                 android:padding="15dp"
@@ -236,7 +290,7 @@
                 android:hint="SGST *"
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
-                android:digits="0123456789"
+                android:digits=".0123456789"
                 android:drawablePadding="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -278,7 +332,7 @@
                 android:hint="IGST *"
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
-                android:digits="0123456789"
+                android:digits=".0123456789"
                 android:drawablePadding="10dp"
                 whatever:maxNumber="3"
                 android:paddingLeft="20dp"

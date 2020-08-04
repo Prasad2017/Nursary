@@ -61,6 +61,9 @@ public class CartResponse {
     @SerializedName("type")
     String type;
 
+    @SerializedName("state")
+    String state;
+
 
 
     //All getter and setter methods.....
@@ -216,5 +219,13 @@ public class CartResponse {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

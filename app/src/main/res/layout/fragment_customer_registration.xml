@@ -210,6 +210,42 @@
             android:textColorHint="@color/light_black">
 
             <com.andreabaccega.widget.FormEditText
+                android:id="@+id/gstNumber"
+                whatever:testErrorString="Enter Valid GST Number"
+                whatever:emptyErrorString="Please Fill This"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="GST Number*"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:drawablePadding="10dp"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:backgroundTint="@color/green_900"
+                android:fontFamily="@font/montserratmedium"
+                android:textColor="@color/black"
+                android:textColorHint="@color/green_900"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            whatever:boxCornerRadiusBottomEnd="5dp"
+            whatever:boxCornerRadiusBottomStart="5dp"
+            whatever:boxCornerRadiusTopEnd="5dp"
+            whatever:boxCornerRadiusTopStart="5dp"
+            android:gravity="center"
+            whatever:boxStrokeColor="@color/light_black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:textColorHint="@color/light_black">
+
+            <com.andreabaccega.widget.FormEditText
                 android:id="@+id/email"
                 whatever:testErrorString="Enter Valid Email"
                 whatever:emptyErrorString="Please Fill This"
@@ -281,6 +317,7 @@
                 whatever:boxCornerRadiusTopStart="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:layout_weight="1"
                 whatever:boxStrokeColor="@color/light_black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -317,6 +354,7 @@
                 whatever:boxCornerRadiusTopStart="5dp"
                 android:gravity="center"
                 android:layout_marginLeft="5dp"
+                android:visibility="gone"
                 android:layout_weight="1"
                 whatever:boxStrokeColor="@color/light_black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -343,6 +381,41 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/statetxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginRight="3dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:hint="Select State"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:fontFamily="@font/montserratmedium"
+                android:background="@drawable/quantityback" />
+
+            <TextView
+                android:id="@+id/citytxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="3dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:hint="Select City"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:fontFamily="@font/montserratmedium"
+                android:background="@drawable/quantityback" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout

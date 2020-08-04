@@ -43,6 +43,8 @@ public class CustomerResponse {
     @SerializedName("type")
     String type;
 
+    @SerializedName("gst")
+    String gst;
 
 
     //To Getter ans Setter Method
@@ -148,5 +150,13 @@ public class CustomerResponse {
 
     public void setTaluka(String taluka) {
         this.taluka = taluka;
+    }
+
+    public String getGst() {
+        return gst;
+    }
+
+    public void setGst(String gst) {
+        this.gst = gst;
     }
 }

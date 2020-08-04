@@ -43,6 +43,12 @@ public class AllList {
     @SerializedName("invoicelistResponse")
     List<LedgerResponse> ledgerResponseList;
 
+    @SerializedName("stateResponse")
+    List<StateResponse> stateResponseList;
+
+    @SerializedName("cityResponse")
+    List<CityResponse> cityResponseList;
+
 
 
     //All Getter and Setter.....
@@ -140,5 +146,21 @@ public class AllList {
 
     public void setCustomerResponseLists(List<CustomerResponse> customerResponseLists) {
         this.customerResponseLists = customerResponseLists;
+    }
+
+    public List<StateResponse> getStateResponseList() {
+        return stateResponseList;
+    }
+
+    public void setStateResponseList(List<StateResponse> stateResponseList) {
+        this.stateResponseList = stateResponseList;
+    }
+
+    public List<CityResponse> getCityResponseList() {
+        return cityResponseList;
+    }
+
+    public void setCityResponseList(List<CityResponse> cityResponseList) {
+        this.cityResponseList = cityResponseList;
     }
 }

@@ -43,7 +43,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="30dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -338,7 +338,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Vehicle Number*"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="text"
                         android:capitalize="characters"
                         android:drawablePadding="10dp"
@@ -388,7 +388,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="30dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -530,6 +530,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Transport"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:text="0"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/rupee_icon"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/pendingAmount"
+                        whatever:testErrorString="Enter Valid Pending Amount"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Pending Amount"
                         android:imeOptions="actionDone"
                         android:inputType="numberDecimal"
                         android:digits="0123456789"
@@ -569,6 +608,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Grand Amount"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:text="0"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/rupee_icon"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserratregular"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/green_900"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    whatever:boxCornerRadiusBottomEnd="5dp"
+                    whatever:boxCornerRadiusBottomStart="5dp"
+                    whatever:boxCornerRadiusTopEnd="5dp"
+                    whatever:boxCornerRadiusTopStart="5dp"
+                    android:gravity="center"
+                    whatever:boxStrokeColor="@color/light_black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/light_black">
+
+                    <com.andreabaccega.widget.FormEditText
+                        android:id="@+id/amountPayable"
+                        whatever:testErrorString="Enter Valid Payable Amount"
+                        whatever:emptyErrorString="Please Fill This"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount Payable"
                         android:imeOptions="actionDone"
                         android:inputType="numberDecimal"
                         android:digits="0123456789"

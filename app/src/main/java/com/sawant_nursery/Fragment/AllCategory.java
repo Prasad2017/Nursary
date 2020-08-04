@@ -58,7 +58,7 @@ public class AllCategory extends Fragment {
     List<ProductResponse> categoryResponseList = new ArrayList<>();
     List<ProductResponse> searchcategoryResponseList = new ArrayList<>();
     ProductSelectionAdapter adapter;
-    String customerId, customerType, customerName;
+    String customerId, customerType, customerName, customerState;
     Bundle bundle;
 
 
@@ -75,6 +75,7 @@ public class AllCategory extends Fragment {
         customerType = bundle.getString("customerType");
         customerId = bundle.getString("customerId");
         customerName = bundle.getString("customerName");
+        customerState = bundle.getString("customerState");
 
         MainPage.cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,7 @@ public class AllCategory extends Fragment {
                 bundle.putString("customerType", customerType);
                 bundle.putString("customerId", customerId);
                 bundle.putString("customerName", customerName);
+                bundle.putString("customerState", customerState);
                 customerCartList.setArguments(bundle);
                 ((MainPage)getActivity()).loadFragment(customerCartList, true);
 
@@ -100,6 +102,7 @@ public class AllCategory extends Fragment {
                 bundle.putString("customerType", customerType);
                 bundle.putString("customerId", customerId);
                 bundle.putString("customerName", customerName);
+                bundle.putString("customerState", customerState);
                 customerCartList.setArguments(bundle);
                 ((MainPage)getActivity()).loadFragment(customerCartList, true);
 
@@ -141,6 +144,7 @@ public class AllCategory extends Fragment {
                 bundle.putString("customerId", customerId);
                 bundle.putString("customerType", customerType);
                 bundle.putString("customerName", customerName);
+                bundle.putString("customerState", customerState);
                 bundle.putString("productId", categoryResponseList.get(position).getProductId());
                 bundle.putString("taxType", categoryResponseList.get(position).getTaxType());
                 bundle.putString("productName", categoryResponseList.get(position).getProductName());

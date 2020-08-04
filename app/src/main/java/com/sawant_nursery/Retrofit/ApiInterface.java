@@ -31,7 +31,8 @@ public interface ApiInterface {
                                     @Field("business_address") String businessAddress,
                                     @Field("city") String city,
                                     @Field("state") String state,
-                                    @Field("pincode") String pincode);
+                                    @Field("pincode") String pincode,
+                                    @Field("gst") String gst);
 
 
     @GET("/androidApp/productList.php")
@@ -245,7 +246,8 @@ public interface ApiInterface {
                                        @Field("business_address") String businessAddress,
                                        @Field("city") String city,
                                        @Field("state") String state,
-                                       @Field("pincode") String pincode);
+                                       @Field("pincode") String pincode,
+                                       @Field("gst") String gst);
 
 
     @GET("/androidApp/InvoiceList.php")
@@ -269,4 +271,11 @@ public interface ApiInterface {
     @GET("/androidApp/getCustomerDetails.php")
     Call<AllList> getCustomerDetails(@Query("userId") String userId,
                                      @Query("customerId") String customerId);
+
+    @GET("/androidApp/stateList.php")
+    Call<AllList> getStateList();
+
+
+    @GET("/androidApp/cityList.php")
+    Call<AllList> getCityList(@Query("stateId") String stateId);
 }
