@@ -149,15 +149,15 @@ public class Registration extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        Call<LoginResponse> call = apiInterface.registration(imageString, shopName, shopPrefix, officeNumber, personName, personNumber);
+        Call<LoginResponse> call = apiInterface.registration(imageString, shopName, shopPrefix, officeNumber, personName, personNumber, gstNumber, email, businessAddress, password);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.body().getSuccess().equalsIgnoreCase("true")){
-
+                    progressDialog.dismiss();
                 } else if (response.body().getSuccess().equalsIgnoreCase("false")){
-
+                    progressDialog.dismiss();
                 }
 
             }
