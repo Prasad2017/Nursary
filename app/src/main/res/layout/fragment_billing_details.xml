@@ -43,7 +43,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="30dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -388,7 +388,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="30dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -570,6 +570,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Pending Amount"
                         android:imeOptions="actionDone"
+                        android:focusable="false"
+                        android:clickable="false"
                         android:inputType="numberDecimal"
                         android:digits="0123456789"
                         android:text="0"

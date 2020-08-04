@@ -166,7 +166,9 @@ public interface ApiInterface {
                                        @Field("discount") String discount,
                                        @Field("otherCharges") String otherCharges,
                                        @Field("transport") String transport,
-                                       @Field("grandTotal") String grandTotal);
+                                       @Field("grandTotal") String grandTotal,
+                                       @Field("pendingAmount") String pendingAmount,
+                                       @Field("payableAmount") String payableAmount);
 
 
     @GET("/androidApp/cartCount.php")
@@ -174,7 +176,7 @@ public interface ApiInterface {
                                @Query("customerId") String customerId);
 
 
-    @GET("/androidApp/cartsubAmount.php")
+    @GET("/androidApp/pendingAmount.php")
     Call<AllList> getProductAmount(@Query("userId") String userId,
                                    @Query("customerId") String customerId);
 

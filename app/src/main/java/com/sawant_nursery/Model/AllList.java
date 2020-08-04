@@ -1,6 +1,7 @@
 package com.sawant_nursery.Model;
 
 import com.google.gson.annotations.SerializedName;
+import com.sawant_nursery.Fragment.PendingResponse;
 
 import java.util.List;
 
@@ -48,6 +49,9 @@ public class AllList {
 
     @SerializedName("cityResponse")
     List<CityResponse> cityResponseList;
+
+    @SerializedName("pendingResponse")
+    List<PendingResponse> pendingResponseList;
 
 
 
@@ -163,4 +167,14 @@ public class AllList {
     public void setCityResponseList(List<CityResponse> cityResponseList) {
         this.cityResponseList = cityResponseList;
     }
+
+    public List<PendingResponse> getPendingResponseList() {
+        return pendingResponseList;
+    }
+
+    public void setPendingResponseList(List<PendingResponse> pendingResponseList) {
+        this.pendingResponseList = pendingResponseList;
+    }
+
+
 }
