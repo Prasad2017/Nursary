@@ -34,6 +34,9 @@ public class CustomerResponse {
     @SerializedName("state")
     String state;
 
+    @SerializedName("stateId")
+    String stateId;
+
     @SerializedName("pincode")
     String pincode;
 
@@ -158,5 +161,13 @@ public class CustomerResponse {
 
     public void setGst(String gst) {
         this.gst = gst;
+    }
+
+    public String getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(String stateId) {
+        this.stateId = stateId;
     }
 }

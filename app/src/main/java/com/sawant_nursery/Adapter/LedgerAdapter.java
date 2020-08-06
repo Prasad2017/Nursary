@@ -40,12 +40,8 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.MyViewHold
 
         LedgerResponse ledgerResponse = ledgerResponseList.get(position);
 
-        holder.orderDate.setText("Date "+ledgerResponseList.get(position).getPaymentDate());
-        holder.pendingAmount.setText("Pending Amount: "+ MainPage.currency+ledgerResponseList.get(position).getOrderPendingAmount());
-        double paidAmount = Double.parseDouble(ledgerResponseList.get(position).getOrderAmount()) - Double.parseDouble(ledgerResponseList.get(position).getOrderPendingAmount());
-        holder.paidAmount.setText("Paid Amount: "+MainPage.currency+paidAmount);
-        holder.totalAmount.setText("Total Amount: "+MainPage.currency+ledgerResponseList.get(position).getOrderAmount());
-        holder.orderNumber.setText(""+ledgerResponseList.get(position).getOrderNumber());
+
+
 
     }
 
@@ -56,17 +52,17 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView orderNumber, totalAmount, paidAmount, pendingAmount, orderDate;
+        TextView billNumber, date, voucherType, debit, credit;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            orderNumber = itemView.findViewById(R.id.orderNumber);
-            totalAmount = itemView.findViewById(R.id.totalAmount);
-            paidAmount = itemView.findViewById(R.id.paidAmount);
-            pendingAmount = itemView.findViewById(R.id.pendingAmount);
-            orderDate = itemView.findViewById(R.id.orderDate);
+            billNumber = (TextView) itemView.findViewById(R.id.billNumber);
+            date = (TextView) itemView.findViewById(R.id.date);
+            voucherType = (TextView) itemView.findViewById(R.id.voucherType);
+            debit = (TextView) itemView.findViewById(R.id.debit);
+            credit = (TextView) itemView.findViewById(R.id.credit);
 
         }
     }

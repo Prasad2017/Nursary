@@ -49,9 +49,9 @@ public class LedgerList extends Fragment {
     @BindView(R.id.linearLayout)
     LinearLayout linearLayout;
     List<LedgerResponse> ledgerResponseList = new ArrayList<>();
-    List<LedgerResponse> searchcustomerResponseList = new ArrayList<>();
+    List<LedgerResponse> searchCustomerResponseList = new ArrayList<>();
     LedgerAdapter adapter;
-    String customerId, invoiceId;
+    String customerId;
 
 
 

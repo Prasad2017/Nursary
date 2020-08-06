@@ -68,12 +68,14 @@ public class CustomerSelection extends Fragment {
     List<CustomerResponse> customerResponseList = new ArrayList<>();
     List<CustomerResponse> searchCustomerResponseList = new ArrayList<>();
     String[] customerIdList, customerNameList;
-    String type="", customerId="", customerName="", customerState;
-    @BindView(R.id.customerNameTxt)
-    TextView customerNameTxt;
+    public static String type="", customerId="", customerName="", customerState;
+    public static TextView customerNameTxt;
     RecyclerView recyclerView;
     TextView close;
     FormEditText searchEdit;
+    public static Dialog dialog;
+
+
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -87,6 +89,8 @@ public class CustomerSelection extends Fragment {
         /*ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, customerType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchableSpinners.get(0).setAdapter(adapter);*/
+
+        customerNameTxt = (TextView) view.findViewById(R.id.customerNameTxt);
 
         SpannableString spannableString = new SpannableString("Add Customer");
         spannableString.setSpan(new UnderlineSpan(), 0, spannableString.length(), 0);
@@ -159,7 +163,7 @@ public class CustomerSelection extends Fragment {
 
                 if (customerResponseList.size()>0){
 
-                    Dialog dialog = new Dialog(getActivity());
+                    dialog = new Dialog(getActivity());
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
                     dialog.setContentView(R.layout.drop_down_list);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -208,14 +212,9 @@ public class CustomerSelection extends Fragment {
                                 Log.e("size", searchCustomerResponseList.size() + "" + customerResponseList.size());
                             } else {
                                 searchCustomerResponseList = new ArrayList<>();
-
-                                CustomerTxtAdapter customerTxtAdapter = new CustomerTxtAdapter(getActivity(), customerResponseList);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                recyclerView.setAdapter(customerTxtAdapter);
-                                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-                                customerTxtAdapter.notifyDataSetChanged();
-                                customerTxtAdapter.notifyItemInserted(customerResponseList.size() - 1);
-                                recyclerView.setHasFixedSize(true);
+                                for (int i = 0; i < customerResponseList.size(); i++) {
+                                    searchCustomerResponseList.add(customerResponseList.get(i));
+                                }
                             }
 
                             try {
@@ -238,12 +237,7 @@ public class CustomerSelection extends Fragment {
                     recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
                         @Override
                         public void onClick(View view, int position) {
-                            CustomerResponse countryResponse = customerResponseList.get(position);
-                            customerNameTxt.setText(customerResponseList.get(position).getCustomerName());
-                            customerId = countryResponse.getCustomerId();
-                            customerName = countryResponse.getCustomerName();
-                            customerState = countryResponse.getState();
-                            dialog.dismiss();
+
                         }
 
                         @Override

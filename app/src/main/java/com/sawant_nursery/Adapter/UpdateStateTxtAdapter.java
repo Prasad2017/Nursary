@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sawant_nursery.Fragment.CustomerRegistration;
-import com.sawant_nursery.Model.CategoryResponse;
+import com.sawant_nursery.Fragment.UpdateCustomer;
 import com.sawant_nursery.Model.StateResponse;
 import com.sawant_nursery.R;
 
@@ -21,12 +21,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StateTxtAdapter extends RecyclerView.Adapter<StateTxtAdapter.MyViewHolder> {
+public class UpdateStateTxtAdapter extends RecyclerView.Adapter<UpdateStateTxtAdapter.MyViewHolder> {
 
     Context context;
     List<StateResponse> countryResponseList;
 
-    public StateTxtAdapter(Context context, List<StateResponse> countryResponseList) {
+    public UpdateStateTxtAdapter(Context context, List<StateResponse> countryResponseList) {
 
         this.context = context;
         this.countryResponseList = countryResponseList;
@@ -56,9 +56,9 @@ public class StateTxtAdapter extends RecyclerView.Adapter<StateTxtAdapter.MyView
             public void onClick(View view) {
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                CustomerRegistration.txtstateName.setText(countryResponseList.get(position).getState_name());
-                CustomerRegistration.getCityList(countryResponseList.get(position).getState_id());
-                CustomerRegistration.dialog.dismiss();
+                UpdateCustomer.txtstateName.setText(countryResponseList.get(position).getState_name());
+                UpdateCustomer.getCityList(countryResponseList.get(position).getState_id());
+                UpdateCustomer.dialog.dismiss();
 
             }
         });

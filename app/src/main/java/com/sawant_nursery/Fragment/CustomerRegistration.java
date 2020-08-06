@@ -1,5 +1,6 @@
 package com.sawant_nursery.Fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -62,17 +63,17 @@ public class CustomerRegistration extends Fragment {
     @BindView(R.id.customertypeSpin)
     Spinner customertypeSpin;
     String[] customerType = {"Retailer" ,"Wholesaler"};
-    String type, cityId, cityName, stateId, stateName;
-    @BindViews({R.id.statetxt, R.id.citytxt})
-    List<TextView> textViews;
+    public static String type, cityId, cityName, stateId, stateName;
+    public static TextView txtstateName, txtcityName;
     RecyclerView recyclerView;
     TextView close;
     FormEditText searchEdit;
     List<StateResponse> stateResponseList = new ArrayList<>();
     List<StateResponse> searchStateResponseList = new ArrayList<>();
-    List<CityResponse> cityResponseList = new ArrayList<>();
+    public static   List<CityResponse> cityResponseList = new ArrayList<>();
     List<CityResponse> searchCityResponseList = new ArrayList<>();
-
+    public static Dialog dialog;
+    public static Activity activity;
 
 
     @Override
@@ -83,6 +84,7 @@ public class CustomerRegistration extends Fragment {
         MainPage.title.setText("Add Customer");
         InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        activity = (Activity) getActivity();
 
 
         if (MainPage.shopStatus.equals("Retailer_on")){
@@ -94,6 +96,10 @@ public class CustomerRegistration extends Fragment {
         } else {
             Toast.makeText(getActivity(), "Please Select Shop Status in setting", Toast.LENGTH_SHORT).show();
         }
+
+        txtstateName = (TextView) view.findViewById(R.id.statetxt);
+        txtcityName = (TextView) view.findViewById(R.id.citytxt);
+
 
         return view;
 
@@ -109,7 +115,7 @@ public class CustomerRegistration extends Fragment {
 
                     if (cityResponseList.size() > 0) {
 
-                        Dialog dialog = new Dialog(getActivity());
+                        dialog = new Dialog(getActivity());
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
                         dialog.setContentView(R.layout.drop_down_list);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -191,12 +197,12 @@ public class CustomerRegistration extends Fragment {
                         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
                             @Override
                             public void onClick(View view, int position) {
-                                CityResponse cityResponse = cityResponseList.get(position);
-                                textViews.get(1).setText(cityResponseList.get(position).getCity_name());
+                             /*   CityResponse cityResponse = cityResponseList.get(position);
+                                txtcityName.setText(cityResponseList.get(position).getCity_name());
                                 cityId = cityResponse.getCity_id();
                                 cityName = cityResponse.getCity_name();
 
-                                dialog.dismiss();
+                                dialog.dismiss();*/
                             }
 
                             @Override
@@ -223,8 +229,8 @@ public class CustomerRegistration extends Fragment {
                         dialog.show();
 
                     } else {
-                        textViews.get(1).setHint("Select City");
-                        textViews.get(1).setText("");
+                        txtcityName.setHint("Select City");
+                        txtcityName.setText("");
                         Toast.makeText(getActivity(), "Select other state, No city found!", Toast.LENGTH_SHORT).show();
                     }
 
@@ -240,7 +246,7 @@ public class CustomerRegistration extends Fragment {
 
                     if (stateResponseList.size() > 0) {
 
-                        Dialog dialog = new Dialog(getActivity());
+                        dialog = new Dialog(getActivity());
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
                         dialog.setContentView(R.layout.drop_down_list);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -316,12 +322,12 @@ public class CustomerRegistration extends Fragment {
                         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
                             @Override
                             public void onClick(View view, int position) {
-                                StateResponse stateResponse = stateResponseList.get(position);
-                                textViews.get(0).setText(stateResponseList.get(position).getState_name());
+                                /*StateResponse stateResponse = stateResponseList.get(position);
+                                txtstateName.setText(stateResponseList.get(position).getState_name());
                                 stateId = stateResponse.getState_id();
                                 stateName = stateResponse.getState_name();
                                 getCityList(stateId);
-                                dialog.dismiss();
+                                dialog.dismiss();*/
                             }
 
                             @Override
@@ -350,10 +356,10 @@ public class CustomerRegistration extends Fragment {
                         dialog.show();
 
                     } else {
-                        textViews.get(0).setHint("Select State");
-                        textViews.get(1).setHint("Select City");
-                        textViews.get(0).setText("");
-                        textViews.get(1).setText("");
+                        txtstateName.setHint("Select State");
+                        txtcityName.setHint("Select City");
+                        txtstateName.setText("");
+                        txtcityName.setText("");
                     }
                 } else {
                     Toast.makeText(getActivity(), "No State Found", Toast.LENGTH_SHORT).show();
@@ -367,13 +373,13 @@ public class CustomerRegistration extends Fragment {
                         && formEditTexts.get(3).testValidity() && formEditTexts.get(4).testValidity() && formEditTexts.get(5).testValidity()
                         && formEditTexts.get(8).testValidity() && formEditTexts.get(9).testValidity()) {
 
-                    if (!textViews.get(0).getText().toString().isEmpty()) {
+                    if (!txtstateName.getText().toString().isEmpty()) {
 
-                        if (!textViews.get(1).getText().toString().isEmpty()) {
+                        if (!txtcityName.getText().toString().isEmpty()) {
 
                             AddCustomer(formEditTexts.get(0).getText().toString(), formEditTexts.get(1).getText().toString(), formEditTexts.get(2).getText().toString(),
                                     formEditTexts.get(3).getText().toString(), formEditTexts.get(4).getText().toString(), formEditTexts.get(5).getText().toString(),
-                                    textViews.get(1).getText().toString(), textViews.get(0).getText().toString(), formEditTexts.get(8).getText().toString(), formEditTexts.get(9).getText().toString());
+                                    txtcityName.getText().toString(), txtstateName.getText().toString(), formEditTexts.get(8).getText().toString(), formEditTexts.get(9).getText().toString());
 
                         } else {
                             Toast.makeText(getActivity(), "Select City", Toast.LENGTH_SHORT).show();
@@ -389,7 +395,7 @@ public class CustomerRegistration extends Fragment {
 
     }
 
-    private void getCityList(String stateId) {
+    public static void getCityList(String stateId) {
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
         Call<AllList> call = apiInterface.getCityList(stateId);
@@ -400,16 +406,16 @@ public class CustomerRegistration extends Fragment {
                 AllList allList = response.body();
                 cityResponseList = allList.getCityResponseList();
                 if (cityResponseList.size()==0){
-                    textViews.get(0).setHint("Select City");
-                    textViews.get(0).setText("");
-                    Toast.makeText(getActivity(), "Select other state, No city Found", Toast.LENGTH_SHORT).show();
+                    txtcityName.setHint("Select City");
+                    txtcityName.setText("");
+                    Toast.makeText(activity, "Select other state, No city Found", Toast.LENGTH_SHORT).show();
                 } else {
 
                     CityResponse cityResponse = cityResponseList.get(0);
                     cityId = cityResponseList.get(0).getCity_id();
                     cityName= cityResponseList.get(0).getCity_name();
 
-                    textViews.get(1).setText(cityName);
+                    txtcityName.setText(cityName);
 
                 }
 
@@ -434,7 +440,8 @@ public class CustomerRegistration extends Fragment {
                 AllList allList = response.body();
                 stateResponseList = allList.getStateResponseList();
                 if (stateResponseList.size()==0){
-
+                    txtstateName.setHint("Select City");
+                    txtstateName.setText("");
                 } else {
 
                 }

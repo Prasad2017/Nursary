@@ -68,19 +68,21 @@ public class AllCategory extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_category, container, false);
         ButterKnife.bind(this, view);
+
         MainPage.title.setText("Product List");
         InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), 0);
         bundle = getArguments();
-        customerType = bundle.getString("customerType");
-        customerId = bundle.getString("customerId");
-        customerName = bundle.getString("customerName");
-        customerState = bundle.getString("customerState");
+        customerType =CustomerSelection.type;
+        customerId = CustomerSelection.customerId;
+        customerName = CustomerSelection.customerName;
+        customerState = CustomerSelection.customerState;
 
         MainPage.cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 CustomerCartList customerCartList = new CustomerCartList();
                 Bundle bundle = new Bundle();
                 bundle.putString("customerType", customerType);
@@ -96,7 +98,8 @@ public class AllCategory extends Fragment {
         MainPage.cartCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 CustomerCartList customerCartList = new CustomerCartList();
                 Bundle bundle = new Bundle();
                 bundle.putString("customerType", customerType);
@@ -138,7 +141,8 @@ public class AllCategory extends Fragment {
                 ProductResponse productResponse = categoryResponseList.get(position);
 
                 String price="0";
-
+                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 ProductDetails productDetails = new ProductDetails();
                 bundle = new Bundle();
                 bundle.putString("customerId", customerId);
@@ -182,12 +186,9 @@ public class AllCategory extends Fragment {
                 }
 
             if (searchcategoryResponseList.size() < 1) {
-                noCategorytxt.setText("Product Not Found");
-                noCategorytxt.setVisibility(View.VISIBLE);
-                linearLayout.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), "Product Not Found", Toast.LENGTH_SHORT).show();
             } else {
                 noCategorytxt.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
             }
         } else {
 

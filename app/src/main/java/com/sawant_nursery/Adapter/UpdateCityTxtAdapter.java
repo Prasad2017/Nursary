@@ -8,12 +8,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sawant_nursery.Fragment.CustomerRegistration;
-import com.sawant_nursery.Model.CategoryResponse;
-import com.sawant_nursery.Model.StateResponse;
+import com.sawant_nursery.Fragment.UpdateCustomer;
+import com.sawant_nursery.Model.CityResponse;
 import com.sawant_nursery.R;
 
 import java.util.List;
@@ -21,16 +20,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StateTxtAdapter extends RecyclerView.Adapter<StateTxtAdapter.MyViewHolder> {
+public class UpdateCityTxtAdapter extends RecyclerView.Adapter<UpdateCityTxtAdapter.MyViewHolder> {
 
     Context context;
-    List<StateResponse> countryResponseList;
+    List<CityResponse> countryResponseList;
 
-    public StateTxtAdapter(Context context, List<StateResponse> countryResponseList) {
+    public UpdateCityTxtAdapter(Context context, List<CityResponse> countryResponseList) {
 
         this.context = context;
         this.countryResponseList = countryResponseList;
-
 
     }
 
@@ -47,22 +45,20 @@ public class StateTxtAdapter extends RecyclerView.Adapter<StateTxtAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        StateResponse stateResponse = countryResponseList.get(position);
+        CityResponse stateResponse = countryResponseList.get(position);
 
-        holder.countryName.setText(countryResponseList.get(position).getState_name());
+        holder.countryName.setText(countryResponseList.get(position).getCity_name());
 
         holder.countryName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                CustomerRegistration.txtstateName.setText(countryResponseList.get(position).getState_name());
-                CustomerRegistration.getCityList(countryResponseList.get(position).getState_id());
-                CustomerRegistration.dialog.dismiss();
+                UpdateCustomer.txtcityName.setText(countryResponseList.get(position).getCity_name());
+                UpdateCustomer.dialog.dismiss();
 
             }
         });
-
 
     }
 
@@ -79,7 +75,6 @@ public class StateTxtAdapter extends RecyclerView.Adapter<StateTxtAdapter.MyView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
         }
     }
 }

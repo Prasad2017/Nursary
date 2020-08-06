@@ -130,9 +130,11 @@ public class CustomerCartList extends Fragment {
                 cartResponseList = allList.getCartResponseList();
 
                 if (cartResponseList.size()==0){
+
                     noCategorytxt.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.GONE);
-                    ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
+
+                  /*  ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                     AllCategory allCategory = new AllCategory();
                     Bundle bundle = new Bundle();
                     bundle.putString("customerType", customerType);
@@ -140,7 +142,7 @@ public class CustomerCartList extends Fragment {
                     bundle.putString("customerName", customerName);
                     bundle.putString("customerState", customerState);
                     allCategory.setArguments(bundle);
-                    ((MainPage) getActivity()).loadFragment(allCategory, true);
+                    ((MainPage) getActivity()).loadFragment(allCategory, true);*/
 
                 }else {
 

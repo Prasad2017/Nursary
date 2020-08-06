@@ -459,19 +459,9 @@ public class ProductDetails extends Fragment {
                 progressDialog.dismiss();
                 Log.e("Response", ""+response.body());
                 if (response.body().getSuccess().equals("true")){
-
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     ((MainPage)getActivity()).removeCurrentFragmentAndMoveBack();
-
-                    AllCategory allCategory = new AllCategory();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("customerType", customerType);
-                    bundle.putString("customerId", customerId);
-                    bundle.putString("customerName", customerName);
-                    bundle.putString("customerState", customerState);
-                    allCategory.setArguments(bundle);
-                    ((MainPage)getActivity()).loadFragment(allCategory, true);
-
+                    ((MainPage) getActivity()).loadFragment(new AllCategory(), true);
                 } else if (response.body().getSuccess().equals("false")){
                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
