@@ -14,30 +14,6 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/colorPrimary">
-
-            <EditText
-                android:id="@+id/searchEdit"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/searchborder"
-                android:layout_gravity="center"
-                android:gravity="center|left"
-                android:paddingLeft="15dp"
-                android:paddingRight="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/light_black"
-                android:hint="search any customer"
-                android:textSize="18sp"
-                android:fontFamily="@font/montserratregular"
-                android:layout_margin="10dp"/>
-
-        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/ledgerLayout"

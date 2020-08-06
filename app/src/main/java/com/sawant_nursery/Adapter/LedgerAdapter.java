@@ -51,8 +51,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.MyViewHold
             holder.credit.setText(ledgerResponseList.get(position).getOrderPaidAmount());
             holder.debit.setText("0.00");
         }
-
-
+        
 
     }
 

@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,8 +46,6 @@ public class LedgerList extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.noCategorytxt)
     TextView noCategorytxt;
-    @BindView(R.id.searchEdit)
-    EditText searchEditText;
     @BindView(R.id.linearLayout)
     LinearLayout linearLayout;
     @BindView(R.id.ledgerLayout)
@@ -65,10 +65,10 @@ public class LedgerList extends Fragment {
         MainPage.title.setText("");
         InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        searchEditText.setLongClickable(false);
 
         Bundle bundle = getArguments();
         customerId = bundle.getString("customerId");
+
 
         return view;
 
