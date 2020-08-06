@@ -17,12 +17,18 @@ public class LedgerResponse {
     @SerializedName("order_pending_amount")
     @Expose
     private String orderPendingAmount;
+    @SerializedName("order_paid_amount")
+    @Expose
+    private String orderPaidAmount;
     @SerializedName("payment_mode")
     @Expose
     private String paymentMode;
     @SerializedName("payment_date")
     @Expose
     private String paymentDate;
+    @SerializedName("voucher_type")
+    @Expose
+    private String voucherType;
 
     public String getPurchaseId() {
         return purchaseId;
@@ -70,5 +76,21 @@ public class LedgerResponse {
 
     public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public String getVoucherType() {
+        return voucherType;
+    }
+
+    public void setVoucherType(String voucherType) {
+        this.voucherType = voucherType;
+    }
+
+    public String getOrderPaidAmount() {
+        return orderPaidAmount;
+    }
+
+    public void setOrderPaidAmount(String orderPaidAmount) {
+        this.orderPaidAmount = orderPaidAmount;
     }
 }

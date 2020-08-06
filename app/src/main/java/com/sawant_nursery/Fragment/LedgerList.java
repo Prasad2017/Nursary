@@ -48,6 +48,8 @@ public class LedgerList extends Fragment {
     EditText searchEditText;
     @BindView(R.id.linearLayout)
     LinearLayout linearLayout;
+    @BindView(R.id.ledgerLayout)
+    LinearLayout ledgerLayout;
     List<LedgerResponse> ledgerResponseList = new ArrayList<>();
     List<LedgerResponse> searchCustomerResponseList = new ArrayList<>();
     LedgerAdapter adapter;
@@ -103,7 +105,7 @@ public class LedgerList extends Fragment {
 
                 if (ledgerResponseList.size() == 0){
                     noCategorytxt.setVisibility(View.VISIBLE);
-                    linearLayout.setVisibility(View.GONE);
+                    ledgerLayout.setVisibility(View.GONE);
                 }else {
 
                     adapter = new LedgerAdapter(getActivity(), ledgerResponseList);
@@ -113,7 +115,7 @@ public class LedgerList extends Fragment {
                     adapter.notifyItemInserted(ledgerResponseList.size() - 1);
 
                     noCategorytxt.setVisibility(View.GONE);
-                    linearLayout.setVisibility(View.VISIBLE);
+                    ledgerLayout.setVisibility(View.VISIBLE);
 
                 }
             }
@@ -122,7 +124,7 @@ public class LedgerList extends Fragment {
             public void onFailure(Call<AllList> call, Throwable t) {
                 Log.e("CustomerError", ""+t.getMessage());
                 noCategorytxt.setVisibility(View.VISIBLE);
-                linearLayout.setVisibility(View.GONE);
+                ledgerLayout.setVisibility(View.GONE);
             }
         });
 

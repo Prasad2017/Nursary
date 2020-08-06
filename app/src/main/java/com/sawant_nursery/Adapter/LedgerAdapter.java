@@ -40,6 +40,17 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.MyViewHold
 
         LedgerResponse ledgerResponse = ledgerResponseList.get(position);
 
+        holder.billNumber.setText(ledgerResponseList.get(position).getOrderNumber());
+        holder.date.setText(ledgerResponseList.get(position).getPaymentDate());
+        holder.voucherType.setText(ledgerResponseList.get(position).getVoucherType());
+
+        if (ledgerResponseList.get(position).getVoucherType().equalsIgnoreCase("Sales")) {
+            holder.debit.setText(ledgerResponseList.get(position).getOrderAmount());
+            holder.credit.setText("0.00");
+        } else if (ledgerResponseList.get(position).getVoucherType().equalsIgnoreCase("Purchase")) {
+            holder.credit.setText(ledgerResponseList.get(position).getOrderPaidAmount());
+            holder.debit.setText("0.00");
+        }
 
 
 

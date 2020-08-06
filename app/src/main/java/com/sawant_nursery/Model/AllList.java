@@ -41,7 +41,7 @@ public class AllList {
     @SerializedName("invoiceResponse")
     List<InvoiceResponse> invoiceResponseList;
 
-    @SerializedName("invoicelistResponse")
+    @SerializedName("ledgerResponse")
     List<LedgerResponse> ledgerResponseList;
 
     @SerializedName("stateResponse")
