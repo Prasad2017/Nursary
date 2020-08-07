@@ -20,8 +20,9 @@
             android:background="@drawable/txtborder"
             android:gravity="center"
             android:textColor="@color/black"
-            android:padding="5dp"
-            android:textSize="12sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="10dp"
             android:text="Bill No."/>
 
         <TextView
@@ -34,8 +35,9 @@
             android:background="@drawable/txtborder"
             android:gravity="center"
             android:textColor="@color/black"
-            android:padding="5dp"
-            android:textSize="12sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="10sp"
             android:text="Date"/>
 
         <TextView
@@ -48,8 +50,9 @@
             android:background="@drawable/txtborder"
             android:gravity="center"
             android:textColor="@color/black"
-            android:padding="5dp"
-            android:textSize="12sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="10dp"
             android:text="Vou. Type"/>
 
         <TextView
@@ -62,8 +65,9 @@
             android:background="@drawable/txtborder"
             android:gravity="center"
             android:textColor="@color/black"
-            android:padding="5dp"
-            android:textSize="12sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="10dp"
             android:text="Debit"/>
 
         <TextView
@@ -76,8 +80,9 @@
             android:background="@drawable/txtborder"
             android:gravity="center"
             android:textColor="@color/black"
-            android:padding="5dp"
-            android:textSize="12sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="10dp"
             android:text="Credit"/>
 
     </LinearLayout>
