@@ -58,7 +58,6 @@ import retrofit2.Response;
  */
 public class CustomerSelection extends Fragment {
 
-
     View view;
     @BindView(R.id.addCustomer)
     TextView addCustomer;
@@ -86,54 +85,11 @@ public class CustomerSelection extends Fragment {
         InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-        /*ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, customerType);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        searchableSpinners.get(0).setAdapter(adapter);*/
-
         customerNameTxt = (TextView) view.findViewById(R.id.customerNameTxt);
 
         SpannableString spannableString = new SpannableString("Add Customer");
         spannableString.setSpan(new UnderlineSpan(), 0, spannableString.length(), 0);
         addCustomer.setText(spannableString);
-
-        /*searchableSpinners.get(0).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                type = customerType[position];
-                Log.e("documentType", ""+type);
-                try {
-                    ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
-                    getCustomerList(type);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
-
-        /*searchableSpinners.get(1).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                customerId = customerIdList[position];
-                customerName = customerNameList[position];
-                Log.e("customerId", ""+customerId);
-                Log.e("customerName", ""+customerName);
-                try {
-                    ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.black));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
 
         if (MainPage.shopStatus.equals("Retailer_on")){
             type = "Retailer_on";

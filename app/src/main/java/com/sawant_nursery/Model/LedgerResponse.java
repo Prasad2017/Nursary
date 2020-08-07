@@ -29,6 +29,18 @@ public class LedgerResponse {
     @SerializedName("voucher_type")
     @Expose
     private String voucherType;
+    @SerializedName("customer_pending_amount")
+    @Expose
+    private String customer_pending_amount;
+    @SerializedName("customer_paid_amount")
+    @Expose
+    private String customer_paid_amount;
+    @SerializedName("customer_order_amount")
+    @Expose
+    private String customer_order_amount;
+
+
+    //All getter and setter method..
 
     public String getPurchaseId() {
         return purchaseId;
@@ -92,5 +104,29 @@ public class LedgerResponse {
 
     public void setOrderPaidAmount(String orderPaidAmount) {
         this.orderPaidAmount = orderPaidAmount;
+    }
+
+    public String getCustomer_pending_amount() {
+        return customer_pending_amount;
+    }
+
+    public void setCustomer_pending_amount(String customer_pending_amount) {
+        this.customer_pending_amount = customer_pending_amount;
+    }
+
+    public String getCustomer_paid_amount() {
+        return customer_paid_amount;
+    }
+
+    public void setCustomer_paid_amount(String customer_paid_amount) {
+        this.customer_paid_amount = customer_paid_amount;
+    }
+
+    public String getCustomer_order_amount() {
+        return customer_order_amount;
+    }
+
+    public void setCustomer_order_amount(String customer_order_amount) {
+        this.customer_order_amount = customer_order_amount;
     }
 }

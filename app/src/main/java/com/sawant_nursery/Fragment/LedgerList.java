@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,6 +55,9 @@ public class LedgerList extends Fragment {
     List<LedgerResponse> searchCustomerResponseList = new ArrayList<>();
     LedgerAdapter adapter;
     String customerId;
+    @BindViews({R.id.receivedAmount, R.id.balanceAmount, R.id.totalAmount})
+    List<TextView> textViews;
+    double receivedAmount=0f, balanceAmount=0f, totalAmount=0f;
 
 
 
@@ -63,6 +67,7 @@ public class LedgerList extends Fragment {
         view = inflater.inflate(R.layout.fragment_ledger, container, false);
         ButterKnife.bind(this, view);
         MainPage.title.setText("");
+
         InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
@@ -108,6 +113,14 @@ public class LedgerList extends Fragment {
                     ledgerLayout.setVisibility(View.GONE);
                 }else {
 
+                    receivedAmount = Double.parseDouble(ledgerResponseList.get(0).getCustomer_paid_amount());
+                    balanceAmount = Double.parseDouble(ledgerResponseList.get(0).getCustomer_pending_amount());
+                    totalAmount = Double.parseDouble(ledgerResponseList.get(0).getCustomer_order_amount());
+
+                    textViews.get(0).setText("Received Amount: "+receivedAmount);
+                    textViews.get(1).setText("Balance Amount: "+balanceAmount);
+                    textViews.get(2).setText("Total Amount: "+totalAmount);
+
                     adapter = new LedgerAdapter(getActivity(), ledgerResponseList);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                     recyclerView.setAdapter(adapter);
@@ -118,6 +131,7 @@ public class LedgerList extends Fragment {
                     ledgerLayout.setVisibility(View.VISIBLE);
 
                 }
+
             }
 
             @Override
