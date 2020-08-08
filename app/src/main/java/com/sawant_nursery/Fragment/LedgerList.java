@@ -154,7 +154,6 @@ public class LedgerList extends Fragment {
                 txtyes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
 
                         ProgressDialog progressDialog = new ProgressDialog(getActivity());
                         progressDialog.setMessage("Loading...");
@@ -171,6 +170,7 @@ public class LedgerList extends Fragment {
 
                                 if (response.body().getSuccess().equalsIgnoreCase("true")){
                                     progressDialog.dismiss();
+                                    dialog.dismiss();
                                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                     ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
                                     LedgerList ledgerList = new LedgerList();
@@ -180,6 +180,7 @@ public class LedgerList extends Fragment {
                                     ((MainPage) getActivity()).loadFragment(ledgerList, true);
                                 } else if (response.body().getSuccess().equalsIgnoreCase("false")){
                                     progressDialog.dismiss();
+                                    dialog.dismiss();
                                     Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
 
@@ -188,6 +189,7 @@ public class LedgerList extends Fragment {
                             @Override
                             public void onFailure(Call<LoginResponse> call, Throwable t) {
                                 progressDialog.dismiss();
+                                dialog.dismiss();
                                 Log.e("paymentOut", ""+t.getMessage());
                             }
                         });
