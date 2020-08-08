@@ -25,6 +25,7 @@ import com.sawant_nursery.Adapter.LedgerAdapter;
 import com.sawant_nursery.Extra.DetectConnection;
 import com.sawant_nursery.Model.AllList;
 import com.sawant_nursery.Model.LedgerResponse;
+import com.sawant_nursery.Model.LoginResponse;
 import com.sawant_nursery.R;
 import com.sawant_nursery.Retrofit.Api;
 import com.sawant_nursery.Retrofit.ApiInterface;
@@ -35,6 +36,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -77,6 +79,24 @@ public class LedgerList extends Fragment {
 
         return view;
 
+    }
+
+    @OnClick({R.id.paymentIn, R.id.paymentOut})
+    public void onClick(View view){
+        switch (view.getId()){
+
+            case R.id.paymentIn:
+
+                ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+                Call<LoginResponse> call = apiInterface.paymentIn(customerId, MainPage.userId, ""+c);
+
+                break;
+
+            case R.id.paymentOut:
+
+                break;
+
+        }
     }
 
     public void onStart() {

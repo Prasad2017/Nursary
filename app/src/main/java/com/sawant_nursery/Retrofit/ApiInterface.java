@@ -295,4 +295,10 @@ public interface ApiInterface {
                                      @Field("email")String email,
                                      @Field("businessAddress") String businessAddress,
                                      @Field("password")String password);
+
+
+
+    Call<LoginResponse> paymentIn(@Query("userId") String userId,
+                                  @Query("customerId") String customerId,
+                                  @Query("balanceAmount") String balanceAmount);
 }
