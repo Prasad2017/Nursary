@@ -1,6 +1,10 @@
 package com.sawant_nursery.Fragment;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -20,8 +25,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sawant_nursery.Activity.Login;
 import com.sawant_nursery.Activity.MainPage;
 import com.sawant_nursery.Adapter.LedgerAdapter;
+import com.sawant_nursery.Extra.Common;
 import com.sawant_nursery.Extra.DetectConnection;
 import com.sawant_nursery.Model.AllList;
 import com.sawant_nursery.Model.LedgerResponse;
@@ -30,6 +37,7 @@ import com.sawant_nursery.R;
 import com.sawant_nursery.Retrofit.Api;
 import com.sawant_nursery.Retrofit.ApiInterface;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,12 +95,107 @@ public class LedgerList extends Fragment {
 
             case R.id.paymentIn:
 
+                ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("Loading...");
+                progressDialog.setTitle("Payment is in process");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
+                progressDialog.setCancelable(false);
+
                 ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-                Call<LoginResponse> call = apiInterface.paymentIn(customerId, MainPage.userId, ""+c);
+                Call<LoginResponse> call = apiInterface.paymentIn(customerId, MainPage.userId, ""+balanceAmount);
+                call.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                        if (response.body().getSuccess().equalsIgnoreCase("true")){
+                            progressDialog.dismiss();
+                            Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
+                            LedgerList ledgerList = new LedgerList();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("customerId", customerId);
+                            ledgerList.setArguments(bundle);
+                            ((MainPage) getActivity()).loadFragment(ledgerList, true);
+                        } else if (response.body().getSuccess().equalsIgnoreCase("false")){
+                            progressDialog.dismiss();
+                            Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Log.e("paymentIn", ""+t.getMessage());
+                    }
+                });
 
                 break;
 
             case R.id.paymentOut:
+
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                dialog.setContentView(R.layout.payment_dialog);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.setCancelable(false);
+                TextView txtyes = dialog.findViewById(R.id.yes);
+                EditText purchaseAmount = dialog.findViewById(R.id.purchaseAmount);
+                TextView txtno = dialog.findViewById(R.id.no);
+
+                txtno.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                txtyes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+
+                        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setMessage("Loading...");
+                        progressDialog.setTitle("Payment is in process");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progressDialog.show();
+                        progressDialog.setCancelable(false);
+
+                        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+                        Call<LoginResponse> call = apiInterface.paymentOut(customerId, MainPage.userId, ""+purchaseAmount.getText().toString().trim());
+                        call.enqueue(new Callback<LoginResponse>() {
+                            @Override
+                            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                                if (response.body().getSuccess().equalsIgnoreCase("true")){
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    ((MainPage) getActivity()).removeCurrentFragmentAndMoveBack();
+                                    LedgerList ledgerList = new LedgerList();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("customerId", customerId);
+                                    ledgerList.setArguments(bundle);
+                                    ((MainPage) getActivity()).loadFragment(ledgerList, true);
+                                } else if (response.body().getSuccess().equalsIgnoreCase("false")){
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getActivity(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                                progressDialog.dismiss();
+                                Log.e("paymentOut", ""+t.getMessage());
+                            }
+                        });
+
+                    }
+                });
+
+                dialog.show();
 
                 break;
 

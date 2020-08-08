@@ -269,7 +269,7 @@ public interface ApiInterface {
 
     @GET("/androidApp/LedgerList.php")
     Call<AllList> getLedgerList(@Query("userId") String userId,
-                                 @Query("customerId") String customerId);
+                                @Query("customerId") String customerId);
 
     @GET("/androidApp/getCustomerDetails.php")
     Call<AllList> getCustomerDetails(@Query("userId") String userId,
@@ -297,8 +297,18 @@ public interface ApiInterface {
                                      @Field("password")String password);
 
 
+    @FormUrlEncoded
+    @POST("/androidApp/paymentIn.php")
+    Call<LoginResponse> paymentIn(@Field("userId") String userId,
+                                  @Field("customerId") String customerId,
+                                  @Field("balanceAmount") String balanceAmount);
 
-    Call<LoginResponse> paymentIn(@Query("userId") String userId,
-                                  @Query("customerId") String customerId,
-                                  @Query("balanceAmount") String balanceAmount);
+
+    @FormUrlEncoded
+    @POST("/androidApp/paymentOut.php")
+    Call<LoginResponse> paymentOut(@Field("userId") String userId,
+                                   @Field("customerId") String customerId,
+                                   @Field("purchaseAmount") String purchaseAmount);
+
+
 }

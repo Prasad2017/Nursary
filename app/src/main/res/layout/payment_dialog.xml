@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="200dp"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="10dp"
     app:cardElevation="3dp"
@@ -31,22 +31,6 @@
             android:text="Are you sure you want to logout"
             tools:ignore="HardcodedText" />
 
-        <com.andreabaccega.widget.FormEditText
-            android:id="@+id/purchaseAmount"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/textborder"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/light_black"
-            android:textSize="15sp"
-            android:fontFamily="@font/montserratregular"
-            android:text="Enter Purchase Amount"
-            tools:ignore="HardcodedText" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +44,7 @@
                 android:id="@+id/no"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:text="Close"
+                android:text="No"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="20sp"
@@ -78,7 +62,7 @@
                 android:id="@+id/yes"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Paid"
+                android:text="YES"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="20sp"
